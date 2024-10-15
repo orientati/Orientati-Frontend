@@ -1,5 +1,5 @@
 <template>
-    <nav :class="['navbar', { 'navbar-bottom': isLoginPage }]">
+    <nav :class="['navbar']">
       <ul>
         <li><router-link to="/">Home</router-link></li>
         <!-- Mostra il link Login solo se NON sei già sulla pagina di login -->
@@ -99,36 +99,6 @@
     .navbar a:hover {
       background-color: #555; /* Colore di sfondo al passaggio del mouse */
     }
-  }
-  
-  /* Navbar sempre in basso nella pagina di login (sia su desktop che su mobile) */
-  .navbar-bottom {
-    position: fixed; /* Mantiene la navbar fissa */
-    bottom: 0; /* Ancoraggio al fondo della finestra */
-    left: 0;
-    width: 100%;
-    height: 60px; /* Altezza della navbar in basso */
-    display: flex;
-    justify-content: space-around; /* Distribuzione dei link */
-    align-items: center; /* Allineamento verticale */
-    background-color: #333; /* Colore di sfondo per la navbar */
-    z-index: 1000; /* Assicura che la navbar sia sopra altri elementi */
-  }
-  
-  .navbar-bottom ul {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  }
-  
-  .navbar-bottom li {
-    margin: 0;
-  }
-  
-  .navbar-bottom a {
-    color: white;
-    padding: 10px;
-    text-align: center;
   }
   </style>
   
