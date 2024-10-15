@@ -28,23 +28,31 @@
     methods: {
       ...mapMutations(["setUser", "setToken"]),
       async login() {
-        const response = fetch("http://localhost:8000/api/v1/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: this.username,
-            password: this.password,
-          }),
-        });
-        
-        const { user, token } = await response.json();
-        this.setUser(user);
-        this.setToken(token);
-      },
-    },
+        const url = 'http://127.0.0.1:8000/api/v1/login';
+        const data = new FormData();
+        data.append('username', username.value);
+        data.append('password', password.value);
 
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: data
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log('Login successful:', result);
+            // DA FARE SALVATAGGIO NELLO STORE
+            //this.setAuth(result.access_token);
+            //this.setRefresh(result.refresh_token);
+        } catch (error) {
+            console.error('There was a problem with the login request:', error);
+        }
+      }
+    }
   };
   </script>
   
