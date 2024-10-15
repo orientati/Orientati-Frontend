@@ -1,10 +1,10 @@
 # build stage
 FROM node:lts-alpine as build-stage
 WORKDIR /app
-COPY orientamento_vallauri/package*.json ./
+COPY package*.json ./
 
 RUN npm install
-COPY orientamento_vallauri .
+COPY .
 RUN npm run build
 
 # production stage
