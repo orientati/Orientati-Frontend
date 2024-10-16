@@ -1,0 +1,19 @@
+.input {
+    border: none;
+    border-radius: 28px;
+    border: 1px solid #cac4d0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 48px;
+}
+
+.icon-div {
+    right: 20px;
+}
+
+.fa-solid {
+    font-size: large;
+    cursor: pointer;
+}

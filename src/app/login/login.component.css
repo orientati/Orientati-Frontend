@@ -1,0 +1,13 @@
+nav,
+.div-login {
+    border-radius: 23px;
+}
+
+.button-vallauri {
+    border: none;
+    border-radius: 20px;
+    background-color: #65558f;
+    text-transform: uppercase;
+    color: white;
+    padding: 10px 30px;
+}

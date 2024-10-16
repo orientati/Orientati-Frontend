@@ -1,0 +1,12 @@
+<div class="input-div position-relative">
+  <input
+    class="input py-3 px-4 w-100 bg-light-vallauri"
+    type="text"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (ngModelChange)="onValueChange()" 
+  />
+  <div class="position-absolute top-50 translate-middle-y icon-div">
+    <i class="fa-solid fa-xmark p-2 bg-light-vallauri" (click)="value = ''; onValueChange()"></i> 
+  </div>
+</div>

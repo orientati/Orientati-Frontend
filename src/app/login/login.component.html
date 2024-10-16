@@ -1,0 +1,28 @@
+<div class="container py-5">
+  <nav class="px-4 py-3 bg-light-vallauri">
+    <p class="text-uppercase m-0 p-0">orientamento</p>
+    <h1 class="text-uppercase m-0 p-0">accedi</h1>
+    <hr />
+  </nav>
+  <div class="d-flex justify-content-center align-items-center h-100" style="min-height: 50vh;">
+    <div class="py-5 px-3 bg-light-vallauri div-login w-100 my-5">
+      <app-vallauri-input
+        placeholder="mail@vallauri.edu"
+        type="email"
+        (valueChange)="handleEmailChange($event)"
+      ></app-vallauri-input>
+
+      <br />
+
+      <app-vallauri-input
+        placeholder="Password"
+        type="password"
+        (valueChange)="handlePasswordChange($event)"
+      ></app-vallauri-input>
+
+      <div class="button-div d-flex justify-content-center mt-4 w-100">
+        <button class="button-vallauri">accedi</button>
+      </div>
+    </div>
+  </div>
+</div>
