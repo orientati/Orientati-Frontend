@@ -1,13 +1,19 @@
-FROM node:alpine
+FROM node:18.18-alpine3.18 as build
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY . /usr/src/app
+COPY . .
 
-RUN npm install -g @angular/cli
+RUN npm ci
 
-RUN npm install
+RUN npm run build
+
+
+FROM nginx:latest
+
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "80"]
+COPY --from=build /app/dist/vallauri-orientamento/browser /usr/share/nginx/html
+
