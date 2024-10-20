@@ -8,31 +8,6 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-async function vallauriRequest(url, method = "GET", headers = {}, body = null) {
-  try {
-    const options = {
-      method: method,
-      headers: headers,
-      body: null,
-    };
-
-    if (method !== "GET" && body) {
-      options.body = body;
-    }
-
-    const response = await fetch(url, options);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Fetch error:", error);
-    throw error;
-  }
-}
-
 function adminLogin() {
   const username = document.getElementById("txtUsername").value;
   const password = document.getElementById("txtPassword").value;
