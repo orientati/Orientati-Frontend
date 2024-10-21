@@ -1,0 +1,43 @@
+#formLogin{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Media query per schermi di larghezza massima 767px (tipicamente dispositivi mobili) */
+@media (max-width: 767px) {
+    body {
+        background-color: lightgreen;
+    }
+
+    #formLogin{
+        margin-top: 55%;
+        gap: 10px;
+        padding: 10%;
+    }
+}
+
+@media (min-width: 768px) {
+    body {
+        background-color: lightblue;
+    }
+
+    #formLogin{
+        -webkit-box-shadow: 5px 5px 15px 5px #FF8080, -9px 5px 15px 5px #FFE488, -7px -5px 15px 5px #8CFF85, 12px -5px 15px 5px #80C7FF, 12px 10px 15px 7px #E488FF, -10px 10px 15px 7px #FF616B, -10px -7px 27px 1px #8E5CFF, 5px 5px 15px 5px rgba(0,0,0,0); 
+        box-shadow: 5px 5px 15px 5px #FF8080, -9px 5px 15px 5px #FFE488, -7px -5px 15px 5px #8CFF85, 12px -5px 15px 5px #80C7FF, 12px 10px 15px 7px #E488FF, -10px 10px 15px 7px #FF616B, -10px -7px 27px 1px #8E5CFF, 5px 5px 15px 5px rgba(0,0,0,0);
+        margin:auto;
+        width: 90%;
+        gap: 10px;
+        padding: 10%;
+        max-width: 60vw;
+        margin-top: 10vh;
+        border-radius: 15px;
+        background-color: rgba(40, 229, 235, 0.718);
+    }
+
+    #formLogin input{
+        width: 100%;
+    }
+}
+
