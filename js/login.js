@@ -4,29 +4,16 @@ window.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("submit", function (event) {
     event.preventDefault();
     event.stopPropagation();
-    adminLogin();
+    adminLogin(document.getElementById('txtUsername').value.trim(), document.getElementById('txtPassword').value.trim())
+    .then(response => {
+      handleResponseRedirect(response);
+    })
+    .catch(err =>{
+      console.err(err);
+    })
   });
 });
 
-function adminLogin() {
-  const username = document.getElementById("txtUsername").value;
-  const password = document.getElementById("txtPassword").value;
-
-  const url = "http://127.0.0.1:8000/api/v1/login";
-  const method = "POST";
-
-  const body = new FormData();
-  body.append("username", username);
-  body.append("password", password);
-
-  vallauriRequest(url, method, {}, body)
-    .then((response) => {
-      handleResponseRedirect(response);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
 
 function handleResponseRedirect(response) {
   const { access_token, refresh_token } = response;
