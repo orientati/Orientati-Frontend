@@ -1,7 +1,7 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Librerie -->
     <script src="../js/librerie/requestModule.js"></script>
@@ -11,17 +11,41 @@
     <script src="../js/login.js"></script>
 
     <!-- Stili Globali -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/login.css" />
 
     <title>Pagina Login</title>
-</head>
-<body>
-    <!-- Form di login admin -->
-    <form id="formLogin"> 
-        <input type="text" id="txtUsername" placeholder="Nome Utente" required>
-        <input type="password" id="txtPassword" placeholder="Password Utente" required>
-        <button>Login</button>
-    </form>
-</body>
+  </head>
+  <body>
+    <main>
+      <p class="title">Login</è>
+      <p class="subtitle">Applicativo per la gestione dei turni</p>
+
+      <!-- Modulo di login -->
+      <form id="formLogin">
+        <label for="txtUsername">Inserisci il tuo nome utente/email</label>
+        <input
+          class="input"
+          type="text"
+          id="txtUsername"
+          placeholder="Inserisci il tuo nome utente/email"
+          required
+        />
+
+        <label for="txtPassword">Inserisci la tua password</label>
+        <input
+          class="input"
+          type="password"
+          id="txtPassword"
+          placeholder="Inserisci la tua password"
+          required
+        />
+
+        <button class="btn-vallauri" type="submit">Login</button>
+      </form>
+
+      <a>gaga redirect</a>
+
+    </main>
+  </body>
 </html>
