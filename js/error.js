@@ -27,4 +27,5 @@ function mostraErrore(){
 
     document.getElementById("txtMsg").innerText = messaggio;
     document.getElementById("txtCodice").innerText = codice;
+    document.title = "Errore " + codice;
 }
