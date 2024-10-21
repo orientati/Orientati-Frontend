@@ -3,17 +3,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>REDIRECT</title>
-    <script>
-      /*
-      const device = window.navigator.userAgent;
-      if (device.includes("Windows")) {
-        location.href = "./desktop/login.html";
-      } else {
-        location.href = "./mobile/login.html";
-      }*/
-    </script>
+
+    <!-- Librerie -->
+    <script src="js/librerie/errorModule.js"></script> 
+
   </head>
   <body>
     <a href="html/login.html"></a>
+    <button id="btn505" onclick="mostraErrore('Errore nel server', 500)">Mostra errore 500</button>
+    <button id="btn505" onclick="mostraErrore('Pagina inesistente', 404)">Mostra errore 404</button>
   </body>
+
+  <script>
+    /*
+    const device = window.navigator.userAgent;
+    if (device.includes("Windows")) {
+      location.href = "./desktop/login.html";
+    } else {
+      location.href = "./mobile/login.html";
+    }*/
+
+    function mostraErrore(msg, codice){
+      MostraPaginaErrore(msg, codice);
+    }
+  </script>
 </html>
