@@ -1,8 +1,15 @@
 "use strict";
 window.addEventListener("load", init);
 
+/**
+ * Funzione richiamata al caricamento della pagina
+ */
 function init(){
     mostraErrore();
+
+    document.getElementById("btnHome").addEventListener("click", ()=>{
+        window.location.href = "../index.html";
+    })
 }
 
 /**
