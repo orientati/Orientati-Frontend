@@ -1,7 +1,7 @@
 "use strict";
 const port = 8000;
-let url;
 const path = findHostName();
+let url = findUrl();
 
 
 /**
@@ -9,25 +9,25 @@ const path = findHostName();
  * @returns hostname
  */
 function findHostName(){
-    if(location.origin == "file://")
+    if(location.origin == "file://"){
         return location.href.substring(0, location.href.lastIndexOf("/Vallauri-Orientati-Frontend"))+"/Vallauri-Orientati-Frontend";
-    else{
-        if(location.hostname == "localhost" || location.hostname == "127.0.0.1"){
-            url = "http://127.0.0.1:"+port;
-        }else{
-            url = location.hostname + ":" + port;
-        }
-        return host+"/Vallauri-Orientati-Frontend"
+    }else{
+        return host+"/Vallauri-Orientati-Frontend";
     }
+}
 
+function findUrl(){
+    if(location.origin == "file://"){
+        return "http://127.0.0.1:"+port;
+    }else{
+        return location.hostname + ":" + port;
+    }
 }
 
 window.addEventListener("load", ()=>{
     if(location.pathname.substring(location.pathname.lastIndexOf("/") + 1)!="login.html"){
-        console.log("cdscds")
         autoReLogin();
     }
-    console.log(location.origin);
 });
 
 /**
@@ -61,31 +61,30 @@ function login(username, password) {
 }
 
 /**
- * Esegue una richiesta di login come admin all'endpoint /api/v1/login.
- * @param {string} [access_token] access_token 
- * @param {string} url 
- * @returns Nuova PROMISE cona la risposta del server
+ * Esegue un controllo per verificare se l'access token è valido
+ * @param {string} [access_token=localStorage.getItem("access_token")] access_token 
+ * @param {string} [urlEndPoint=url + "/api/v1/users/me"] url 
+ * @returns true: access token valido, false: accesso token non valido
  */
 function testAccessToken(access_token = localStorage.getItem("access_token"), endpointUrl =url + "/api/v1/users/me"){
+    let bool;
     const headers = {
         "Authorization": `Bearer ${access_token}`
     };
     vallauriRequest(endpointUrl,"GET",headers).then((response) =>{
-        return true;
+        bool = true;
     }).catch((error)=>{
-        return false;
+        bool =  false;
     });
+    return bool;
 }
 
 /**
- * gestione dei token: effettua una prova per determinare se l'access token è valido, in caso contrario ne richiede un altro con il session token, in case anche l'ultimo non sia valido richiede il login per ottenere nuovi token
+ * gestione dei token: effettua una prova per determinare se l'access token è valido, in caso contrario ne richiede un altro con il session token, in caso anche l'ultimo non sia valido richiede il login per ottenere nuovi token
  */
-
 function autoReLogin(){
     const access_token = localStorage.getItem("access_token");
     const refresh_token = localStorage.getItem("refresh_token");
-
-    console.log(access_token + "---" + refresh_token);
 
     const endpointUrl = url + "/api/v1/users/me";
 
@@ -93,7 +92,6 @@ function autoReLogin(){
         "Authorization": `Bearer ${access_token}`
     };
     vallauriRequest(endpointUrl,"GET",headers).then((response) =>{
-        console.log(response);
     }).catch((error)=>{
         if (error.response) {
             console.log("Errore con status code:", error.response.status);
@@ -113,7 +111,7 @@ function autoReLogin(){
                         location.href = path+"/html/login.html";
                     }else{
                         console.error("errore sconosciuto");
-                        //creazione di una pagina di errore
+                        MostraPaginaErrore("errore nel server, ritenta a breve",500);
                     }
                     console.warn(error);
                 });
@@ -121,7 +119,7 @@ function autoReLogin(){
             console.log("Errore con status code:", statusCode);
             }
         } else {
-            console.error("Errore sconosciuto:", error);
+            MostraPaginaErrore("errore nel server, ritenta a breve",500);
         }
     });
 }
