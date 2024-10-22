@@ -1,5 +1,5 @@
 "use strict";
-const port = 8010;
+const port = 8000;
 const path = findHostName();
 let url = findUrl();
 
