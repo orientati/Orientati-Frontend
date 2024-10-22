@@ -7,77 +7,17 @@
     <!-- Script -->
     <script src="../js/error.js"></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/error.css">
 
 </head>
 <body>
-    <div id="txtCodice"></div>
-    <div id="txtMsg"></div>
-    <div id="txtFooter">
-        Torna alla 
-        <button id="btnHome">Home</button>
-    </div>
+    <a href="#">
+        <div id="txtCodice"></div>
+        <div id="txtMsg"></div>
+    </a>
 </body>
-
 <style>
-    html{
-        user-select: none; /* Disabilita l'evidenziazione del testo */
-        -webkit-user-select: none; /* Per Safari */
-        -moz-user-select: none; /* Per Firefox */
-        -ms-user-select: none; /* Per IE e Edge */
-    }
-
-    body{
-        font-family: "Staatliches", sans-serif;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    button{
-        font-size: 1vw;
-        border: 0;
-        border-radius: 15px;
-        background-color: rgb(10, 95, 253);
-        padding: 10px 20px;
-        color: white;
-
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover{
-        cursor: pointer;
-        background-color: rgb(57, 123, 245);
-    }
-
-    button:active{
-        color: black;
-        background-color: rgb(31, 182, 241);
-    }
-
-    div{
-        margin: 0;
-        padding: 0;
-    }
-
-    #txtMsg{
-        font-size: 3vw;
-        margin-bottom: 50px;
-    }
-
-    #txtCodice{
-        font-size: 30vw;
-        font-stretch: expanded;
-    }
-
-    #txtFooter{
-        font-size: 1.5vw;
-        display: flex;
-        gap: 10px;
-    }
 </style>
 </html>
