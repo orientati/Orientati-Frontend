@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("submit", function (event) {
     event.preventDefault();
     event.stopPropagation();
-    adminLogin(document.getElementById('txtUsername').value.trim(), document.getElementById('txtPassword').value.trim())
+    login(document.getElementById('txtUsername').value.trim(), document.getElementById('txtPassword').value.trim())
     .then(response => {
       handleResponseRedirect(response);
     })
