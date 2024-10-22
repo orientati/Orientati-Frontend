@@ -2,9 +2,10 @@
 
 async function vallauriRequest(url, method = "GET", headers = {}, body = null) {
   try {
+    console.log(headers)
     const options = {
       method: method,
-      header: headers,
+      headers: headers,
       body: null,
     };
 
@@ -12,7 +13,7 @@ async function vallauriRequest(url, method = "GET", headers = {}, body = null) {
       options.body = body instanceof FormData ? body : JSON.stringify(body);
 
       if (!(body instanceof FormData)) {
-        options.header["Content-Type"] = "application/json";
+        options.headers["Content-Type"] = "application/json";
       }
     }
 
@@ -24,7 +25,6 @@ async function vallauriRequest(url, method = "GET", headers = {}, body = null) {
 
     return await response.json();
   } catch (error) {
-    console.error("Fetch error:", error);
     throw error;
   }
 }
