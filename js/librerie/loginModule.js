@@ -1,7 +1,7 @@
 "use strict";
-const port = 8000;
+const port = 8010;
 const path = findHostName();
-let url = "http://localhost"+":"+port;
+let url = findUrl();
 
 
 /**
@@ -11,12 +11,17 @@ let url = "http://localhost"+":"+port;
 function findHostName(){
     if(location.origin == "file://"){
         return location.href.substring(0, location.href.lastIndexOf("/Vallauri-Orientati-Frontend"))+"/Vallauri-Orientati-Frontend";
-        url = "http://127.0.0.1:"+port;
     }else{
-        url = location.hostname + ":" + port;
         return host+"/Vallauri-Orientati-Frontend";
     }
+}
 
+function findUrl(){
+    if(location.origin == "file://"){
+        return "http://127.0.0.1:"+port;
+    }else{
+        return location.hostname + ":" + port;
+    }
 }
 
 window.addEventListener("load", ()=>{
@@ -114,7 +119,7 @@ function autoReLogin(){
             console.log("Errore con status code:", statusCode);
             }
         } else {
-            console.error("Errore sconosciuto:", error);
+            MostraPaginaErrore("errore nel server, ritenta a breve",500);
         }
     });
 }
