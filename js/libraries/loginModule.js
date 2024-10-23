@@ -1,9 +1,10 @@
 "use strict";
 const port = 8001;
-const path = findHostName();
 let url = findUrl();
 const htmlpage =
   window.location.href.split("/")[window.location.href.split("/").length - 1];
+
+console.log(window.location + "/Vallauri-Orientati-Frontend");
 
 /**
  * trova l'hostname, utile per mantenere la funzionalità durante il developing in locale.
@@ -59,17 +60,7 @@ function login(username, password) {
         localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
         res(response);
-        if (
-          !sessionStorage.getItem("path") &&
-          sessionStorage
-            .getItem("path")
-            .substring(sessionStorage.getItem("path").lastIndexOf("/") + 1) !=
-            "login.html"
-        ) {
-          location.href = sessionStorage.getItem("path");
-        } else {
-          location.href = path + "/index.html";
-        }
+        location.href = "../index.html";
       })
       .catch((error) => {
         rej(error);
@@ -138,8 +129,14 @@ function autoReLogin() {
                     "loginMessage",
                     "Login scaduto, reinserisci le tue credenziali"
                   );
-                  sessionStorage.setItem("path", location.pathname);
-                  //location.href = path + "/pages/login.html";
+                  if (
+                    !(
+                      htmlpage === "" ||
+                      htmlpage === "index.html" ||
+                      htmlpage === "login.html"
+                    )
+                  )
+                    location.href = "./login.html";
                 } else {
                   console.error("errore sconosciuto");
                   // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
@@ -182,6 +179,13 @@ function autoReLogin() {
       });
   } else {
     // Reindirizza al login se non trovo un token di accesso
-    window.location.href = "./login.html";
+    if (
+      !(
+        htmlpage === "" ||
+        htmlpage === "index.html" ||
+        htmlpage === "login.html"
+      )
+    )
+      location.href = "./login.html";
   }
 }
