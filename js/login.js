@@ -9,22 +9,10 @@ window.addEventListener("DOMContentLoaded", function () {
       document.getElementById("txtPassword").value.trim()
     )
       .then((response) => {
-        handleResponseRedirect(response);
+        location.href = "./dashboard.html";
       })
       .catch((err) => {
         console.error(err);
       });
   });
 });
-
-function handleResponseRedirect(response) {
-  const { access_token, refresh_token } = response;
-
-  if (access_token && refresh_token) {
-    localStorage.setItem("access_token", access_token);
-    localStorage.setItem("refresh_token", refresh_token);
-    //location.href = "./dashboard.html";
-  } else {
-    console.error("Errore nell'acquisizione dei token");
-  }
-}

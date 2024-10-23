@@ -1,5 +1,5 @@
 "use strict";
-const port = 8000;
+const port = 8001;
 const path = findHostName();
 let url = findUrl();
 const htmlpage = window.location.href.split("/")[window.location.href.split("/").length - 1];
@@ -23,7 +23,7 @@ function findHostName() {
 
 function findUrl() {
   if (location.origin == "file://") {
-    return "http://127.0.0.1:" + port;
+    return "http://109.123.240.145:" + port;
   } else {
     return location.hostname + ":" + port;
   }
