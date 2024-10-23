@@ -18,7 +18,7 @@ function MostraPaginaErrore(
   let path = "./";
   const htmlpage =
     window.location.href.split("/")[window.location.href.split("/").length - 1];
-  if (htmlpage === "" || htmlpage === "index.html") path = "html/";
+  if (htmlpage === "" || htmlpage === "index.html") path = "pages/";
   path += "error.html";
 
   sessionStorage.setItem("errorMsg", JSON.stringify(jsonMsg));
