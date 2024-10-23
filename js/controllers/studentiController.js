@@ -11,7 +11,7 @@ class Studente {
 }
 
 let studenti = [];
-const urlEndpoint = "http://109.123.240.145:8001/api/v1/";
+const urlEndpoint = "http://127.0.0.1/api/v1/";
 
 /**
  * Ritorna tutti gli studenti registrati sul server. Richiede l'admin

@@ -25,7 +25,7 @@ function findHostName() {
 
 function findUrl() {
   if (location.origin == "file://") {
-    return "http://109.123.240.145:" + port;
+    return "http://127.0.0.1" + port;
   } else {
     return location.hostname + ":" + port;
   }
@@ -84,7 +84,7 @@ function testAccessToken(
   };
   vallauriRequest(endpointUrl, "GET", headers)
     .then((response) => {
-      bool = true;
+      bool = true;s
     })
     .catch((error) => {
       bool = false;
