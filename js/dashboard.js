@@ -1,7 +1,16 @@
 window.addEventListener("DOMContentLoaded", function () {
-  createComponents("body", false);
+  // Per uan futura navbar
+  //createComponents("body", false);
 
-  createComponents("body", true);
+  getStudenti()
+  .then(res =>{
+    console.log(res);
+  });
 
-  getStudenti();
+  /*addStudente('gaga', 'gaga', false, false, false)
+  .then(res=>{
+    console.log(res)
+  }).catch(rej=>{
+    console.log("ERRORE:" + rej);
+  })*/
 });

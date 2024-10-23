@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; 
 
 /**
  * Effettua una richiesta all'url spcificato con la possibilità di passare i dati sotto forma di FormData
@@ -11,7 +11,6 @@
 function vallauriRequest(url, method = "GET", headers = {}, body = null) {
   return new Promise((res, rej) => {
     try {
-      console.log(headers);
       const options = {
         method: method,
         headers: headers,

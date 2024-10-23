@@ -27,23 +27,18 @@ function getStudenti() {
 
     vallauriRequest(`${urlEndpoint}admin/users`, "GET", headers)
       .then((response) => {
-        if (response.ok) {
-          const data = response.json();
-          data.users.forEach((studente) => {
-            studenti.push(
-              new Studente(
-                studente.username,
-                studente.admin,
-                studente.temporaneo,
-                studente.connessoAGruppo,
-                studente.id
-              )
-            );
-            res(studenti);
-          });
-        } else {
-          rej(semplificaErrore(response.status));
-        }
+        response.users.forEach((studente) => {
+          studenti.push(
+            new Studente(
+              studente.username,
+              studente.admin,
+              studente.temporaneo,
+              studente.connessoAGruppo === true,
+              studente.id
+            )
+          );
+          res(studenti);
+        });
       })
       .catch((err) => {
         rej(semplificaErrore(500));
@@ -54,12 +49,12 @@ function getStudenti() {
 
 /**
  * Ritorna lo studente con l'id specificato. Richiede l'admin
- * @param {int/string} id
+ * @param {int} id
  * @returns Nuova classe STUDENTE con i dettagli
  */
 function getStudenteById(id) {
   return new Promise((res, rej) => {
-    if (id.trim()) {
+    if (id) {
       const access_token = localStorage.getItem("access_token");
       const headers = {
         Authorization: `Bearer ${access_token}`,
@@ -67,20 +62,15 @@ function getStudenteById(id) {
 
       vallauriRequest(`${urlEndpoint}admin/users/${id}`, "GET", headers)
         .then((response) => {
-          if (response.ok) {
-            const data = response.json();
-            res(
-              new Studente(
-                data.username,
-                data.admin,
-                data.temporaneo,
-                data.connessoAGruppo,
-                data.id
-              )
-            );
-          } else {
-            rej(semplificaErrore(response.status));
-          }
+          res(
+            new Studente(
+              response.username,
+              response.admin,
+              response.temporaneo,
+              response.connessoAGruppo === true,
+              response.id
+            )
+          );
         })
         .catch((err) => {
           rej(semplificaErrore(500));
@@ -92,7 +82,7 @@ function getStudenteById(id) {
 
 /**
  * Modifica i dati dello studente con l'id passato.
- * @param {int/string} id
+ * @param {int} id
  * @param {string} username
  * @param {string} password
  * @param {boolean} isAdmin
@@ -102,7 +92,7 @@ function getStudenteById(id) {
 function patchStudente(id, username, password, isAdmin, isTemporary) {
   return new Promise((res, rej) => {
     if (
-      id.trim() &&
+      id &&
       username.trim() &&
       password.trim() &&
       isAdmin === Boolean &&
@@ -121,20 +111,15 @@ function patchStudente(id, username, password, isAdmin, isTemporary) {
 
       vallauriRequest(`${urlEndpoint}admin/users/${id}`, "PUT", headers, body)
         .then((response) => {
-          if (response.ok) {
-            const data = response.json();
-            res(
-              new Studente(
-                data.username,
-                data.admin,
-                data.temporaneo,
-                data.connessoAGruppo,
-                data.id
-              )
-            );
-          } else {
-            rej(semplificaErrore(response.status));
-          }
+          res(
+            new Studente(
+              response.username,
+              response.admin,
+              response.temporaneo,
+              response.connessoAGruppo === true,
+              response.id
+            )
+          );
         })
         .catch((err) => {
           rej(semplificaErrore(500));
@@ -164,9 +149,9 @@ function addStudente(
     if (
       username.trim() &&
       password.trim() &&
-      isAdmin === Boolean &&
-      isTemporary === Boolean &&
-      connectedToGroup === Boolean
+      typeof isAdmin === "boolean" &&
+      typeof isTemporary === "boolean" &&
+      typeof connectedToGroup === "boolean"
     ) {
       const access_token = localStorage.getItem("access_token");
       const headers = {
@@ -182,20 +167,15 @@ function addStudente(
 
       vallauriRequest(`${urlEndpoint}admin/users`, "POST", headers, body)
         .then((response) => {
-          if (response.ok) {
-            const data = response.json();
-            res(
-              new Studente(
-                data.username,
-                data.admin,
-                data.temporaneo,
-                data.connessoAGruppo,
-                data.id
-              )
-            );
-          } else {
-            rej(semplificaErrore(response.status));
-          }
+          res(
+            new Studente(
+              response.username,
+              response.admin,
+              response.temporaneo,
+              response.connessoAGruppo === true,
+              response.id
+            )
+          );
         })
         .catch((err) => {
           rej(semplificaErrore(500));
@@ -207,12 +187,12 @@ function addStudente(
 
 /**
  * Rimuove lo studente con l'id passato dal server
- * @param {int/string} id
+ * @param {int} id
  * @returns Un messaggio di avvenuta cancellazione dello studente.
  */
 function delStudente(id) {
   return new Promise((res, rej) => {
-    if (id.trim()) {
+    if (id) {
       const access_token = localStorage.getItem("access_token");
       const headers = {
         Authorization: `Bearer ${access_token}`,
@@ -220,11 +200,7 @@ function delStudente(id) {
 
       vallauriRequest(`${urlEndpoint}admin/users/${id}`, "DELETE", headers)
         .then((response) => {
-          if (response.ok) {
-            res("Studente rimosso con successo!");
-          } else {
-            rej(semplificaErrore(response.status));
-          }
+          res("Studente rimosso con successo!");
         })
         .catch((err) => {
           rej(semplificaErrore(500));
