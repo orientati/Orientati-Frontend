@@ -95,8 +95,8 @@ function patchStudente(id, username, password, isAdmin, isTemporary) {
       id &&
       username.trim() &&
       password.trim() &&
-      isAdmin === Boolean &&
-      isTemporary === Boolean
+      typeof isAdmin === Boolean &&
+      typeof isTemporary === Boolean
     ) {
       const access_token = localStorage.getItem("access_token");
       const headers = {

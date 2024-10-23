@@ -12,6 +12,7 @@ main {
 }
 
 .title {
+    margin-top: 0;
     font-size: 55px;
     text-align: center;
     text-transform: capitalize;
@@ -96,7 +97,7 @@ a {
 /* Media query per telefono */
 @media (max-width: 767px) {
     main {
-        margin-top: 5dvh;
+        margin-top: 100px;
         max-width: 80dvw;
     }
 
@@ -119,7 +120,6 @@ a {
     main {
         margin-top: 80px;
         max-width: 40vw;
-
     }
 
     #formLogin {
@@ -130,6 +130,6 @@ a {
     }
 
     #formLogin input {
-        width: 100%;
-    }
+        width: 100%;
+    }
 }
