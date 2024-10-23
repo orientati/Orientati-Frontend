@@ -18,7 +18,7 @@ function findHostName() {
       ) + "/Vallauri-Orientati-Frontend"
     );
   } else {
-    return host + "/Vallauri-Orientati-Frontend";
+    return location.hostname + "/Vallauri-Orientati-Frontend";
   }
 }
 
