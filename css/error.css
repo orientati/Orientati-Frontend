@@ -1,69 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
-
-html {
-    user-select: none;
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-}
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
 
 body {
-    font-family: "Staatliches", sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin: 0;
+}
+.error-container {
+  text-align: center;
+  border-radius: 5px;
+  padding: 80px;
+}
+h2 {
+  font-size: 5em;
+  margin-bottom: 10px;
+}
+.error-code {
+  font-weight: bold;
+}
+.error-message {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
 }
 
-div {
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    text-decoration: none;  
-    color: black;
-}
-
+.error-code,
 #txtMsg {
-    font-size: 5vw;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    -webkit-text-stroke: 2px black;
+  margin-left: 10px;
+  font-size: 1.5em;
 }
 
-#txtCodice {
-    font-size: 35vw;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: 400;
-    color: var(--primary-color);
+button {
+  padding: 10px 30px;
+  width: 120px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
 }
-
-#txtFooter {
-    font-size: 1.5vw;
-    margin-top: -100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-
-@media (max-width: 767px) { 
-    #txtCodice {
-        font-size: 55vw;
-    }
-
-    #txtMsg {
-        font-size: 7vw;
-    }
+button:hover {
+  background-color: var(--secondary-color);
 }
