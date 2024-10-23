@@ -6,10 +6,6 @@ window.addEventListener("load", init);
  */
 function init() {
   mostraErrore();
-
-  document.getElementById("btnHome").addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
 }
 
 /**

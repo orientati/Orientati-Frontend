@@ -2,6 +2,7 @@
 const port = 8000;
 const path = findHostName();
 let url = findUrl();
+const htmlpage = window.location.href.split("/")[window.location.href.split("/").length - 1];
 
 /**
  * trova l'hostname, utile per mantenere la funzionalità durante il developing in locale.
@@ -135,7 +136,13 @@ function autoReLogin() {
                 location.href = path + "/html/login.html";
               } else {
                 console.error("errore sconosciuto");
-                MostraPaginaErrore("errore nel server, ritenta a breve", 500);
+                // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
+                if(htmlpage === "" || htmlpage === "index.html" || htmlpage === "login.html"){
+                  // Mostra alert
+                }
+                else{
+                  MostraPaginaErrore("errore nel server, ritenta a breve", 500);
+                }              
               }
               console.warn(error);
             });
@@ -143,7 +150,16 @@ function autoReLogin() {
           console.log("Errore con status code:", statusCode);
         }
       } else {
-        MostraPaginaErrore("errore nel server, ritenta a breve", 500);
+        const htmlpage =
+        window.location.href.split("/")[window.location.href.split("/").length - 1];
+
+        // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
+        if(htmlpage === "" || htmlpage === "index.html" || htmlpage === "login.html"){
+          // Mostra alert
+        }
+        else{
+          MostraPaginaErrore("errore nel server, ritenta a breve", 500);
+        }
       }
     });
 }

@@ -36,6 +36,7 @@ a {
     transform: translate(-50%, -50%);
     color: white;
     -webkit-text-stroke: 2px black;
+    text-align: center;
 }
 
 #txtCodice {
