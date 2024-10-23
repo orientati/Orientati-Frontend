@@ -11,7 +11,6 @@
 function vallauriRequest(url, method = "GET", headers = {}, body = null) {
   return new Promise((res, rej) => {
     try {
-      console.log(headers);
       const options = {
         method: method,
         headers: headers,
