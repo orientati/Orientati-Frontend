@@ -4,16 +4,18 @@ window.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("submit", function (event) {
     event.preventDefault();
     event.stopPropagation();
-    login(document.getElementById('txtUsername').value.trim(), document.getElementById('txtPassword').value.trim())
-    .then(response => {
-      handleResponseRedirect(response);
-    })
-    .catch(err =>{
-      console.error(err);
-    })
+    login(
+      document.getElementById("txtUsername").value.trim(),
+      document.getElementById("txtPassword").value.trim()
+    )
+      .then((response) => {
+        handleResponseRedirect(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 });
-
 
 function handleResponseRedirect(response) {
   const { access_token, refresh_token } = response;

@@ -2,7 +2,7 @@
 
 async function vallauriRequest(url, method = "GET", headers = {}, body = null) {
   try {
-    console.log(headers)
+    console.log(headers);
     const options = {
       method: method,
       headers: headers,
