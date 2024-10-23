@@ -25,7 +25,7 @@ function findHostName() {
 
 function findUrl() {
   if (location.origin == "file://") {
-    return "http://127.0.0.1" + port;
+    return "http://127.0.0.1:" + port;
   } else {
     return location.hostname + ":" + port;
   }
@@ -84,7 +84,8 @@ function testAccessToken(
   };
   vallauriRequest(endpointUrl, "GET", headers)
     .then((response) => {
-      bool = true;s
+      bool = true;
+      s;
     })
     .catch((error) => {
       bool = false;
@@ -139,14 +140,14 @@ function autoReLogin() {
                     location.href = "./login.html";
                 } else {
                   console.error("errore sconosciuto");
-                  // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
+                  // Reinderizza solo se non in index.html o login.html.
                   if (
-                    htmlpage === "" ||
-                    htmlpage === "index.html" ||
-                    htmlpage === "login.html"
+                    !(
+                      htmlpage === "" ||
+                      htmlpage === "index.html" ||
+                      htmlpage === "login.html"
+                    )
                   ) {
-                    // Mostra alert
-                  } else {
                     MostraPaginaErrore(
                       "Errore con la sessione in corso, rifare il login",
                       500
@@ -166,12 +167,12 @@ function autoReLogin() {
 
           // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
           if (
-            htmlpage === "" ||
-            htmlpage === "index.html" ||
-            htmlpage === "login.html"
+            !(
+              htmlpage === "" ||
+              htmlpage === "index.html" ||
+              htmlpage === "login.html"
+            )
           ) {
-            // Mostra alert
-          } else {
             // Reindirizza al login
             window.location.href = "./login.html";
           }
