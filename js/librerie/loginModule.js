@@ -77,7 +77,7 @@ function login(username, password) {
 /**
  * Esegue un controllo per verificare se l'access token è valido
  * @param {string} [access_token=localStorage.getItem("access_token")] access_token
- * @param {string} [urlEndPoint=url + "/api/v1/users/me"] url
+ * @param {string} [urlEndPoint=url + "/api/v1/user   s/me"] url
  * @returns true: access token valido, false: accesso token non valido
  */
 function testAccessToken(
