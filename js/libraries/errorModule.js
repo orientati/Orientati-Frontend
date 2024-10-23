@@ -27,41 +27,46 @@ function MostraPaginaErrore(
 
 /**
  * Mostra un alert in alto a dx con il messaggio e la formattazione selezionata
- * @param {string} tipo 
- * @param {string} msg 
- * @param {int} tempo 
+ * @param {string} tipo
+ * @param {string} msg
+ * @param {int} tempo
  */
-function mostraAlert(tipo = "errore", msg = "Errore nel server...", tempo = 5000){
-  if(tempo < 10)
-    tempo *= 1000;
-  
-  let alertWrapper = document.getElementById('alert-wrapper');
-  if(!alertWrapper){
-    const body = document.querySelector('body');
-    alertWrapper = document.createElement('div');
+function mostraAlert(
+  tipo = "errore",
+  msg = "Errore nel server...",
+  tempo = 5000
+) {
+  if (tempo < 10) tempo *= 1000;
+
+  let alertWrapper = document.getElementById("alert-wrapper");
+  if (!alertWrapper) {
+    const body = document.querySelector("body");
+    alertWrapper = document.createElement("div");
     alertWrapper.id = "alert-wrapper";
     body.appendChild(alertWrapper);
   }
 
   const alertDiv = document.createElement("div");
-  
-  switch(tipo){
-    case 'errore':
-      alertDiv.classList.add('alert-danger');
+
+  switch (tipo) {
+    case "errore":
+      alertDiv.classList.add("alert-danger");
       break;
-    case 'successo':
-      alertDiv.classList.add('alert-success');
+    case "successo":
+      alertDiv.classList.add("alert-success");
       break;
     default:
-      alertDiv.classList.add('alert-info');
+      alertDiv.classList.add("alert-info");
       break;
   }
   alertDiv.innerText = msg;
-  alertDiv.classList.add('alert-enter');
+  alertDiv.classList.add("alert-enter");
 
   alertWrapper.appendChild(alertDiv);
 
-  setTimeout(()=>{rimuoviAlert(alertWrapper, alertDiv)}, tempo);
+  setTimeout(() => {
+    rimuoviAlert(alertWrapper, alertDiv);
+  }, tempo);
 }
 
 /**
@@ -69,9 +74,9 @@ function mostraAlert(tipo = "errore", msg = "Errore nel server...", tempo = 5000
  * @param {Node} e L'elemento padre
  * @param {Node} alert L'alert
  */
-function rimuoviAlert(e, alert){
-  alert.classList.add('alert-exit');
-  alert.addEventListener('animationend', ()=>{
+function rimuoviAlert(e, alert) {
+  alert.classList.add("alert-exit");
+  alert.addEventListener("animationend", () => {
     e.removeChild(alert);
-  })
+  });
 }

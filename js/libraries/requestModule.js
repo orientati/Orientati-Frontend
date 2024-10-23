@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 
 /**
  * Effettua una richiesta all'url spcificato con la possibilità di passare i dati sotto forma di FormData
