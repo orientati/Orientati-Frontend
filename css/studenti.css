@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  padding: 20px;
+}
+
+#tableStudenti {
+  width: 90vw;
+  border-collapse: separate;
+  border-spacing: 3px;
+  margin: 20px auto;
+  background-color: white;
+  cursor: pointer;
+}
+
+#tableStudenti th,
+#tableStudenti td {
+  border: 1px solid var(--primary-color);
+  padding: 12px 15px;
+  text-align: left;
+}
+
+#tableStudenti th {
+  background-color: var(--primary-color);
+  color: white;
+  text-transform: uppercase;
+}
+
+#tableStudenti tr:hover {
+  background-color: #f1f1f1;
+}
+
+.action-buttons {
+  display: flex;
+}
+
+.edit-button,
+.delete-button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s all ease;
+  color: var(--primary-color);
+}
+
+.edit-button:hover {
+  color: #218838;
+}
+
+.delete-button:hover {
+  color: #c82333;
+}
+
+.yes {
+  background-color: #d4edda;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.no {
+  background-color: #f8d7da;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+}

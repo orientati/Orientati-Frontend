@@ -3,7 +3,7 @@
 window.addEventListener("DOMContentLoaded", function () {
   getStudenti()
     .then((data) => {
-      createTable(data); 
+      createTable(data);
     })
     .catch((err) => {
       mostraAlert("errore", err);
@@ -12,22 +12,38 @@ window.addEventListener("DOMContentLoaded", function () {
 
 function createTable(data) {
   const table = document.getElementById("tableStudenti");
-  
+
   data.forEach((student, index) => {
     const row = document.createElement("tr");
-    
-    row.onclick = function() {
-      console.log("Student ID:", student.id); 
-    };
-    
+
+    const adminClass = student.isAdmin ? "yes" : "no";
+    const temporaryClass = student.isTemporary ? "yes" : "no";
+    const groupClass = student.inGroup ? "yes" : "no";
+
     row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${student.username}</td>
-      <td>${student.isAdmin ? "Yes" : "No"}</td>
-      <td>${student.isTemporary ? "Yes" : "No"}</td>
-      <td>${student.inGroup ? "Yes" : "No"}</td>
-    `;
-    
+    <td>${student.id}</td>
+    <td>${student.username}</td>
+    <td class="${adminClass}">${student.isAdmin ? "Si" : "No"}</td>
+    <td class="${temporaryClass}">${student.isTemporary ? "Si" : "No"}</td>
+    <td class="${groupClass}">${student.inGroup ? "Si" : "No"}</td>
+    <td class="action-buttons">
+      <button class="edit-button" onclick="editStudent(${student.id})">
+        <span class="material-symbols-outlined">edit</span>
+      </button>
+      <button class="delete-button" onclick="deleteStudent(${student.id})">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    </td>
+  `;
+
     table.appendChild(row);
   });
+}
+
+function editStudent(id) {
+  console.log("Edit Student ID:", id);
+}
+
+function deleteStudent(id) {
+  console.log("Delete Student ID:", id);
 }
