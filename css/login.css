@@ -16,7 +16,8 @@ main {
     font-size: 55px;
     text-align: center;
     text-transform: capitalize;
-    color: var(--primary-color);
+    color: black;
+    font-weight: 500;
 }
 
 .subtitle {
@@ -47,10 +48,8 @@ label {
     margin-bottom: 5px;
     text-transform: capitalize;
     margin-left: 15px;
-    color: var(--primary-color);
     display: inline-block;
-    color: var(--secondary-color);
-
+    color: black;
 }
 
 .input {
@@ -63,6 +62,9 @@ label {
     margin-bottom: 20px;
     background-color: #ffffff;
     color: #333;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 input:focus {
