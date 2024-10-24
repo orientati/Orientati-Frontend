@@ -80,3 +80,4 @@ function rimuoviAlert(e, alert) {
     e.removeChild(alert);
   });
 }
+

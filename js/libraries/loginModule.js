@@ -25,7 +25,7 @@ function findHostName() {
 
 function findUrl() {
   if (location.origin == "file://") {
-    return "http://127.0.0.1:" + port;
+    return "http://109.123.240.145:" + port;
   } else {
     return location.hostname + ":" + port;
   }
@@ -63,7 +63,7 @@ function login(username, password) {
         location.href = "../index.html";
       })
       .catch((error) => {
-        rej(error);
+        rej(semplificaErrore(error));
       });
   });
 }
@@ -189,4 +189,16 @@ function autoReLogin() {
     )
       location.href = "./login.html";
   }
+}
+
+
+/**
+ * Semplifica il codice di errore passato trasformandolo in un messaggio leggibile dall'utente.
+ * @param {int} errorCode
+ * @returns Una stringa messaggio generalizzata dell'errore
+ */
+function semplificaErrore(errorCode) {
+  if (errorCode == 401)
+    return "Nessun utente trovato con queste credenziali";
+  else return "Errore interno nel server";
 }

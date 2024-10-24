@@ -28,14 +28,14 @@ function vallauriRequest(url, method = "GET", headers = {}, body = null) {
       fetch(url, options)
         .then((response) => {
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            rej(response.status);
           }
 
           res(response.json());
         })
         .catch((err) => {
           console.error(err);
-          rej("Errore col collegamento al server");
+          rej(500);
         });
     } catch (error) {
       rej(error);

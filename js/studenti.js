@@ -3,9 +3,9 @@
 window.addEventListener("DOMContentLoaded", function () {
   getStudenti()
     .then((data) => {
-        console.log(data)
+      console.log(data);
     })
     .catch((err) => {
-      console.log(err);
-    });
+      mostraAlert("errore", err);
+    });
 });
