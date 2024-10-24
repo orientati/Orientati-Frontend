@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
 
+html{
+  overflow: hidden;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80vh;
   margin: 0;
+  overflow: hidden;
 }
 .error-container {
   text-align: center;
@@ -18,16 +23,18 @@ h2 {
 }
 .error-code {
   font-weight: bold;
+  padding-right:5px;
 }
 .error-message {
   display: flex;
   align-items: center;
-  margin: 15px 0;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .error-code,
 #txtMsg {
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin: 0;
 }
 

@@ -34,7 +34,8 @@ function vallauriRequest(url, method = "GET", headers = {}, body = null) {
           res(response.json());
         })
         .catch((err) => {
-          rej(err);
+          console.error(err);
+          rej("Errore col collegamento al server");
         });
     } catch (error) {
       rej(error);
