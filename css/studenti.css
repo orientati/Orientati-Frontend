@@ -4,9 +4,10 @@ body {
 }
 
 #tableStudenti {
-  width: 90vw;
+  width: 100%;
+  max-width: 70vw;
   border-collapse: separate;
-  border-spacing: 3px;
+  border-spacing: 4px;
   margin: 20px auto;
   background-color: white;
   cursor: pointer;
@@ -15,51 +16,143 @@ body {
 #tableStudenti th,
 #tableStudenti td {
   border: 1px solid var(--primary-color);
-  padding: 12px 15px;
+  padding: 12px;
   text-align: left;
+  position: relative;
 }
 
 #tableStudenti th {
   background-color: var(--primary-color);
   color: white;
   text-transform: uppercase;
+  padding: 12px;
+  border: none;
 }
 
 #tableStudenti tr:hover {
-  background-color: #f1f1f1;
+  background-color: #eef4fc;
+  color: black;
 }
 
-.action-buttons {
-  display: flex;
-}
-
-.edit-button,
-.delete-button {
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  transition: 0.3s all ease;
-  color: var(--primary-color);
-}
-
-.edit-button:hover {
-  color: #218838;
-}
-
-.delete-button:hover {
-  color: #c82333;
+.admin-cell,
+.temporary-cell,
+.group-cell,
+.id-cell,
+.chk-cell {
+  width: 40px;
 }
 
 .yes {
-  background-color: #d4edda;
+  background-color: #3eb159;
+  color: white;
   padding: 5px;
-  border-radius: 4px;
-  text-align: center;
+  border-radius: 5px;
 }
 
 .no {
-  background-color: #f8d7da;
+  background-color: #db5762;
   padding: 5px;
-  border-radius: 4px;
-  text-align: center;
+  color: white;
+  border-radius: 5px;
+}
+
+.selected-row {
+  color: white;
+  background-color: #4c84edbb;
+}
+
+.student-checkbox {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.checkmark {
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--primary-color);
+  background-color: white;
+  transition: background-color 0.3s, border-color 0.3s;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.student-checkbox:checked+.checkmark {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.student-checkbox:checked+.checkmark::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 100%;
+  max-width: 70vw;
+  margin: 0 auto;
+  padding: 0;
+}
+
+nav p {
+  font-size: 3em;
+  margin: 0;
+}
+
+nav div {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border-radius: 5px;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 20px;
+  transition: all ease 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button span {
+  padding-right: 5px;
+}
+
+#editSelected {
+  background-color: var(--primary-color);
+  color: white;
+  margin-right: 10px;
+}
+
+#deleteSelected {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+#editSelected:hover {
+  background-color: #3eb159;
+}
+
+#deleteSelected:hover {
+  background-color: #db5762;
 }
