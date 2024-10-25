@@ -5,9 +5,9 @@ const urlEndpoint = "http://109.123.240.145:8001/api/v1/";
 
 /**
  * Ritorna tutti gli studenti registrati sul server. Richiede l'admin
- * @returns Una LISTA di classe STUDENTE con i dettagli
+ * @returns Una LISTA di classe USER con i dettagli
  */
-function getStudenti() {
+function getUsers() {
   return new Promise((res, rej) => {
     studenti = [];
     const access_token = localStorage.getItem("access_token");
@@ -17,14 +17,14 @@ function getStudenti() {
 
     vallauriRequest(`${urlEndpoint}admin/users`, "GET", headers)
       .then((response) => {
-        response.users.forEach((studente) => {
+        response.users.forEach((user) => {
           studenti.push(
-            new Studente(
-              studente.username,
-              studente.admin,
-              studente.temporaneo,
-              studente.connessoAGruppo === true,
-              studente.id
+            new User(
+              user.username,
+              user.admin,
+              user.temporaneo,
+              user.connessoAGruppo === true,
+              user.id
             )
           );
           res(studenti);
@@ -38,11 +38,11 @@ function getStudenti() {
 }
 
 /**
- * Ritorna lo studente con l'id specificato. Richiede l'admin
+ * Ritorna l'utente con l'id specificato. Richiede l'admin
  * @param {int} id
- * @returns Nuova classe STUDENTE con i dettagli
+ * @returns Nuova classe USER con i dettagli
  */
-function getStudenteById(id) {
+function getUserById(id) {
   return new Promise((res, rej) => {
     if (id) {
       const access_token = localStorage.getItem("access_token");
@@ -53,7 +53,7 @@ function getStudenteById(id) {
       vallauriRequest(`${urlEndpoint}admin/users/${id}`, "GET", headers)
         .then((response) => {
           res(
-            new Studente(
+            new User(
               response.username,
               response.admin,
               response.temporaneo,
@@ -66,20 +66,20 @@ function getStudenteById(id) {
           rej(semplificaErrore(500));
           console.error(err);
         });
-    } else rej("Nessun id studente selezionato");
+    } else rej("Nessun id utente selezionato");
   });
 }
 
 /**
- * Modifica i dati dello studente con l'id passato.
+ * Modifica i dati del'user con l'id passato.
  * @param {int} id
  * @param {string} username
  * @param {string} password
  * @param {boolean} isAdmin
  * @param {boolean} isTemporary
- * @returns Una classe STUDENTE con i dati aggiornati.
+ * @returns Una classe USER con i dati aggiornati.
  */
-function patchStudente(id, username, password, isAdmin, isTemporary) {
+function patchUser(id, username, password, isAdmin, isTemporary) {
   return new Promise((res, rej) => {
     if (
       id &&
@@ -102,7 +102,7 @@ function patchStudente(id, username, password, isAdmin, isTemporary) {
       vallauriRequest(`${urlEndpoint}admin/users/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
-            new Studente(
+            new User(
               response.username,
               response.admin,
               response.temporaneo,
@@ -120,7 +120,7 @@ function patchStudente(id, username, password, isAdmin, isTemporary) {
 }
 
 /**
- * Aggiunge lo studente con i dati passati al server
+ * Aggiunge l'utente con i dati passati al server
  * @param {string} username
  * @param {string} password
  * @param {boolean} isAdmin
@@ -128,7 +128,7 @@ function patchStudente(id, username, password, isAdmin, isTemporary) {
  * @param {boolean} connectedToGroup
  * @returns Un messaggio di avvenuta modifica dei dati sul server
  */
-function addStudente(
+function addUser(
   username,
   password,
   isAdmin,
@@ -158,7 +158,7 @@ function addStudente(
       vallauriRequest(`${urlEndpoint}admin/users`, "POST", headers, body)
         .then((response) => {
           res(
-            new Studente(
+            new User(
               response.username,
               response.admin,
               response.temporaneo,
@@ -176,11 +176,11 @@ function addStudente(
 }
 
 /**
- * Rimuove lo studente con l'id passato dal server
+ * Rimuove l'user con l'id passato dal server
  * @param {int} id
- * @returns Un messaggio di avvenuta cancellazione dello studente.
+ * @returns Un messaggio di avvenuta cancellazione del'user.
  */
-function delStudente(id) {
+function delUser(id) {
   return new Promise((res, rej) => {
     if (id) {
       const access_token = localStorage.getItem("access_token");
@@ -190,13 +190,13 @@ function delStudente(id) {
 
       vallauriRequest(`${urlEndpoint}admin/users/${id}`, "DELETE", headers)
         .then((response) => {
-          res("Studente rimosso con successo!");
+          res("Utente rimosso con successo!");
         })
         .catch((err) => {
           rej(semplificaErrore(500));
           console.error(err);
         });
-    } else rej("Nessun id studente selezionato");
+    } else rej("Nessun id utente selezionato");
   });
 }
 

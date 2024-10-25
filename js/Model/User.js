@@ -1,6 +1,6 @@
 "use strict";
 
-class Studente {
+class User {
   constructor(username, isAdmin, isTemporary, connectedToGroup, id) {
     this.username = username;
     this.isAdmin = isAdmin;
