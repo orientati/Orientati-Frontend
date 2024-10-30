@@ -76,7 +76,7 @@ function login(username, password) {
  */
 function testAccessToken(
   access_token = localStorage.getItem("access_token"),
-  endpointUrl = url + "/api/v1/users/me"
+  endpointUrl = url + "/api/v1/utenti/me"
 ) {
   let bool;
   const headers = {
@@ -100,7 +100,7 @@ function autoReLogin() {
   const access_token = localStorage.getItem("access_token");
   const refresh_token = localStorage.getItem("refresh_token");
 
-  const endpointUrl = url + "/api/v1/users/me";
+  const endpointUrl = url + "/api/v1/utenti/me";
 
   if (access_token && refresh_token) {
     const headers = {
@@ -190,7 +190,6 @@ function autoReLogin() {
       location.href = "./login.html";
   }
 }
-
 
 /**
  * Semplifica il codice di errore passato trasformandolo in un messaggio leggibile dall'utente.
