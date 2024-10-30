@@ -3,13 +3,12 @@
 class Indirizzo {
     constructor(
         name = "",
-        percorsoDiStudiId = 0,
-        percorsoDiStudiName = "",
+        percorsoDiStudioId = 0,
+        percorsoDiStudioName = "",
         id = 0
     ){
         this.name = name;
-        this.percorsoDiStudiId = percorsoDiStudiId;
-        this.percorsoDiStudiName = percorsoDiStudiName;
+        this.percorsoDiStudio = new PercorsoDiStudio(percorsoDiStudioName, percorsoDiStudioId)
         this.id = id;
     }
 }
