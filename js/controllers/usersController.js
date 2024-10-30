@@ -1,7 +1,7 @@
 "use strict";
 
 let studenti = [];
-const urlEndpoint = "http://109.123.240.145:8001/api/v1/";
+const urlEndpoint = "http://localhost/api/v1/";
 
 /**
  * Ritorna tutti gli studenti registrati sul server. Richiede l'admin
@@ -15,7 +15,7 @@ function getUsers() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/users`, "GET", headers)
+    vallauriRequest(`${urlEndpoint}admin/utenti`, "GET", headers)
       .then((response) => {
         response.users.forEach((user) => {
           studenti.push(
@@ -50,7 +50,7 @@ function getUserById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/users/${id}`, "GET", headers)
+      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "GET", headers)
         .then((response) => {
           res(
             new User(
@@ -99,7 +99,7 @@ function patchUser(id, username, password, isAdmin, isTemporary) {
         temporaneo: isTemporary,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/users/${id}`, "PUT", headers, body)
+      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new User(
@@ -155,7 +155,7 @@ function addUser(
         connessoAGruppo: connectedToGroup,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/users`, "POST", headers, body)
+      vallauriRequest(`${urlEndpoint}admin/utenti`, "POST", headers, body)
         .then((response) => {
           res(
             new User(
@@ -188,7 +188,7 @@ function delUser(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/users/${id}`, "DELETE", headers)
+      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "DELETE", headers)
         .then((response) => {
           res("Utente rimosso con successo!");
         })

@@ -25,7 +25,7 @@ function findHostName() {
 
 function findUrl() {
   if (location.origin == "file://") {
-    return "http://109.123.240.145:" + port;
+    return "http://localhost:" + port;
   } else {
     return location.hostname + ":" + port;
   }
