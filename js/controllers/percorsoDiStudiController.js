@@ -18,7 +18,7 @@ function getPercorsiDiStudio() {
       .then((response) => {
         response.percorsiDiStudi.forEach((percorso) => {
           percorsiDiStudio.push(
-            new PercorsoDiStudio(
+            new PercorsoDiStudi(
               percorso.nome,
               percorso.id
             )
@@ -49,7 +49,7 @@ function getPercorsoDiStudioById(id) {
       vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi/${id}`, "GET", headers)
         .then((response) => {
           res(
-            new PercorsoDiStudio(
+            new PercorsoDiStudi(
               response.nome,
               response.id
             )
@@ -83,7 +83,7 @@ function patchPercorsoDiStudio(id, name) {
       vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
-            new PercorsoDiStudio(
+            new PercorsoDiStudi(
               response.nome,
               response.id
             )
@@ -116,7 +116,7 @@ function addPercorsoDiStudio(name) {
       vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi`, "POST", headers, body)
         .then((response) => {
           res(
-            new PercorsoDiStudio(
+            new PercorsoDiStudi(
               response.nome,
               response.id
             )

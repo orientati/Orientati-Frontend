@@ -1,11 +1,11 @@
 "use strict";
 
-class PercorsoDiStudio{
+class PercorsoDiStudi {
     constructor(
-        name = "",
+        nome = "",
         id = ""
     ){
-        this.name = name;
+        this.nome = nome;
         this.id = id;
     }
 }

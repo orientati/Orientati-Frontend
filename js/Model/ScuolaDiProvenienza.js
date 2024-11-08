@@ -2,12 +2,12 @@
 
 class ScuolaDiProvenienza{
     constructor(
-        name = "",
-        city = "",
+        nome = "",
+        citta = "",
         id = 0
     ){
-        this.name = name;
-        this.city = city;
+        this.nome = nome;
+        this.citta = citta;
         this.id = id;
     }
 }
