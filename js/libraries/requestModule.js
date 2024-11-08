@@ -25,8 +25,6 @@ function vallauriRequest(url, method = "GET", headers = {}, body = null) {
                 }
             }
 
-            console.log(url);
-
             fetch(url, options)
                 .then((response) => {
                     if (!response.ok) {
