@@ -1,0 +1,73 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard</title>
+
+    <!-- Librerie -->
+    <script src="../js/libraries/requestModule.js"></script>
+    <script src="../js/libraries/loginModule.js"></script>
+    <script src="../js/libraries/errorModule.js"></script>
+    <script src="../js/libraries/routingModule.js"></script>
+
+    <!-- Scripts-->
+    <script>
+        checkAdmin();
+    </script>
+
+    <style>
+        #navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        #navbar a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        #navbar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #navbar a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+<h1>
+    home per la parte di amministrazione
+    ci sono le parti di gesitone degli utenti, percorsi di studi, indirizzi, aule, percorsi. accompagnatori,
+    accompagnati.
+
+
+</h1>
+<div>
+    <!-- navbar a sx -->
+    <ul id="navbar">
+        <li><a href="admin.html">Home</a></li>
+        <li><a href="admin.html">Gestione Utenti</a></li>
+        <li><a href="admin.html">Gestione Percorsi di Studi</a></li>
+        <li><a href="admin.html">Gestione Indirizzi</a></li>
+        <li><a href="admin.html">Gestione Aule</a></li>
+        <li><a href="admin.html">Gestione Percorsi</a></li>
+        <li><a href="admin.html">Gestione Accompagnatori</a></li>
+        <li><a href="admin.html">Gestione Accompagnati</a></li>
+    </ul>
+
+</div>
+</body>
+</html>

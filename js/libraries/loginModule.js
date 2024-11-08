@@ -2,7 +2,7 @@
 const port = 8000;
 let url = findUrl();
 const htmlpage =
-  window.location.href.split("/")[window.location.href.split("/").length - 1];
+    window.location.href.split("/")[window.location.href.split("/").length - 1];
 
 console.log(window.location + "/Vallauri-Orientati-Frontend");
 
@@ -11,33 +11,33 @@ console.log(window.location + "/Vallauri-Orientati-Frontend");
  * @returns hostname
  */
 function findHostName() {
-  if (location.origin == "file://") {
-    return (
-      location.href.substring(
-        0,
-        location.href.lastIndexOf("/Vallauri-Orientati-Frontend")
-      ) + "/Vallauri-Orientati-Frontend"
-    );
-  } else {
-    return location.hostname + "/Vallauri-Orientati-Frontend";
-  }
+    if (location.origin == "file://") {
+        return (
+            location.href.substring(
+                0,
+                location.href.lastIndexOf("/Vallauri-Orientati-Frontend")
+            ) + "/Vallauri-Orientati-Frontend"
+        );
+    } else {
+        return location.hostname + "/Vallauri-Orientati-Frontend";
+    }
 }
 
 function findUrl() {
-  if (location.origin == "file://") {
-    return "http://localhost:" + port;
-  } else {
-    return location.origin.split(":").slice(0, 2).join(":") + ":" + port;
-  }
+    if (location.origin == "file://") {
+        return "http://localhost:" + port;
+    } else {
+        return location.origin.split(":").slice(0, 2).join(":") + ":" + port;
+    }
 }
 
 window.addEventListener("load", () => {
-  if (
-    location.pathname.substring(location.pathname.lastIndexOf("/") + 1) !=
-    "login.html"
-  ) {
-    autoReLogin();
-  }
+    if (
+        location.pathname.substring(location.pathname.lastIndexOf("/") + 1) !=
+        "login.html"
+    ) {
+        autoReLogin();
+    }
 });
 
 /**
@@ -47,25 +47,25 @@ window.addEventListener("load", () => {
  * @returns Nuova PROMISE cona la risposta del server
  */
 function login(username, password) {
-  return new Promise((res, rej) => {
-    const endpointUrl = url + "/api/v1/login";
-    const method = "POST";
+    return new Promise((res, rej) => {
+        const endpointUrl = url + "/api/v1/login";
+        const method = "POST";
 
-    const body = new FormData();
-    body.append("username", username);
-    body.append("password", password);
+        const body = new FormData();
+        body.append("username", username);
+        body.append("password", password);
 
-    vallauriRequest(endpointUrl, method, {}, body)
-      .then((response) => {
-        localStorage.setItem("access_token", response.access_token);
-        localStorage.setItem("refresh_token", response.refresh_token);
-        res(response);
-        location.href = "../index.html";
-      })
-      .catch((error) => {
-        rej(semplificaErrore(error));
-      });
-  });
+        vallauriRequest(endpointUrl, method, {}, body)
+            .then((response) => {
+                localStorage.setItem("access_token", response.access_token);
+                localStorage.setItem("refresh_token", response.refresh_token);
+                res(response);
+                location.href = "../index.html";
+            })
+            .catch((error) => {
+                rej(semplificaErrore(error));
+            });
+    });
 }
 
 /**
@@ -75,120 +75,121 @@ function login(username, password) {
  * @returns true: access token valido, false: accesso token non valido
  */
 function testAccessToken(
-  access_token = localStorage.getItem("access_token"),
-  endpointUrl = url + "/api/v1/utenti/me"
+    access_token = localStorage.getItem("access_token"),
+    endpointUrl = url + "/api/v1/utenti/me"
 ) {
-  let bool;
-  const headers = {
-    Authorization: `Bearer ${access_token}`,
-  };
-  vallauriRequest(endpointUrl, "GET", headers)
-    .then((response) => {
-      bool = true;
-      s;
-    })
-    .catch((error) => {
-      bool = false;
-    });
-  return bool;
+    let bool;
+    const headers = {
+        Authorization: `Bearer ${access_token}`,
+    };
+    vallauriRequest(endpointUrl, "GET", headers)
+        .then((response) => {
+            bool = true;
+            s;
+        })
+        .catch((error) => {
+            bool = false;
+        });
+    return bool;
 }
 
 /**
  * gestione dei token: effettua una prova per determinare se l'access token è valido, in caso contrario ne richiede un altro con il session token, in caso anche l'ultimo non sia valido richiede il login per ottenere nuovi token
  */
 function autoReLogin() {
-  const access_token = localStorage.getItem("access_token");
-  const refresh_token = localStorage.getItem("refresh_token");
+    const access_token = localStorage.getItem("access_token");
+    const refresh_token = localStorage.getItem("refresh_token");
 
-  const endpointUrl = url + "/api/v1/utenti/me";
+    const endpointUrl = url + "/api/v1/utenti/me";
 
-  if (access_token && refresh_token) {
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-    };
-    vallauriRequest(endpointUrl, "GET", headers)
-      .then((response) => {})
-      .catch((error) => {
-        if (error.response) {
-          console.log("Errore con status code:", error.response.status);
-        } else if (error.message && error.message.includes("status:")) {
-          const statusCode = error.message.match(/status:\s*(\d+)/)?.[1];
-          if (statusCode == 401) {
-            console.log(
-              "access token non valido invio richiesta refresh token"
-            );
+    if (access_token && refresh_token) {
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
+        vallauriRequest(endpointUrl, "GET", headers)
+            .then((response) => {
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log("Errore con status code:", error.response.status);
+                } else if (error.message && error.message.includes("status:")) {
+                    const statusCode = error.message.match(/status:\s*(\d+)/)?.[1];
+                    if (statusCode == 401) {
+                        console.log(
+                            "access token non valido invio richiesta refresh token"
+                        );
 
-            const body = { refresh_token: refresh_token };
-            vallauriRequest(url + "/api/v1/token/refresh", "POST", {}, body)
-              .then((response) => {
-                localStorage.setItem("access_token", response.access_token);
-                location.reload();
-              })
-              .catch((error) => {
-                if (error.message && error.message.includes("status:")) {
-                  sessionStorage.setItem(
-                    "loginMessage",
-                    "Login scaduto, reinserisci le tue credenziali"
-                  );
-                  if (
-                    !(
-                      htmlpage === "" ||
-                      htmlpage === "index.html" ||
-                      htmlpage === "login.html"
-                    )
-                  )
-                    location.href = "./login.html";
+                        const body = {refresh_token: refresh_token};
+                        vallauriRequest(url + "/api/v1/token/refresh", "POST", {}, body)
+                            .then((response) => {
+                                localStorage.setItem("access_token", response.access_token);
+                                location.reload();
+                            })
+                            .catch((error) => {
+                                if (error.message && error.message.includes("status:")) {
+                                    sessionStorage.setItem(
+                                        "loginMessage",
+                                        "Login scaduto, reinserisci le tue credenziali"
+                                    );
+                                    if (
+                                        !(
+                                            htmlpage === "" ||
+                                            htmlpage === "index.html" ||
+                                            htmlpage === "login.html"
+                                        )
+                                    )
+                                        location.href = "./login.html";
+                                } else {
+                                    console.error("errore sconosciuto");
+                                    // Reinderizza solo se non in index.html o login.html.
+                                    if (
+                                        !(
+                                            htmlpage === "" ||
+                                            htmlpage === "index.html" ||
+                                            htmlpage === "login.html"
+                                        )
+                                    ) {
+                                        MostraPaginaErrore(
+                                            "Errore con la sessione in corso, rifare il login",
+                                            500
+                                        );
+                                    }
+                                }
+                                console.warn(error);
+                            });
+                    } else {
+                        console.log("Errore con status code:", statusCode);
+                    }
                 } else {
-                  console.error("errore sconosciuto");
-                  // Reinderizza solo se non in index.html o login.html.
-                  if (
-                    !(
-                      htmlpage === "" ||
-                      htmlpage === "index.html" ||
-                      htmlpage === "login.html"
-                    )
-                  ) {
-                    MostraPaginaErrore(
-                      "Errore con la sessione in corso, rifare il login",
-                      500
-                    );
-                  }
-                }
-                console.warn(error);
-              });
-          } else {
-            console.log("Errore con status code:", statusCode);
-          }
-        } else {
-          const htmlpage =
-            window.location.href.split("/")[
-              window.location.href.split("/").length - 1
-            ];
+                    const htmlpage =
+                        window.location.href.split("/")[
+                        window.location.href.split("/").length - 1
+                            ];
 
-          // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
-          if (
+                    // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
+                    if (
+                        !(
+                            htmlpage === "" ||
+                            htmlpage === "index.html" ||
+                            htmlpage === "login.html"
+                        )
+                    ) {
+                        // Reindirizza al login
+                        window.location.href = "./login.html";
+                    }
+                }
+            });
+    } else {
+        // Reindirizza al login se non trovo un token di accesso
+        if (
             !(
-              htmlpage === "" ||
-              htmlpage === "index.html" ||
-              htmlpage === "login.html"
+                htmlpage === "" ||
+                htmlpage === "index.html" ||
+                htmlpage === "login.html"
             )
-          ) {
-            // Reindirizza al login
-            window.location.href = "./login.html";
-          }
-        }
-      });
-  } else {
-    // Reindirizza al login se non trovo un token di accesso
-    if (
-      !(
-        htmlpage === "" ||
-        htmlpage === "index.html" ||
-        htmlpage === "login.html"
-      )
-    )
-      location.href = "./login.html";
-  }
+        )
+            location.href = "./login.html";
+    }
 }
 
 /**
@@ -197,7 +198,48 @@ function autoReLogin() {
  * @returns Una stringa messaggio generalizzata dell'errore
  */
 function semplificaErrore(errorCode) {
-  if (errorCode == 401)
-    return "Nessun utente trovato con queste credenziali";
-  else return "Errore interno nel server";
+    if (errorCode == 401)
+        return "Nessun utente trovato con queste credenziali";
+    else return "Errore interno nel server";
 }
+
+async function getAdminStatus() {
+
+    const access_token = localStorage.getItem("access_token");
+    const endpointUrl = url + "/api/v1/utenti/me";
+
+    if (!access_token) {
+        throw new Error("Access token non trovato");
+    }
+
+    const headers = {
+        Authorization: `Bearer ${access_token}`,
+    };
+
+    try {
+        const response = await vallauriRequest(endpointUrl, "GET", headers);
+        if (response && response.admin !== undefined) {
+            return response.admin;
+        } else {
+            throw new Error("Campo admin non trovato nella risposta");
+        }
+    } catch (error) {
+        throw new Error(semplificaErrore(error));
+    }
+}
+
+
+function checkAdmin() {
+    getAdminStatus()
+        .then((response) => {
+            if (!response) {
+                location.href = "/index.html";
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+            mostraAlert("errore", error);
+        });
+}
+
+
