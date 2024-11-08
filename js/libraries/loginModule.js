@@ -1,5 +1,5 @@
 "use strict";
-const port = 8001;
+const port = 8000;
 let url = findUrl();
 const htmlpage =
   window.location.href.split("/")[window.location.href.split("/").length - 1];
@@ -27,7 +27,7 @@ function findUrl() {
   if (location.origin == "file://") {
     return "http://localhost:" + port;
   } else {
-    return location.hostname + ":" + port;
+    return location.origin.split(":").slice(0, 2).join(":") + ":" + port;
   }
 }
 
