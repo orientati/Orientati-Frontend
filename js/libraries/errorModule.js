@@ -14,15 +14,8 @@ function MostraPaginaErrore(
     code: codiceErrore,
   };
 
-  // PER ADESSO va bene cosi, se mai cambiassimo la posizone relativa delle pagine html e o dell'index è da modificare questa logica qui
-  let path = "./";
-  const htmlpage =
-    window.location.href.split("/")[window.location.href.split("/").length - 1];
-  if (htmlpage === "" || htmlpage === "index.html") path = "pages/";
-  path += "error.html";
-
   sessionStorage.setItem("errorMsg", JSON.stringify(jsonMsg));
-  window.location.href = path;
+  window.location.href = "pages/error.html";
 }
 
 /**
@@ -80,4 +73,3 @@ function rimuoviAlert(e, alert) {
     e.removeChild(alert);
   });
 }
-

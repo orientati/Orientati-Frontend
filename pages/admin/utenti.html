@@ -3,6 +3,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Utenti</title>
+    <base href="../../">
 
     <!-- Icone -->
     <link
@@ -11,31 +12,32 @@
     />
 
     <!-- Classi -->
-    <script src="../../js/Model/User.js"></script>
+    <script src="js/Model/User.js"></script>
 
 
     <!-- Librerie -->
-    <script src="../../js/libraries/requestModule.js"></script>
-    <script src="../../js/libraries/loginModule.js"></script>
-    <script src="../../js/libraries/errorModule.js"></script>
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
 
     <!-- Controllers -->
-    <script src="../../js/controllers/usersController.js"></script>
+    <script src="js/controllers/usersController.js"></script>
 
     <!-- Scripts -->
-    <script src="../../js/pages/users.js"></script>
+    <script src="js/pages/users.js"></script>
 
     <script>
         checkAdmin();
     </script>
 
     <!-- Stili -->
-    <link rel="stylesheet" href="../../css/style.css"/>
-    <link rel="stylesheet" href="../../css/utenti.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/utenti.css"/>
 
 
 </head>
 <body>
+    <button onclick="logout();">LOGOUT</button>
 <nav>
     <p>Lista degli utenti</p>
     <div>

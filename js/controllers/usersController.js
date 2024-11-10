@@ -1,7 +1,7 @@
 "use strict";
 
 let studenti = [];
-const urlEndpoint = "http://localhost/api/v1/";
+const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti gli studenti registrati sul server. Richiede l'admin

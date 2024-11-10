@@ -1,6 +1,6 @@
 "use strict";
 let percorsiDiStudio = [];
-const urlEndpoint = "http://localhost/api/v1/";
+const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti i percorsi di studio registrati sul server. Richiede l'admin
