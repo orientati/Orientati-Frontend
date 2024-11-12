@@ -67,6 +67,30 @@ function login(username, password) {
 }
 
 /**
+ * Esegue una richiesta di login come utente temporaneo all'endpoint /api/v1/login/temp.
+ * @returns Nuova PROMISE cona la risposta del server
+ */
+function loginTemp() {
+  return new Promise((res, rej) => {
+    const endpointUrl = url + "/api/v1/utenti/temp";
+    const method = "POST";
+
+    const body = new FormData();
+
+    vallauriRequest(endpointUrl, method, {}, body)
+      .then((response) => {
+        localStorage.setItem("access_token", response.access_token);
+        localStorage.setItem("refresh_token", response.refresh_token);
+        res(response);
+        location.href = "index.html";
+      })
+      .catch((error) => {
+        rej(semplificaErrore(error));
+      });
+  });
+}
+
+/**
  * Esegue un controllo per verificare se l'access token è valido
  * @param {string} [access_token=localStorage.getItem("access_token")] access_token
  * @param {string} [urlEndPoint=url + "/api/v1/user   s/me"] url

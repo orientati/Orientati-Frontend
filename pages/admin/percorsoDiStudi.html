@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Utenti</title>
+    <title>Percorsi di Studio</title>
     <base href="../../">
 
     <!-- Icone -->
@@ -12,8 +13,7 @@
     />
 
     <!-- Classi -->
-    <script src="js/Model/User.js"></script>
-
+    <script src="js/Model/PercorsoDiStudi.js"></script>
 
     <!-- Librerie -->
     <script src="js/libraries/requestModule.js"></script>
@@ -21,10 +21,10 @@
     <script src="js/libraries/errorModule.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/usersController.js"></script>
+    <script src="js/controllers/percorsoDiStudiController.js"></script>
 
     <!-- Scripts -->
-    <script src="js/pages/users.js"></script>
+    <script src="js/pages/percorsoDiStudi.js"></script>
 
     <script>
         checkAdmin();
@@ -34,30 +34,26 @@
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/tableStyle.css"/>
 
-
 </head>
 <body>
     <button onclick="logout();">LOGOUT</button>
-<nav>
-    <p>Lista degli utenti</p>
-    <div>
-        <button id="editSelected">
-            <span class="material-symbols-outlined"> edit </span>Modifica
-        </button>
-        <button id="deleteSelected">
-            <span class="material-symbols-outlined"> delete </span>Elimina
-        </button>
-    </div>
-</nav>
-<table id="tableUtenti" class="table">
-    <tr>
-        <th></th>
-        <th>#</th>
-        <th>Username</th>
-        <th>Admin?</th>
-        <th>Temporaneo?</th>
-        <th>Gruppo?</th>
-    </tr>
-</table>
+    <nav>
+        <p>Lista dei percorsi di studio</p>
+        <div>
+            <button id="editSelectedPercorso">
+                <span class="material-symbols-outlined"> edit </span>Modifica
+            </button>
+            <button id="deleteSelectedPercorso">
+                <span class="material-symbols-outlined"> delete </span>Elimina
+            </button>
+        </div>
+    </nav>
+    <table id="tablePercorsi" class="table">
+        <tr>
+            <th></th>
+            <th>#</th>
+            <th>Nome Percorso</th>
+        </tr>
+    </table>
 </body>
 </html>

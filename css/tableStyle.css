@@ -3,7 +3,7 @@ body {
   padding: 50px;
 }
 
-#tableUtenti {
+.table {
   width: 100%;
   max-width: 70vw;
   border-collapse: separate;
@@ -13,15 +13,15 @@ body {
   cursor: pointer;
 }
 
-#tableUtenti th,
-#tableUtenti td {
+.table th,
+.table td {
   border: 1px solid var(--primary-color);
   padding: 12px;
   text-align: left;
   position: relative;
 }
 
-#tableUtenti th {
+.table th {
   background-color: var(--primary-color);
   color: white;
   text-transform: uppercase;
@@ -29,7 +29,7 @@ body {
   border: none;
 }
 
-#tableUtenti tr:hover {
+.table tr:hover {
   background-color: #eef4fc;
   color: black;
 }

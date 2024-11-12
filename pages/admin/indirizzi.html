@@ -1,22 +1,66 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Indirizzi</title>
     <base href="../../">
+
+    <!-- Icone -->
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+
+    <!-- Classi -->
+    <script src="js/Model/Indirizzo.js"></script>
+    <script src="js/Model/PercorsoDiStudi.js"></script>
 
     <!-- Librerie -->
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
-    <script src="js/libraries/routingModule.js"></script>
 
-    <!-- Scripts-->
+    <!-- Controllers -->
+    <script src="js/controllers/indirizziController.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/pages/indirizzi.js"></script>
+
     <script>
         checkAdmin();
     </script>
+
+    <!-- Stili -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/tableStyle.css"/>
+
 </head>
 <body>
-
+    <button onclick="logout();">LOGOUT</button>
+    <nav>
+        <p>Lista degli indirizzi</p>
+        <div>
+            <button id="editSelectedIndirizzo">
+                <span class="material-symbols-outlined"> edit </span>Modifica
+            </button>
+            <button id="deleteSelectedIndirizzo">
+                <span class="material-symbols-outlined"> delete </span>Elimina
+            </button>
+        </div>
+    </nav>
+    <table id="tableIndirizzi" class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>#</th>
+                <th>Nome Indirizzo</th>
+                <th>Percorso di Studio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Righe generate dinamicamente -->
+        </tbody>
+    </table>
 </body>
 </html>

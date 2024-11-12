@@ -17,4 +17,17 @@ window.addEventListener("DOMContentLoaded", function () {
                 mostraAlert("errore", err);
             });
     });
+    const aUtenteTemporaneo = document.getElementById("ALoginUtenteTemporaneo");
+    aUtenteTemporaneo.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        loginTemp()
+            .then((response) => {
+                location.href = "index.html";
+            })
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            });
+    });
 });

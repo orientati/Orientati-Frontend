@@ -1,15 +1,15 @@
 "use strict";
 
-let studenti = [];
+let utenti = [];
 const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
- * Ritorna tutti gli studenti registrati sul server. Richiede l'admin
+ * Ritorna tutti gli utenti registrati sul server. Richiede l'admin
  * @returns Una LISTA di classe USER con i dettagli
  */
 function getUsers() {
   return new Promise((res, rej) => {
-    studenti = [];
+    utenti = [];
     const access_token = localStorage.getItem("access_token");
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -18,7 +18,7 @@ function getUsers() {
     vallauriRequest(`${urlEndpoint}admin/utenti`, "GET", headers)
       .then((response) => {
         response.users.forEach((user) => {
-          studenti.push(
+          utenti.push(
             new User(
               user.username,
               user.admin,
@@ -27,7 +27,7 @@ function getUsers() {
               user.id
             )
           );
-          res(studenti);
+          res(utenti);
         });
       })
       .catch((err) => {
