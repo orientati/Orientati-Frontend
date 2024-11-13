@@ -12,7 +12,7 @@ function changePassword() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/utenti/me`, "GET", headers)
+    vallauriRequest(`${urlEndpoint}utenti/me/change_password`, "GET", headers)
       .then((response) => {
         response.users.forEach((user) => {
           res(new User(
@@ -41,7 +41,7 @@ function getMe() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/utenti/me`, "GET", headers)
+    vallauriRequest(`${urlEndpoint}utenti/me`, "GET", headers)
       .then((response) => {
         response.users.forEach((user) => {
           res(new User(
