@@ -34,6 +34,36 @@ function getIndirizzi() {
       });
   });
 }
+/**
+ * Ritorna tutti i percorsi di studio registrati sul server. Richiede l'admin
+ * @returns Una LISTA di classe PERCORSODISTUDIO con i dettagli
+ */
+function getPercorsiDiStudio() {
+  return new Promise((res, rej) => {
+    let percorsiDiStudio = [];
+    const access_token = localStorage.getItem("access_token");
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
+    vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi`, "GET", headers)
+      .then((response) => {
+        response.percorsiDiStudi.forEach((percorso) => {
+          percorsiDiStudio.push(
+            new PercorsoDiStudi(
+              percorso.nome,
+              percorso.id
+            )
+          );
+        });
+        res(percorsiDiStudio);
+      })
+      .catch((err) => {
+        rej(semplificaErrore(500));
+        console.error(err);
+      });
+  });
+}
 
 /**
  * Ritorna l'indirizzo con l'id specificato. Richiede l'admin
@@ -72,26 +102,23 @@ function getIndirizzoById(id) {
  * @param {int} id
  * @param {string} name
  * @param {int} percorsoDiStudioId
- * @param {string} percorsoDiStudioName
  * @returns Una classe INDIRIZZO con i dettagli
  */
-function patchIndirizzo(id, name, percorsoDiStudioId, percorsoDiStudioName) {
+function patchIndirizzo(id, nome, percorsoDiStudioId) {
   return new Promise((res, rej) => {
     if (
       id &&
-      name.trim() &&
-      percorsoDiStudioId &&
-      percorsoDiStudioName.trim()
+      nome.trim() &&
+      percorsoDiStudioId
     ) {
       const access_token = localStorage.getItem("access_token");
       const headers = {
         Authorization: `Bearer ${access_token}`,
       };
       const body = {
-        name: name,
+        nome: nome,
         percorsoDiStudi_id: percorsoDiStudioId,
       };
-
       vallauriRequest(
         `${urlEndpoint}admin/indirizzi/${id}`,
         "PUT",

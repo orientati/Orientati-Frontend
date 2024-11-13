@@ -246,7 +246,7 @@ function checkAdmin() {
   getAdminStatus()
     .then((response) => {
       if (!response) {
-        location.href = "/index.html";
+        MostraPaginaErrore(null, "Non sei autorizzato ad accedere a questa pagina");
       }
     })
     .catch((error) => {

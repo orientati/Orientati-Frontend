@@ -7,7 +7,20 @@ window.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             const selectedIds = prendiIdSelezionati();
             if (selectedIds.length === 1) {
-                // Logica per modificare il percorso di studio selezionato
+                getPercorsoDiStudioById(parseInt(selectedIds[0])).then((res) => {
+                    console.log(res);
+                    openModal(res, function (formData) {
+                        patchPercorsoDiStudio(formData.id, formData.nome).then((res) => {
+                            mostraAlert("successo", res, 3);
+                            aggiornaTabellaPercorsi();
+                        }).catch((err) => {
+                            mostraAlert("errore", err);
+                        });
+                    });
+                }).catch((err) => {
+                    mostraAlert("errore", err);
+                });
+                //openModal()
             } else {
                 mostraAlert("info", "Seleziona un percorso di studio prima");
             }
