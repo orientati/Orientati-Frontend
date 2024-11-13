@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", function () {
             document.getElementById("txtPassword").value.trim()
         )
             .then((response) => {
-                location.href = "pages/dashboard.html";
+                location.href = "../../pages/admin/dashboard.html";
             })
             .catch((err) => {
                 console.error(err);
