@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Personale</title>
+    <base href="../">
+
+    <!-- Classi -->
+    <script src="js/Model/User.js"></script>
+
+    <!-- Librerie -->
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/usersController.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/pages/areaPersonale.js"></script>
+
+    <!-- Stili -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/areaPersonale.css"/>
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-left">
+            <img src="assets/user.jpg" alt="Immagine Profilo" class="profile-image">
+            <p class="role">Admin</p>
+        </div>
+        <div class="card-right">
+            <h2>Modifica Dati</h2>
+            <form id="formData">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="Super Banana" readonly>
+                
+                <label for="passwordLabel">Password:</label>
+                <input type="password" id="passwordLabel" readonly>
+
+                <p>Cambia password:</p>
+
+                <label for="password">Password corrente:</label>
+                <input type="password" id="newPassword" placeholder="Password corrente" minlength="8" required>
+
+                <label for="newPassword">Nuova password:</label>
+                <input type="password" id="newPassword" placeholder="Nuova password" minlength="8" required>
+                <input type="password" id="newPassword" placeholder="Reinserisci password" minlength="8" required>
+                
+                <button type="submit">Aggiorna Password</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,6 +3,62 @@
 let utenti = [];
 const urlEndpoint = "http://localhost:8000/api/v1/";
 
+
+
+function changePassword() {
+  return new Promise((res, rej) => {
+    const access_token = localStorage.getItem("access_token");
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
+    vallauriRequest(`${urlEndpoint}admin/utenti/me`, "GET", headers)
+      .then((response) => {
+        response.users.forEach((user) => {
+          res(new User(
+            user.username,
+            user.admin,
+            user.temporaneo,
+            user.connessoAGruppo === true
+          ));
+        });
+      })
+      .catch((err) => {
+        rej(semplificaErrore(500));
+        console.error(err);
+      });
+  });
+}
+
+/**
+ * Ritorna i dati dell'utente corrente
+ * @returns classe USER con i dettagli dell'utente corrente
+ */
+function getMe() {
+  return new Promise((res, rej) => {
+    const access_token = localStorage.getItem("access_token");
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
+    vallauriRequest(`${urlEndpoint}admin/utenti/me`, "GET", headers)
+      .then((response) => {
+        response.users.forEach((user) => {
+          res(new User(
+            user.username,
+            user.admin,
+            user.temporaneo,
+            user.connessoAGruppo === true
+          ));
+        });
+      })
+      .catch((err) => {
+        rej(semplificaErrore(500));
+        console.error(err);
+      });
+  });
+}
+
 /**
  * Ritorna tutti gli utenti registrati sul server. Richiede l'admin
  * @returns Una LISTA di classe USER con i dettagli
@@ -128,13 +184,7 @@ function patchUser(id, username, password, isAdmin, isTemporary) {
  * @param {boolean} connectedToGroup
  * @returns Un messaggio di avvenuta modifica dei dati sul server
  */
-function addUser(
-  username,
-  password,
-  isAdmin,
-  isTemporary,
-  connectedToGroup
-) {
+function addUser(username, password, isAdmin, isTemporary, connectedToGroup) {
   return new Promise((res, rej) => {
     if (
       username.trim() &&
