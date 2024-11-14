@@ -6,7 +6,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("formData").addEventListener("submit", (e) => {
     e.preventDefault();
-    changePassword(document.getElementById("newPassword").value);
+    requestChangePassword(
+      document.getElementById("password").value,
+      document.getElementById("newPassword").value,
+      document.getElementById("newPasswordCheck").value
+    );
   });
 });
 
@@ -24,11 +28,11 @@ function checkTemporaneo() {
         document.getElementById("role").innerText = currentUser.isAdmin
           ? "Admin"
           : "Accompagnatore";
-        document.getElementById("passwordLabel").value = "banano";
       }
     })
-    .catch((err) => {
-      //MostraPaginaErrore(err, 500);
+    .catch((err, msg) => {
+      MostraPaginaErrore(msg, err);
+      console.error(msg + "CODE: "+err);
     });
 }
 
@@ -37,7 +41,23 @@ function loadData() {
   document.getElementById("role").innerText = currentUser.isAdmin
     ? "Admin"
     : "Accompagnatore";
-  document.getElementById("password").value = "banano";
 }
 
-function changePassword(newPassword) {}
+function requestChangePassword(currentPassword, newPassword, newPasswordCheck) {
+  if (newPassword != newPasswordCheck) {
+    mostraAlert("errore", "Le password non coincidono...");
+  } else {
+    changePassword(currentPassword, newPassword)
+      .then((response) => {
+        mostraAlert("successo", response, 3);
+        document.getElementById("password").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("newPasswordCheck").value = "";
+      })
+      .catch((err) => {
+        mostraAlert("errore", err);
+      });
+  }
+
+  return false;
+}

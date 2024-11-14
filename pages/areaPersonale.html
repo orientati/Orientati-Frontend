@@ -28,7 +28,7 @@
     <div class="card">
         <div class="card-left">
             <img src="assets/user.jpg" alt="Immagine Profilo" class="profile-image">
-            <p class="role">Admin</p>
+            <p id="role">Admin</p>
         </div>
         <div class="card-right">
             <h2>Modifica Dati</h2>
@@ -37,16 +37,13 @@
                 <input type="text" id="username" name="username" value="Super Banana" readonly>
                 
                 <label for="passwordLabel">Password:</label>
-                <input type="password" id="passwordLabel" readonly>
+                <input type="password" id="passwordLabel" value="Bananone" readonly>
+                <br>
+                <h4>Cambia password:</h4>
 
-                <p>Cambia password:</p>
-
-                <label for="password">Password corrente:</label>
-                <input type="password" id="newPassword" placeholder="Password corrente" minlength="8" required>
-
-                <label for="newPassword">Nuova password:</label>
+                <input type="password" id="password" placeholder="Password corrente" required>
                 <input type="password" id="newPassword" placeholder="Nuova password" minlength="8" required>
-                <input type="password" id="newPassword" placeholder="Reinserisci password" minlength="8" required>
+                <input type="password" id="newPasswordCheck" placeholder="Reinserisci password" minlength="8" required>
                 
                 <button type="submit">Aggiorna Password</button>
             </form>

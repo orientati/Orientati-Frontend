@@ -4,27 +4,29 @@ let utenti = [];
 const urlEndpoint = "http://localhost:8000/api/v1/";
 
 
-
-function changePassword() {
+/**
+ * Modifica la password dell'utente corrente
+ * @param {string} currentPassword La password corrente dell'utente
+ * @param {string} newPassword La password nuova dell'utente
+ * @returns Response con successo o errore da mostrare
+ */
+function changePassword(currentPassword, newPassword) {
   return new Promise((res, rej) => {
     const access_token = localStorage.getItem("access_token");
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
+    const body = {
+      old_password: currentPassword,
+      new_password: newPassword
+    }
 
-    vallauriRequest(`${urlEndpoint}utenti/me/change_password`, "GET", headers)
+    vallauriRequest(`${urlEndpoint}utenti/me/change_password`, "POST", headers, body)
       .then((response) => {
-        response.users.forEach((user) => {
-          res(new User(
-            user.username,
-            user.admin,
-            user.temporaneo,
-            user.connessoAGruppo === true
-          ));
-        });
+        res("Password cambiata con successo!");
       })
       .catch((err) => {
-        rej(semplificaErrore(500));
+        rej(semplificaErrore(err));
         console.error(err);
       });
   });
@@ -42,18 +44,16 @@ function getMe() {
     };
 
     vallauriRequest(`${urlEndpoint}utenti/me`, "GET", headers)
-      .then((response) => {
-        response.users.forEach((user) => {
+      .then((user) => {
           res(new User(
             user.username,
             user.admin,
             user.temporaneo,
             user.connessoAGruppo === true
           ));
-        });
       })
       .catch((err) => {
-        rej(semplificaErrore(500));
+        rej(semplificaErrore(err), err);
         console.error(err);
       });
   });
@@ -258,5 +258,9 @@ function delUser(id) {
 function semplificaErrore(errorCode) {
   if (errorCode == 401 || errorCode == 403)
     return "Azione non consentita a questo utente";
+  else if(errorCode == 422)
+    return "La password corrente è errata";
+  else if(errorCode == 400)
+    return "La password corrente è errata";
   else return "Errore interno nel server";
 }
