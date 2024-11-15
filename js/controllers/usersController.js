@@ -49,7 +49,7 @@ function getMe() {
             user.username,
             user.admin,
             user.temporaneo,
-            user.connessoAGruppo === true
+            user.orientatore_id
           ));
       })
       .catch((err) => {
@@ -79,7 +79,7 @@ function getUsers() {
               user.username,
               user.admin,
               user.temporaneo,
-              user.connessoAGruppo === true,
+              user.orientatore_id,
               user.id
             )
           );
@@ -113,7 +113,7 @@ function getUserById(id) {
               response.username,
               response.admin,
               response.temporaneo,
-              response.connessoAGruppo === true,
+              response.orientatore_id,
               response.id
             )
           );
@@ -133,9 +133,10 @@ function getUserById(id) {
  * @param {string} password
  * @param {boolean} isAdmin
  * @param {boolean} isTemporary
+ * @param {*} idOrientatore Null se inesistente
  * @returns Una classe USER con i dati aggiornati.
  */
-function patchUser(id, username, password, isAdmin, isTemporary) {
+function patchUser(id, username, password, isAdmin, isTemporary, idOrientatore) {
   return new Promise((res, rej) => {
     if (
       id &&
@@ -153,6 +154,7 @@ function patchUser(id, username, password, isAdmin, isTemporary) {
         password: password,
         admin: isAdmin,
         temporaneo: isTemporary,
+        orientatore_id: idOrientatore
       };
 
       vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "PUT", headers, body)
@@ -162,7 +164,7 @@ function patchUser(id, username, password, isAdmin, isTemporary) {
               response.username,
               response.admin,
               response.temporaneo,
-              response.connessoAGruppo === true,
+              response.orientatore_id,
               response.id
             )
           );
@@ -181,17 +183,16 @@ function patchUser(id, username, password, isAdmin, isTemporary) {
  * @param {string} password
  * @param {boolean} isAdmin
  * @param {boolean} isTemporary
- * @param {boolean} connectedToGroup
+ * @param {*} idOrientatore Null se inesistente
  * @returns Un messaggio di avvenuta modifica dei dati sul server
  */
-function addUser(username, password, isAdmin, isTemporary, connectedToGroup) {
+function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
   return new Promise((res, rej) => {
     if (
       username.trim() &&
       password.trim() &&
       typeof isAdmin === "boolean" &&
-      typeof isTemporary === "boolean" &&
-      typeof connectedToGroup === "boolean"
+      typeof isTemporary === "boolean"
     ) {
       const access_token = localStorage.getItem("access_token");
       const headers = {
@@ -202,7 +203,7 @@ function addUser(username, password, isAdmin, isTemporary, connectedToGroup) {
         password: password,
         admin: isAdmin,
         temporaneo: isTemporary,
-        connessoAGruppo: connectedToGroup,
+        orientatore_id: idOrientatore,
       };
 
       vallauriRequest(`${urlEndpoint}admin/utenti`, "POST", headers, body)
@@ -212,7 +213,7 @@ function addUser(username, password, isAdmin, isTemporary, connectedToGroup) {
               response.username,
               response.admin,
               response.temporaneo,
-              response.connessoAGruppo === true,
+              response.orientatore_id,
               response.id
             )
           );
