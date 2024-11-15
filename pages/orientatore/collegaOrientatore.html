@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
+<h>
     <meta charset="UTF-8">
     <title>orientatore</title>
-    <script src="../../js/pages/orientatore/collegaOrientatore.js"></script>
+    <base href="../../">
 
-    <!-- TODO: controlla se l'utente è loggato come orientatore, se non lo è lo sposti su login -->
-    <!-- TODO: controlla se l'utente è già collegato ad un orientatore, se lo è lo sposti su index -->
+    <!-- Libraries -->
+     <script src="js/Libraries/requestModule.js"></script>
+     <script src="js/Libraries/errorModule.js"></script>
+     <script src="js/Libraries/loginModule.js"></script>
 
+    <!-- Model -->
+     <script src="js/Model/User.js"></script>
+
+    <!-- Controllers -->
+     <script src="js/controllers/usersController.js"></script>
+
+     <!-- Scripts -->
+     <script src="js/pages/orientatore/collegaOrientatore.js"></script>
+
+    <!-- Styles -->
+     <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
 <label for="codiceOrientatore">Inserisci il codice dell'orientatore</label>
 <input type="text" id="codiceOrientatore">
-<button onclick="collegaOrientatore()">collegati</button>
+<button id="btnLink">collegati</button>
 </body>
 </html>
