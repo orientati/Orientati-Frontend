@@ -1,7 +1,7 @@
 "use strict";
 
 let aule = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
+let urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutte le aule registrate sul server. Richiede l'admin

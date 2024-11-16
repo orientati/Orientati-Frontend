@@ -1,7 +1,7 @@
 "use strict";
 
 let utenti = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
+let urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Collega l'utente con l'orientatore specificato dal codice

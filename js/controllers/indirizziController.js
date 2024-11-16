@@ -1,6 +1,6 @@
 "use strict";
 let indirizzi = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
+let urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti gli indirizzi registrati sul server. Richiede l'admin

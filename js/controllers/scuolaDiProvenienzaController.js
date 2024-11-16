@@ -1,6 +1,6 @@
 "use strict";
 let scuoleDiProvenienza = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
+let urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutte le scuole di provenienza registrate sul server. Richiede l'admin

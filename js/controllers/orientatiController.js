@@ -1,7 +1,7 @@
 "use strict";
 
 let orientati = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
+let urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti gli orientati registrati sul server. Richiede l'admin

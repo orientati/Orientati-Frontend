@@ -1,0 +1,193 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;    
+    background-color: #c4d0ea;
+}
+
+/* navbar */
+#navbarWrapper{
+    user-select: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    height: 100%;
+    width: 60px;
+    background-color: #84a8dc;
+}
+
+#navbarBurger{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbarList{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    width: 100%;
+    height: 100%;
+}
+
+/* Navbar links style */
+.navbarItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+
+    margin: 0 5px 0 5px;
+    height: 50px;
+}
+
+.navbarItemBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 30px;
+    width: 100%;
+
+    background-color:#4e6dfc;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+.navbarItem:hover{
+    cursor: pointer;
+
+    .navbarItemBtn{
+        background-color: #6481ff;
+    }
+}
+
+.navbarItemText{
+    text-align: center;
+    color: white;
+    font-size: small;
+    font-weight: bold;
+
+    overflow: hidden;
+    text-wrap:wrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Context Navbar styles*/
+.contextNavbarWrapper{
+    user-select: none;
+    max-width: 20%;
+    height: 100%;
+}
+
+.btnWhite{
+    border-radius: 15px;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.btnWhite:hover, .contextNavbarItem:hover{
+    background-color: rgb(232, 234, 255);
+}
+
+@media (max-width: 700px) {
+    .contextNavbarWrapper{
+        width: 60px;
+    }
+
+    .droppableText{
+        display: none;
+    }
+
+    .contextNavbarItem{
+        justify-content: center;
+        padding: 2px 0 2px 0;
+    }
+}
+
+@media (min-width: 701px) {
+    .contextNavbarWrapper{
+        width: 20%;
+    }
+
+    .contextNavbarItem{
+        justify-content: start;
+        padding: 2px 0 2px 15px;
+    }
+}
+
+/* Files navbar */
+#loadFilesBtn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+
+    max-width: min-content;
+
+    margin-top: 75px;
+    margin-left: 7px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+#loadFilesBtn > .droppableText{
+    text-wrap: nowrap;
+}
+
+#loadFilesBtn > svg{
+    flex-shrink: 0;
+}
+
+.contextNavbarList{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.contextNavbarItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:5px;
+    height: 25px;
+
+    color: white;
+
+    margin-left: 7px;
+    margin-right: 7px;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+
+    
+    overflow: hidden;
+    text-wrap:wrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.contextNavbarItem > svg{
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(27%) hue-rotate(253deg) brightness(108%) contrast(108%);
+    
+}
+
+.contextNavbarItemSelected{
+    background-color: white;
+    color: black !important;
+}
+
+.contextNavbarItemSelected > svg{
+    filter: none !important;
+}
