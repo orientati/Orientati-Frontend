@@ -71,5 +71,8 @@ function rimuoviAlert(e, alert) {
   alert.classList.add("alert-exit");
   alert.addEventListener("animationend", () => {
     e.removeChild(alert);
+
+    if(!e.firstChild)
+      document.removeChild(e);
   });
 }
