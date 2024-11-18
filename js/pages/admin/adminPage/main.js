@@ -105,3 +105,11 @@ function addEventsToContextNavbar() {
     });
   }
 }
+
+function clearTable(tableElement){
+    console.log(tableElement.children);
+    for(let i = 0; i < tableElement.children.length; i++){
+        if(!tableElement.children[i].classList.contains("tableHeader"));
+            tableElement.removeChild(tableElement.children[i]);
+    }
+}

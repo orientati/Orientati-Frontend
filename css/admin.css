@@ -286,7 +286,7 @@ body {
   border-collapse: collapse;
   overflow-y: hidden;
 
-  table-layout:auto;
+  table-layout: auto;
   width: 100%;
 }
 
@@ -305,14 +305,14 @@ body {
   background-color: #84a8dc;
   padding-bottom: 10px;
   text-align: start;
-    box-shadow:  inset 0 -2px 0 #000000;
+  box-shadow: inset 0 -2px 0 #000000;
 }
 
-.defaultTable tr td:first-child{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5px;
+.defaultTable tr td:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
 }
 
 .tableWrapper::-webkit-scrollbar {
