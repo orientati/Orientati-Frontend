@@ -9,16 +9,22 @@
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
-    <script src="js/libraries/routingModule.js"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/admin.css" />
+
+    <!-- Scripts -->
+    <script src="js/pages/admin/adminPage/main.js"></script>
+
+    <!-- Pages' Script -->
+    <script src="js/pages/admin/adminPage/paginaOrientati.js"></script>
+
   </head>
   <body>
     <!-- navbar a sx -->
     <div id="navbarWrapper">
-      <div id="navbarBurger">
+      <div id="navbarBurger" style="opacity: 0">
         <svg
           width="18"
           height="12"
@@ -85,6 +91,7 @@
       </div>
     </div>
     <!-- Fine navbar sx -->
+
     <!-- Navbar Contesto Files aperta di default-->
     <div id="contextFilesNavbar" class="contextNavbarWrapper">
       <div id="loadFilesBtn" class="btnWhite">
@@ -138,7 +145,7 @@
           <div class="contextNavbarText droppableText">Accompagnatori</div>
         </div>
 
-        <div id="Chat" class="contextNavbarItem">
+        <div id="Percorsi" class="contextNavbarItem">
           <svg
             width="16"
             height="20"
@@ -156,10 +163,17 @@
         </div>
       </div>
     </div>
-    <!-- Fine Navbar Contesto Files -->
+
+    <!-- Navbar contesto Gruppi -->
+    <div id="contextGroupNavbar" class="contextNavbarWrapper hide"></div>
+
+    <!-- Navbar contesto Chat -->
+    <div id="contextChatNavbar" class="contextNavbarWrapper hide"></div>
+
     <!-- Context Page -->
+    <!-- Pagina Orientati-->
     <div id="pageOrientati" class="contextPageWrapper">
-      <div class="searchBox">
+      <div class="searchBox" style="opacity: 0">
         <svg
           width="18"
           height="18"
@@ -232,12 +246,17 @@
               <th style="width: 30px"></th>
               <th>Nome</th>
               <th>Cognome</th>
-              <th>Cognome</th>
-              <th>Cognome</th>
+              <th>Scuola Di Provenienza</th>
             </tr>
           </table>
         </div>
       </div>
     </div>
+
+    <!-- Pagina Accompagnatori -->
+    <div id="pageAccompagnatori" class="contextPageWrapper hide"></div>
+
+    <!-- Pagina Percorsi-->
+    <div id="pagePercorsi" class="contextPageWrapper hide"></div>
   </body>
 </html>
