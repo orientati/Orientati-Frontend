@@ -128,20 +128,38 @@ function autoReLogin() {
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
-    vallauriRequest(endpointUrl, "GET", headers)
+    vallauriRequest(endpointUrl, "GET", headers, null, true)
       .then((response) => {})
       .catch((error) => {
+        let statusCode;
         if (error.response) {
           console.log("Errore con status code:", error.response.status);
+          statusCode = error.response.status;
         } else if (error.message && error.message.includes("status:")) {
-          const statusCode = error.message.match(/status:\s*(\d+)/)?.[1];
+          statusCode = error.message.match(/status:\s*(\d+)/)?.[1];
+          console.log("Errore con status code:", statusCode);
+        }else if(error){
+          statusCode = error;
+        } else {
+          // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
+          if (
+            !(
+              htmlpage === "" ||
+              htmlpage === "index.html" ||
+              htmlpage === "login.html"
+            )
+          ) {
+            // Reindirizza al login
+            window.location.href = "pages/login.html";
+          }
+        }
           if (statusCode == 401) {
             console.log(
               "access token non valido invio richiesta refresh token"
             );
 
             const body = { refresh_token: refresh_token };
-            vallauriRequest(url + "/api/v1/token/refresh", "POST", {}, body)
+            vallauriRequest(url + "/api/v1/token/refresh", "POST", {}, body, true)
               .then((response) => {
                 localStorage.setItem("access_token", response.access_token);
                 location.reload();
@@ -181,19 +199,6 @@ function autoReLogin() {
           } else {
             console.log("Errore con status code:", statusCode);
           }
-        } else {
-          // Reinderizza solo se non in index.html o login.html. In caso contrario, mostra un alert
-          if (
-            !(
-              htmlpage === "" ||
-              htmlpage === "index.html" ||
-              htmlpage === "login.html"
-            )
-          ) {
-            // Reindirizza al login
-            window.location.href = "pages/login.html";
-          }
-        }
       });
   } else {
     // Reindirizza al login se non trovo un token di accesso
