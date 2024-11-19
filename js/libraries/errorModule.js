@@ -73,6 +73,6 @@ function rimuoviAlert(e, alert) {
     e.removeChild(alert);
 
     if(!e.firstChild)
-      document.removeChild(e);
+      e.remove();
   });
 }

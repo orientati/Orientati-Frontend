@@ -15,7 +15,7 @@ function controllaOrientatore(){
     getMe()
     .then(res => {
         user = res;
-        if(user.orientatore_id)
+        if(user.orientatoreId)
             location.href = "./pages/orientatore/index.html";
         else if(user.isAdmin || user.temporaneo)
             location.href = "./pages/login.html";

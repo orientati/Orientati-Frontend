@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>orientatore</title>
-    <!-- TODO: controlla se l'utente è loggato come orientatore, se non lo è lo sposti su login -->
+    <base href="../../">
 
+    <!-- Libraries -->
+     <script src="js/libraries/requestModule.js"></script>
+     <script src="js/libraries/errorModule.js"></script>
+
+    <!-- Model-->
+    <script src="js/Model/User.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/Controllers/usersController.js"></script>
+
+    <script>
+        window.addEventListener("load", ()=>{
+            getMe()
+            .then((user) => {
+                if(!user.isAdmin){
+                    if(user.orientatoreId == null)
+                        location.href = "pages/orientatore/collegaOrientatore.html";
+                }else{
+                    location.href = "pages/login.html";
+                }
+                    
+            });
+        })
+    </script>
 </head>
 <body>
-
-se si è collegati ad un orientatore si può vedere il gruppo al quale si è connessi, altrimenti c'è il pulsante per
-collegarsi all'orientatore
-
-<a href="collegaOrientatore.html">
-    <button>collegati ad un'orientatore</button>
 </a>
 </body>
 </html>
