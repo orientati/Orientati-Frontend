@@ -20,7 +20,7 @@
             getMe()
             .then((user) => {
                 if(!user.isAdmin){
-                    if(user.orientatoreId == null)
+                    if(user.orientatoreId == null || user.orientatoreId == 0)
                         location.href = "pages/orientatore/collegaOrientatore.html";
                 }else{
                     location.href = "pages/login.html";
