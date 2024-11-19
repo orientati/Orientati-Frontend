@@ -14,11 +14,8 @@ function linkOrientatore(codiceOrientatore) {
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
-    const body = {
-      orientatore_codice: codiceOrientatore,
-    };
 
-    vallauriRequest(`${urlEndpoint}utenti/orientatore`, "POST", headers, body)
+    vallauriRequest(`${urlEndpoint}utenti/orientatore?orientatore_codice=`+codiceOrientatore, "POST", headers)
       .then((response) => {
         res("Utente collegato come Orientatore!");
       })
