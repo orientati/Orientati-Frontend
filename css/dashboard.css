@@ -98,3 +98,22 @@ main {
         flex-direction: column;
     }
 }
+
+button {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 5px;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 20px;
+    transition: all ease 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button span {
+    padding-right: 5px;
+}
