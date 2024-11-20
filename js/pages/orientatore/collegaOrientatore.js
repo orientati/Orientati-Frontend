@@ -15,9 +15,9 @@ function controllaOrientatore(){
     getMe()
     .then(res => {
         user = res;
-        if(user.orientatoreId && user.orientatoreId != 0)
+        if(user.orientatoreId != null && user.orientatoreId != 0)
             location.href = "./pages/orientatore/index.html";
-        else if(user.isAdmin || user.temporaneo)
+        else if(user.isAdmin)
             location.href = "./pages/login.html";
 
     }).catch((err, code) => {

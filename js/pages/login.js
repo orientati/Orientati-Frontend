@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", function () {
         event.stopPropagation();
         loginTemp()
             .then((response) => {
-                location.href = "index.html";
+                location.href = "pages/orientatore/index.html";
             })
             .catch((err) => {
                 console.error(err);
