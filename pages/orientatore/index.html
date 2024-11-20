@@ -6,8 +6,8 @@
     <base href="../../">
 
     <!-- Libraries -->
-     <script src="js/libraries/requestModule.js"></script>
-     <script src="js/libraries/errorModule.js"></script>
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
 
     <!-- Model-->
     <script src="js/Model/User.js"></script>
@@ -15,22 +15,64 @@
     <!-- Controllers -->
     <script src="js/Controllers/usersController.js"></script>
 
+    <link rel="stylesheet" href="../../css/mobile.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=location_on" />
+
+
     <script>
-        window.addEventListener("load", ()=>{
+        window.addEventListener("load", () => {
             getMe()
-            .then((user) => {
-                if(!user.isAdmin){
-                    if(user.orientatoreId == null || user.orientatoreId == 0)
-                        location.href = "pages/orientatore/collegaOrientatore.html";
-                }else{
-                    location.href = "pages/login.html";
-                }
-                    
-            });
+                .then((user) => {
+                    if (!user.isAdmin) {
+                        if (user.orientatoreId == null || user.orientatoreId == 0)
+                            location.href = "pages/orientatore/collegaOrientatore.html";
+                    } else {
+                        location.href = "pages/login.html";
+                    }
+                });
         })
     </script>
 </head>
 <body>
-
+<div class="layout">
+    <div class="top">
+        <p id="data">SABATO 23/11 - 15:20</p>
+        <h1 id="nome-gruppo">GRUPPO N01</h1>
+    </div>
+    <div class="bottom">
+        <p id="aula-attuale">LAB. T59 PLC</p>
+        <h1 id="laboratorio-attuale">SISTEMI AUTOMATICI</h1>
+        <p id="orari-teorico-attuale">15:20 - 15:30</p>
+        <div class="separatore"></div>
+        <div class="timer">
+            <p>Avvia Timer</p>
+            <div class="timer-layout">
+                <h1 id="minuti" class="timer-h1">10</h1>
+                <h1>:</h1>
+                <h1 id="secondi" class="timer-h1">00</h1>
+            </div>
+            <div class="timer-buttons">
+                <p id="avvia">Avvia</p>
+                <p id="arresta">Arresta</p>
+            </div>
+        </div>
+        <div class="separatore"></div>
+        <p>Prossimo Laboratorio</p>
+        <p id="aula-futura">LAB. S48 ENERGIA</p>
+        <h1 id="laboratorio-futuro">MECCANICA</h1>
+        <p id="orari-teorico-futuro">15:35 - 15:45</p>
+    </div>
+</div>
+<div class="nav-bar">
+    <div class="nav-item">
+        <div class="nav-icon-selected">
+                <span class="material-symbols-outlined">
+                    location_on
+                    </span>
+        </div>
+        <p>Home</p>
+    </div>
+</div>
 </body>
 </html>
