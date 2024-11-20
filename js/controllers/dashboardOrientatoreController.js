@@ -17,3 +17,12 @@ function getGruppo(){
     });
 }
 
+function getTappe(id){
+    return new Promise((res, rej) => {
+        vallauriRequest(urlEndpoint + "orientatore/gruppo/tappe/"+id, "GET", headers).then((result) => {
+            res(result);
+        }).catch((err) => {
+            rej(err);
+        });
+    });
+}
