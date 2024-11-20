@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+main {
+    display: flex;
+}
+
+.nav-bar {
+    width: 62px;
+    height: 100%;
+    background-color: #84A8DC;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: #C4CFE9;
+    padding: 36px;
+}
+
+.left {
+    position: relative;
+}
+
+.right {
+    position: relative;
+}
+
+.scrollable {
+    flex: 1;
+    background-color: white;
+    border-radius: 16px;
+    padding: 22px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+.content {
+    background-color: #f0f0f0;
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.on-time {
+    background-color: green;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+}
+
+.late {
+    background-color: red;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+}
+
+.next-lab {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
-<h>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>orientatore</title>
     <base href="../../">
 
@@ -20,12 +19,19 @@
      <script src="js/pages/orientatore/collegaOrientatore.js"></script>
 
     <!-- Styles -->
-     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/collegaOrientatore.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
-<label for="codiceOrientatore">Inserisci il codice dell'orientatore</label>
-<input type="text" id="codiceOrientatore">
-<button id="btnLink">collegati</button>
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1>Accedi</h1>
+                <input id="codiceOrientatore" type="text" placeholder="Inserisci il tuo codice">
+                <button id="btnLink">Accedi</button>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
