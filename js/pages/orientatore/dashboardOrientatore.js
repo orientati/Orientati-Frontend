@@ -35,6 +35,7 @@ function aggiornaTimer(){
         clearInterval(timerInterval);
         
     }
+    console.info(tempoRimanente);
     let minuti = Math.floor(tempoRimanente / 60);
     let secondi = tempoRimanente % 60;
     console.warn(minuti + " - " + secondi);
@@ -80,22 +81,23 @@ function setAula(){
             document.getElementById("orari-teorico-attuale").innerText = inizio + " - " + fine;
             document.getElementById("laboratorio-attuale").innerText = result.tappe[gruppo.numero_tappa-1].aula_materia.toUpperCase();
             document.getElementById("aula-attuale").innerText = result.tappe[gruppo.numero_tappa-1].aula_posizione.toUpperCase() + "  " + result.tappe[gruppo.numero_tappa-1].aula_nome.toUpperCase();
+            if(gruppo.arrivato)
+                document.getElementById("azione-in-corso").innerText = "sei in:";
+            else
+                document.getElementById("azione-in-corso").innerText = "in viaggio verso: ";
             if(timerInterval == null){
-                if(gruppo.arrivato)
-                    document.getElementById("azione-in-corso").innerText = "sei in:";
-                else
-                    document.getElementById("azione-in-corso").innerText = "in viaggio verso: ";
-
                 if(gruppo.arrivato){
                     tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa-1].minuti_partenza - result.tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
+                    
                 }else{
-                    if(!gruppo.numero_tappa == result.tappe.length && gruppo.numero_tappa != 0){
+                    console.log("BBBBB");
+                    if(gruppo.numero_tappa != result.tappe.length && gruppo.numero_tappa != 0){
                         tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa].minuti_arrivo - result.tappe[gruppo.numero_tappa-1].minuti_partenza)*60;
                     }else if(gruppo.numero_tappa == 0){
                         tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa].minuti_arrivo)*60;
                     }
+                }console.log(tempoRimanente);
                 avviaTimerInterval();
-                }
             }
         }else{
             document.getElementById("orari-teorico-attuale").innerText = "orario teorico partenza: "+ oraInizio.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
@@ -109,8 +111,7 @@ function setAula(){
 }
 
 function setProssimo(result){
-    console.warn(result);
-    if(!gruppo.numero_tappa == result.tappe.length){
+    if(gruppo.numero_tappa != result.tappe.length){
         let inizio = aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa].minuti_arrivo).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
         let fine = aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
         console.log(inizio + " - " + fine);
