@@ -6,11 +6,11 @@ let data;
 let oraInizio;
 
 let tempoRimanente;
+let timerReload = null;
 let timerInterval = null;
 
 document.addEventListener("DOMContentLoaded", function () {
     downloadData();
-    setInterval(aggiorna, 10000);
 });
 
 function downloadData(){
@@ -26,6 +26,7 @@ function downloadData(){
     }).catch((err) => {
         console.error(err);
     });
+    avviaTimerReload();
 }
 
 function aggiorna(){
@@ -45,6 +46,19 @@ function stoppaTimerInterval(){
     }
 }
 
+function avviaTimerReload(){
+    if(timerReload === null){
+        timerReload = setInterval(aggiorna, 10000);
+    }
+}
+
+function stoppaTimerReload(){
+    if(timerReload !== null){
+        clearInterval(timerReload);
+        timerReload = null;
+    }
+}
+
 function aggiornaTimer(){
     tempoRimanente--;
     let minuti = Math.floor(tempoRimanente / 60);
@@ -54,6 +68,10 @@ function aggiornaTimer(){
             tempoRimanente--;
         document.getElementById("minuti").innerText = "+ " + ((minuti*-1)-1).toString().padStart(2, "0");
         document.getElementById("secondi").innerText = (secondi*-1).toString().padStart(2, "0");
+        document.getElementById("minuti").classList.remove("timer-h1");
+        document.getElementById("minuti").classList.add("timer-h1-red");
+        document.getElementById("secondi").classList.remove("timer-h1");
+        document.getElementById("secondi").classList.add("timer-h1-red");
         //clearInterval(timerInterval);
         
     }else{
@@ -100,14 +118,19 @@ function setAula(){
             document.getElementById("azione-in-corso").innerText = "in viaggio verso: ";
         if(timerInterval == null){
             if(gruppo.arrivato){
+                document.getElementById("btn-avanti").innerText = "mettiti in viaggio";
                 tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_partenza - tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
-            }else{
-                if(gruppo.numero_tappa != tappe.length && gruppo.numero_tappa != 0){
-                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa].minuti_arrivo - tappe[gruppo.numero_tappa-1].minuti_partenza)*60;
-                    console.log(tempoRimanente);
-                }else if(gruppo.numero_tappa == 0){
-                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa].minuti_arrivo)*60;
+                if(gruppo.numero_tappa == tappe.length){
+                    document.getElementById("btn-avanti").innerText = "fine percorso";
                 }
+            }else{
+                if(gruppo.numero_tappa != tappe.length+1 && gruppo.numero_tappa != 1){
+                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_arrivo - tappe[gruppo.numero_tappa-2].minuti_partenza)*60;
+                    console.log(tempoRimanente);
+                }else if(gruppo.numero_tappa == 1){
+                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
+                }
+                document.getElementById("btn-avanti").innerText = "arrivato alla tappa";
             }
             avviaTimerInterval();
         }
@@ -117,14 +140,14 @@ function setAula(){
                 document.getElementById("orari-teorico-attuale").innerText = "orario teorico partenza: "+ oraInizio.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
                 document.getElementById("laboratorio-attuale").innerText = "DEVI ANCORA PARTIRE";
                 document.getElementById("aula-attuale").innerText = "";
+                document.getElementById("btn-indietro").enabled = false;
             }else{
                 document.getElementById("orari-teorico-attuale").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
-                document.getElementById("laboratorio-attuale").innerText = "FINE PERCORSO";
                 document.getElementById("aula-attuale").innerText = "";
             }
         }
-        setProssimo();
     }
+    setProssimo();
 }
 
 function setProssimo(){
@@ -142,8 +165,14 @@ function setProssimo(){
     }
 }
 
-function statoSuccessivo(){
+function setFinito(){
+    document.getElementById("laboratorio-attuale").innerText = "PERCORSO COMPLETATO";
+    document.getElementById("btn-inietro").enabled = false;
+    stoppaTimerInterval();
+    stoppaTimerReload();
+}
 
+function statoSuccessivo(){
     if(!gruppo.arrivato){
         if(gruppo.numero_tappa == 0){
             gruppo.numero_tappa++;
@@ -151,10 +180,10 @@ function statoSuccessivo(){
             gruppo.arrivato = true;
         }
     }else{
-        console.log(gruppo.numero_tappa + " - " + tappe.length);
         if(gruppo.numero_tappa == tappe.length){
             gruppo.arrivato = true;
             gruppo.numero_tappa = 0;
+            setFinito();
         }else{
             gruppo.numero_tappa++;
             gruppo.arrivato = false;
@@ -167,12 +196,25 @@ function statoSuccessivo(){
     }).catch((err) => {
         console.error(err);
     });
-
-
 }
 
 function statoPrecedente(){
-
+    if(gruppo.arrivato){
+        gruppo.arrivato = false;
+    }else{
+        if(gruppo.numero_tappa == 0){
+            gruppo.numero_tappa = tappe.length;
+        }else{
+            gruppo.numero_tappa--;
+        }
+    }
+    putGruppo(gruppo).then((result) => {
+        console.log(result);
+        stoppaTimerInterval();
+        setHead();
+    }).catch((err) => {
+        console.error(err);
+    });
 
 }
 
