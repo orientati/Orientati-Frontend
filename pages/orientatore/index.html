@@ -1,58 +1,51 @@
 <!DOCTYPE html>
 <html lang="it">
-    <meta charset="UTF-8" />
-    <title>orientatore</title>
-    <base href="../../">
+<meta charset="UTF-8"/>
+<title>orientatore</title>
+<base href="../../">
 
-    <!-- umami -->
-    <!--<script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
-    -->
-    <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=location_on,logout"
-           />
+<!-- umami -->
+<!--<script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
+-->
 
-    <!-- Libraries -->
-     <script src="js/libraries/urlModule.js"></script>
-    <script src="js/libraries/requestModule.js"></script>
-    <script src="js/libraries/loginModule.js"></script>
-    <script src="js/libraries/errorModule.js"></script>
-    <script src="js/libraries/loginModule.js"></script>
+<!-- Libraries -->
+<script src="js/libraries/urlModule.js"></script>
+<script src="js/libraries/requestModule.js"></script>
+<script src="js/libraries/loginModule.js"></script>
+<script src="js/libraries/errorModule.js"></script>
+<script src="js/libraries/loginModule.js"></script>
 
-    <!-- Model-->
-    <script src="js/Model/User.js"></script>
+<!-- Model-->
+<script src="js/Model/User.js"></script>
 
-    <!-- Controllers -->
-    <script src="js/Controllers/usersController.js"></script>
-    <script src="js/Controllers/dashboardOrientatoreController.js"></script>
-    <script src="js/pages/orientatore/dashboardOrientatore.js"></script>
+<!-- Controllers -->
+<script src="js/Controllers/usersController.js"></script>
+<script src="js/Controllers/dashboardOrientatoreController.js"></script>
+<script src="js/pages/orientatore/dashboardOrientatore.js"></script>
 
 
-    <script>
-        document.addEventListener("loginSucceded", () => {
-          getMe().then((user) => {
-              console.log(user);
+<script>
+    document.addEventListener("loginSucceded", () => {
+        getMe().then((user) => {
+            console.log(user);
             if (!user.isAdmin) {
-              if (user.orientatoreId == null || user.orientatoreId == 0)
-                location.href = "pages/orientatore/collegaOrientatore.html";
+                if (user.orientatoreId == null || user.orientatoreId == 0)
+                    location.href = "pages/orientatore/collegaOrientatore.html";
             } else {
-              location.href = "pages/login.html";
+                location.href = "pages/login.html";
             }
-          });
         });
-      </script>
+    });
+</script>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/mobile.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=location_on"
-    />
-  </head>
-  <body>
-    <div class="layout">
-      <div class="top">
+<!-- Styles -->
+<link rel="stylesheet" href="css/mobile.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body>
+<div class="layout">
+    <div class="top">
         <p id="data">SABATO 23/11 - 15:20</p>
         <h1 id="nome-gruppo">GRUPPO N01</h1>
     </div>
@@ -69,30 +62,32 @@
                 <h1>:</h1>
                 <h1 id="secondi" class="timer-h1">00</h1>
             </div>
-            <!--<div class="timer-buttons">
-                <p id="avvia">Avvia</p>
-                <p id="arresta">Arresta</p>
-            </div>-->
         </div>
         <div class="separatore"></div>
         <p>Prossimo Laboratorio</p>
         <p id="aula-futura">LAB. S48 ENERGIA</p>
         <h1 id="laboratorio-futuro">MECCANICA</h1>
         <p id="orari-teorico-futuro">15:35 - 15:45</p>
-        <button id="btn-indietro" onclick="statoPrecedente()">Tappa Indietro</button>
-        <button id="btn-avanti" onclick="statoSuccessivo()">Tappa Avanti</button>
-      </div>
+        <button id="btn-indietro" class="btn-tappe" onclick="statoPrecedente()">Tappa Indietro</button>
+        <button id="btn-avanti" class="btn-tappe" onclick="statoSuccessivo()">Tappa Avanti</button>
     </div>
-    <div class="nav-bar">
-      <div class="nav-item">
+</div>
+<div class="nav-bar">
+    <div class="nav-item">
         <div class="nav-icon-selected">
-                <span class="material-symbols-outlined">location_on</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12C12.55 12 13.0208 11.8042 13.4125 11.4125C13.8042 11.0208 14 10.55 14 10C14 9.45 13.8042 8.97917 13.4125 8.5875C13.0208 8.19583 12.55 8 12 8C11.45 8 10.9792 8.19583 10.5875 8.5875C10.1958 8.97917 10 9.45 10 10C10 10.55 10.1958 11.0208 10.5875 11.4125C10.9792 11.8042 11.45 12 12 12ZM12 22C9.31667 19.7167 7.3125 17.5958 5.9875 15.6375C4.6625 13.6792 4 11.8667 4 10.2C4 7.7 4.80417 5.70833 6.4125 4.225C8.02083 2.74167 9.88333 2 12 2C14.1167 2 15.9792 2.74167 17.5875 4.225C19.1958 5.70833 20 7.7 20 10.2C20 11.8667 19.3375 13.6792 18.0125 15.6375C16.6875 17.5958 14.6833 19.7167 12 22Z"
+                      fill="white"/>
+            </svg>
         </div>
         <p>Home</p>
     </div>
     <div class="nav-item" onclick="logout()">
         <div class="nav-icon-selected">
-                <span class="material-symbols-outlined">logout</span>
+            <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 18C1.45 18 0.979167 17.8042 0.5875 17.4125C0.195833 17.0208 0 16.55 0 16V2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0H9V2H2V16H9V18H2ZM13 14L11.625 12.55L14.175 10H6V8H14.175L11.625 5.45L13 4L18 9L13 14Z"
+                      fill="white"/>
+            </svg>
         </div>
         <p>Logout</p>
     </div>

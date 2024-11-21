@@ -4,13 +4,6 @@
     box-sizing: border-box;
 }
 
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 1,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
-}
-
 html, body {
     height: 100%;
     width: 100%;
@@ -48,7 +41,7 @@ body {
     height: 92px;
     display: flex;
     align-items: start;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 18px 0 0 0;
 }
 
@@ -108,4 +101,12 @@ body {
     width: 86px;
     border-radius: 8px;
     color: white;
+}
+
+.btn-tappe {
+    padding: 12px;
+    border-radius: 18px;
+    color: white;
+    background-color: #506AFF;
+    border: solid #020181;
 }
