@@ -31,14 +31,20 @@ function stoppaTimerInterval(){
 
 function aggiornaTimer(){
     tempoRimanente--;
-    if(tempoRimanente = 0){
-        clearInterval(timerInterval);
-        
-    }
-    console.info(tempoRimanente);
     let minuti = Math.floor(tempoRimanente / 60);
     let secondi = tempoRimanente % 60;
-    console.warn(minuti + " - " + secondi);
+    if(tempoRimanente <= 0){
+        if(secondi == 59)
+            tempoRimanente--;
+        document.getElementById("minuti").innerText = "+ " + ((minuti*-1)-1).toString().padStart(2, "0");
+        document.getElementById("secondi").innerText = (secondi*-1).toString().padStart(2, "0");
+        //clearInterval(timerInterval);
+        
+    }else{
+        document.getElementById("minuti").innerText = minuti;
+        document.getElementById("secondi").innerText = secondi;
+    }
+
     //document.getElementById("tempo-rimanente").innerText = tempoRimanente + " minuti";
 }
 
@@ -88,15 +94,14 @@ function setAula(){
             if(timerInterval == null){
                 if(gruppo.arrivato){
                     tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa-1].minuti_partenza - result.tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
-                    
                 }else{
-                    console.log("BBBBB");
                     if(gruppo.numero_tappa != result.tappe.length && gruppo.numero_tappa != 0){
                         tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa].minuti_arrivo - result.tappe[gruppo.numero_tappa-1].minuti_partenza)*60;
+                        console.log(tempoRimanente);
                     }else if(gruppo.numero_tappa == 0){
                         tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa].minuti_arrivo)*60;
                     }
-                }console.log(tempoRimanente);
+                }
                 avviaTimerInterval();
             }
         }else{
