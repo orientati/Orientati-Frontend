@@ -1,7 +1,6 @@
 "use strict";
 
 let aule = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutte le aule registrate sul server. Richiede l'admin
@@ -15,7 +14,7 @@ function getAule() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/aule`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/aule`, "GET", headers)
       .then((response) => {
         response.aule.forEach((aula) => {
           aule.push(
@@ -50,7 +49,7 @@ function getAulaById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/aule/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/aule/${id}`, "GET", headers)
         .then((response) => {
           res(
             new Aula(
@@ -99,7 +98,7 @@ function patchAula(id, name, position, subject, details) {
         dettagli: details,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/aule/${id}`, "PUT", headers, body)
+      vallauriRequest(`${serverUrl}admin/aule/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new Aula(
@@ -146,7 +145,7 @@ function addAula(name, position, subject, details) {
         dettagli: details,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/aule`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/aule`, "POST", headers, body)
         .then((response) => {
           res(
             new Aula(
@@ -179,7 +178,7 @@ function delAula(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/aule/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/aule/${id}`, "DELETE", headers)
         .then((response) => {
           res("Aula rimossa con successo!");
         })

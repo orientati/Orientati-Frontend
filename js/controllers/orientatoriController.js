@@ -1,6 +1,5 @@
 "use strict";
 let orientatori = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti gli orientatori registrati sul server. Richiede l'admin
@@ -14,7 +13,7 @@ function getOrientatori() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/orientatori`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/orientatori`, "GET", headers)
       .then((response) => {
         response.orientatori.forEach((orientatore) => {
           orientatori.push(
@@ -52,7 +51,7 @@ function getOrientatoreById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientatori/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/orientatori/${id}`, "GET", headers)
         .then((response) => {
           res(
             new Orientatore(
@@ -109,7 +108,7 @@ function patchOrientatore(id, name, surname, email, schoolSection, schoolAddress
         indirizzo_id: schoolAddressId,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientatori/${id}`, "PUT", headers, body)
+      vallauriRequest(`${serverUrl}admin/orientatori/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new Orientatore(
@@ -164,7 +163,7 @@ function addOrientatore(name, surname, email, schoolSection, schoolAddressId, gr
         indirizzo_id: schoolAddressId,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientatori`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/orientatori`, "POST", headers, body)
         .then((response) => {
           res(
             new Orientatore(
@@ -200,7 +199,7 @@ function delOrientatore(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientatori/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/orientatori/${id}`, "DELETE", headers)
         .then((response) => {
           res("Orientatore rimosso con successo!");
         })

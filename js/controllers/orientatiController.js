@@ -1,7 +1,6 @@
 "use strict";
 
 let orientati = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti gli orientati registrati sul server. Richiede l'admin
@@ -15,7 +14,7 @@ function getOrientati() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/orientati`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/orientati`, "GET", headers)
       .then((response) => {
         response.orientati.forEach((orientato) => {
           orientati.push(
@@ -50,7 +49,7 @@ function getOrientatoById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientati/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/orientati/${id}`, "GET", headers)
         .then((response) => {
           res(
             new Orientato(
@@ -96,7 +95,7 @@ function patchOrientato(id, nome, cognome, scuolaProvenienzaId) {
         scuoladiprovenienza_id: scuolaProvenienzaId,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientati/${id}`, "PUT", headers, body)
+      vallauriRequest(`${serverUrl}admin/orientati/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new Orientato(
@@ -147,7 +146,7 @@ function addOrientato(
         scuoladiprovenienza_id: scuolaProvenienzaId,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientati`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/orientati`, "POST", headers, body)
         .then((response) => {
           res(
             new Orientato(
@@ -180,7 +179,7 @@ function delOrientato(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/orientati/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/orientati/${id}`, "DELETE", headers)
         .then((response) => {
           res("Orientato rimosso con successo!");
         })
