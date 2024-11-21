@@ -1,6 +1,7 @@
 "use strict"
 
 let gruppo;
+let tappe;
 let data;
 let oraInizio;
 
@@ -8,9 +9,24 @@ let tempoRimanente;
 let timerInterval = null;
 
 document.addEventListener("DOMContentLoaded", function () {
-    //aggiorna();
-    setInterval(aggiorna, 5000);
+    downloadData();
+    setInterval(aggiorna, 10000);
 });
+
+function downloadData(){
+    getGruppo().then((result) => {
+        gruppo = result.gruppi[0];
+        console.log(result.gruppi[0]);
+        getTappe(gruppo.id).then((result) => {
+            tappe = result.tappe;
+            aggiorna();
+        }).catch((err) => {
+            console.error(err);
+        });
+    }).catch((err) => {
+        console.error(err);
+    });
+}
 
 function aggiorna(){
     setHead();
@@ -49,85 +65,115 @@ function aggiornaTimer(){
 }
 
 function setHead(){
-    getGruppo().then((result) => {
-        gruppo = result.gruppi[0];
-        console.log(result);
-        const dataString = result.gruppi[0].data;
-        const [giorno, mese, anno] = dataString.split("/").map(Number); // Divide e converte in numeri
-        data = new Date(anno, mese - 1, giorno); // Mese è zero-based
+    console.log(gruppo);
+    const dataString = gruppo.data;
+    const [giorno, mese, anno] = dataString.split("/").map(Number); // Divide e converte in numeri
+    data = new Date(anno, mese - 1, giorno); // Mese è zero-based
 
-        const oraAttuale = new Date();
-        data.setHours(oraAttuale.getHours());
-        data.setMinutes(oraAttuale.getMinutes());
-        console.log(data);
+    const oraAttuale = new Date();
+    data.setHours(oraAttuale.getHours());
+    data.setMinutes(oraAttuale.getMinutes());
 
-        oraInizio = new Date(data);
-        oraInizio.setHours(gruppo.orario_partenza.split(":")[0]);
-        oraInizio.setMinutes(gruppo.orario_partenza.split(":")[1]);
-        
-        console.log(oraInizio);
+    oraInizio = new Date(data);
+    oraInizio.setHours(gruppo.orario_partenza.split(":")[0]);
+    oraInizio.setMinutes(gruppo.orario_partenza.split(":")[1]);
+    
+    console.log(oraInizio);
 
-
-        document.getElementById("data").innerText = (data.toLocaleDateString("it-IT", {weekday:"long" ,day: "numeric", month: "numeric"})+" - "+data.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"})).toUpperCase();
-        document.getElementById("nome-gruppo").innerText = result.gruppi[0].nome.toUpperCase();
-        setAula();
-    }).catch((err) => {
-        console.error(err);
-    });
+    document.getElementById("data").innerText = (data.toLocaleDateString("it-IT", {weekday:"long" ,day: "numeric", month: "numeric"})+" - "+data.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"})).toUpperCase();
+    document.getElementById("nome-gruppo").innerText = gruppo.nome.toUpperCase();
+    setAula();
 }
 
 function setAula(){
-    getTappe(gruppo.id).then((result) => {
-        console.log(result);
-
-        if(gruppo.numero_tappa != 0){
-            let inizio = aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa-1].minuti_arrivo).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
-            let fine = aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
-            console.log(inizio + " - " + fine);
-            document.getElementById("orari-teorico-attuale").innerText = inizio + " - " + fine;
-            document.getElementById("laboratorio-attuale").innerText = result.tappe[gruppo.numero_tappa-1].aula_materia.toUpperCase();
-            document.getElementById("aula-attuale").innerText = result.tappe[gruppo.numero_tappa-1].aula_posizione.toUpperCase() + "  " + result.tappe[gruppo.numero_tappa-1].aula_nome.toUpperCase();
-            if(gruppo.arrivato)
-                document.getElementById("azione-in-corso").innerText = "sei in:";
-            else
-                document.getElementById("azione-in-corso").innerText = "in viaggio verso: ";
-            if(timerInterval == null){
-                if(gruppo.arrivato){
-                    tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa-1].minuti_partenza - result.tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
-                }else{
-                    if(gruppo.numero_tappa != result.tappe.length && gruppo.numero_tappa != 0){
-                        tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa].minuti_arrivo - result.tappe[gruppo.numero_tappa-1].minuti_partenza)*60;
-                        console.log(tempoRimanente);
-                    }else if(gruppo.numero_tappa == 0){
-                        tempoRimanente = parseInt(result.tappe[gruppo.numero_tappa].minuti_arrivo)*60;
-                    }
+    console.log(tappe);
+    if(gruppo.numero_tappa != 0 && gruppo.numero_tappa <= tappe.length){
+        let inizio = aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_arrivo).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+        let fine = aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+        console.log(inizio + " - " + fine);
+        document.getElementById("orari-teorico-attuale").innerText = inizio + " - " + fine;
+        document.getElementById("laboratorio-attuale").innerText = tappe[gruppo.numero_tappa-1].aula_materia.toUpperCase();
+        document.getElementById("aula-attuale").innerText = tappe[gruppo.numero_tappa-1].aula_posizione.toUpperCase() + "  " + tappe[gruppo.numero_tappa-1].aula_nome.toUpperCase();
+        if(gruppo.arrivato)
+            document.getElementById("azione-in-corso").innerText = "sei in:";
+        else
+            document.getElementById("azione-in-corso").innerText = "in viaggio verso: ";
+        if(timerInterval == null){
+            if(gruppo.arrivato){
+                tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_partenza - tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
+            }else{
+                if(gruppo.numero_tappa != tappe.length && gruppo.numero_tappa != 0){
+                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa].minuti_arrivo - tappe[gruppo.numero_tappa-1].minuti_partenza)*60;
+                    console.log(tempoRimanente);
+                }else if(gruppo.numero_tappa == 0){
+                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa].minuti_arrivo)*60;
                 }
-                avviaTimerInterval();
             }
-        }else{
-            document.getElementById("orari-teorico-attuale").innerText = "orario teorico partenza: "+ oraInizio.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
-            document.getElementById("laboratorio-attuale").innerText = "DEVI ANCORA PARTIRE";
-            document.getElementById("aula-attuale").innerText = "";
+            avviaTimerInterval();
         }
-        setProssimo(result);
-    }).catch((err) => {
-        console.error(err);
-    });
+    }else{
+        if(gruppo.numero_tappa == 0){
+            if(!gruppo.arrivato){
+                document.getElementById("orari-teorico-attuale").innerText = "orario teorico partenza: "+ oraInizio.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+                document.getElementById("laboratorio-attuale").innerText = "DEVI ANCORA PARTIRE";
+                document.getElementById("aula-attuale").innerText = "";
+            }else{
+                document.getElementById("orari-teorico-attuale").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+                document.getElementById("laboratorio-attuale").innerText = "FINE PERCORSO";
+                document.getElementById("aula-attuale").innerText = "";
+            }
+        }
+        setProssimo();
+    }
 }
 
-function setProssimo(result){
-    if(gruppo.numero_tappa != result.tappe.length){
-        let inizio = aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa].minuti_arrivo).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
-        let fine = aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+function setProssimo(){
+    if(gruppo.numero_tappa != tappe.length){
+        let inizio = aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa].minuti_arrivo).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+        let fine = aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
         console.log(inizio + " - " + fine);
         document.getElementById("orari-teorico-futuro").innerText = inizio + " - " + fine;
-        document.getElementById("laboratorio-futuro").innerText = result.tappe[gruppo.numero_tappa].aula_materia.toUpperCase();
-        document.getElementById("aula-futura").innerText = result.tappe[gruppo.numero_tappa].aula_posizione.toUpperCase() + "  " + result.tappe[gruppo.numero_tappa].aula_nome.toUpperCase();
+        document.getElementById("laboratorio-futuro").innerText = tappe[gruppo.numero_tappa].aula_materia.toUpperCase();
+        document.getElementById("aula-futura").innerText = tappe[gruppo.numero_tappa].aula_posizione.toUpperCase() + "  " + tappe[gruppo.numero_tappa].aula_nome.toUpperCase();
     }else{
-        document.getElementById("orari-teorico-futuro").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, result.tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+        document.getElementById("orari-teorico-futuro").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
         document.getElementById("laboratorio-futuro").innerText = "FINE PERCORSO";
         document.getElementById("aula-futura").innerText = "";
     }
+}
+
+function statoSuccessivo(){
+
+    if(!gruppo.arrivato){
+        if(gruppo.numero_tappa == 0){
+            gruppo.numero_tappa++;
+        }else{
+            gruppo.arrivato = true;
+        }
+    }else{
+        console.log(gruppo.numero_tappa + " - " + tappe.length);
+        if(gruppo.numero_tappa == tappe.length){
+            gruppo.arrivato = true;
+            gruppo.numero_tappa = 0;
+        }else{
+            gruppo.numero_tappa++;
+            gruppo.arrivato = false;
+        }
+    }
+    putGruppo(gruppo).then((result) => {
+        console.log(result);
+        stoppaTimerInterval();
+        setHead();
+    }).catch((err) => {
+        console.error(err);
+    });
+
+
+}
+
+function statoPrecedente(){
+
+
 }
 
 function aggiungiMinuti(data, minuti) {
