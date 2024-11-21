@@ -1,16 +1,22 @@
-window.addEventListener("DOMContentLoaded", function () {
-  // Per uan futura navbar
-  //createComponents("body", false);
+"use strict";
 
-  getStudenti()
-  .then(res =>{
-    console.log(res);
+const pollingTime = 5000;
+
+window.addEventListener("DOMContentLoaded", function () {
+  getGruppi()
+  .then(loadGraphic)
+  .catch(err=>{
+    mostraAlert("errore", err);
   });
 
-  /*addStudente('gaga', 'gaga', false, false, false)
-  .then(res=>{
-    console.log(res)
-  }).catch(rej=>{
-    console.log("ERRORE:" + rej);
-  })*/
 });
+
+function loadGraphic(groups){
+  console.log(groups);
+
+  this.setInterval(updateGroups, pollingTime);
+}
+
+function updateGroups(){
+  console.log("Faccio Polling");
+}

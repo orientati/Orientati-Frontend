@@ -1,20 +1,23 @@
 <html lang="it">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <base href="../../">
+    <base href="../../" />
 
-    
     <script>
-        document.addEventListener("loginSucceded", ()=>{
-            checkAdmin();
-        });
+      document.addEventListener("loginSucceded", () => {
+        checkAdmin();
+      });
     </script>
 
     <!-- umami -->
-    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
+    <script
+      defer
+      src="http://10.0.5.81:3000/script.js"
+      data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"
+    ></script>
 
     <!-- Modelli -->
     <script src="js/model/Route.js"></script>
@@ -26,63 +29,64 @@
     <script src="js/libraries/errorModule.js"></script>
 
     <!-- Scripts-->
+    <script src="js/controllers/dashboardAdminController.js"></script>
     <script src="js/pages/admin/dashboard.js"></script>
 
-    <link rel="stylesheet" href="css/dashboard.css">
-
-</head>
-<body>
-<main>
-    <div class="nav-bar">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <main>
+      <div class="nav-bar">
         <button onclick="logout();">LOGOUT</button>
-    </div>
-    <div class="container">
+      </div>
+      <div class="container">
         <div class="layout left">
-            <div class="scrollable">
-
-                <div class="content">
-                    <div class="top">
-                        <div>
-                            <h2>Gruppo N01</h2>
-                            <p>Matteo Rossi - Giovanni Verdi</p>
-                        </div>
-                        <span class="on-time">IN ORARIO</span>
-                    </div>
-                    <div>
-                        <p>Lab Archimede - S22</p>
-                        <h1>Informatica</h1>
-                    </div>
-                    <div class="bottom">
-                        <p class="next-lab">Prossimo Laboratorio</p>
-                        <h2>Meccanica</h2>
-                        <p>Lab Prototipazione - S04</p>
-                    </div>
+          <div class="scrollable">
+            <div class="content">
+              <div class="top">
+                <div>
+                  <h2>Gruppo N01</h2>
+                  <p>Matteo Rossi - Giovanni Verdi</p>
                 </div>
-
-                <div class="content">
-                    <div class="top">
-                        <div>
-                            <h2>Gruppo N01</h2>
-                            <p>Matteo Rossi - Giovanni Verdi</p>
-                        </div>
-                        <span class="late">IN RITARDO</span>
-                    </div>
-                    <div>
-                        <p>Lab Archimede - S22</p>
-                        <h1>Informatica</h1>
-                    </div>
-                    <div class="bottom">
-                        <p class="next-lab">Prossimo Laboratorio</p>
-                        <h2>Meccanica</h2>
-                        <p>Lab Prototipazione - S04</p>
-                    </div>
-                </div>
+                <span class="on-time">IN ORARIO</span>
+              </div>
+              <div>
+                <p>Lab Archimede - S22</p>
+                <h1>Informatica</h1>
+              </div>
+              <div class="bottom">
+                <p class="next-lab">Prossimo Laboratorio</p>
+                <h2>Meccanica</h2>
+                <p>Lab Prototipazione - S04</p>
+              </div>
             </div>
+
+            <div class="content">
+              <div class="top">
+                <div>
+                  <h2>Gruppo N01</h2>
+                  <p>Matteo Rossi - Giovanni Verdi</p>
+                </div>
+                <span class="late">IN RITARDO</span>
+              </div>
+              <div>
+                <p>Lab Archimede - S22</p>
+                <h1>Informatica</h1>
+              </div>
+              <div class="bottom">
+                <p class="next-lab">Prossimo Laboratorio</p>
+                <h2>Meccanica</h2>
+                <p>Lab Prototipazione - S04</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="layout right">
-            <!-- Tabella GAGA-->
+          <!-- Tabella GAGA-->
         </div>
-    </div>
-</main>
-</body>
+      </div>
+    </main>
+  </body>
 </html>
