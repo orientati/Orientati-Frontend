@@ -99,3 +99,13 @@ body {
     border-radius: 8px;
     color: white;
 }
+
+.timer-h1-red{
+    text-align: center;
+    padding: 4px;
+    background-color: #ef3b3b;
+    border: solid #ff0000;
+    width: 86px;
+    border-radius: 8px;
+    color: white;
+}

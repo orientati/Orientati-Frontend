@@ -5,9 +5,19 @@ const headers = {
     Authorization: `Bearer ${access_token}`,
   };
 
-function getGruppo(){
+  function getGruppo(){
     return new Promise((res, rej) => {
         vallauriRequest(serverUrl + "orientatore/gruppo/", "GET", headers).then((result) => {
+            res(result);
+        }).catch((err) => {
+            rej(err);
+        });
+    });
+}
+
+function putGruppo(gruppo){
+    return new Promise((res, rej) => {
+        vallauriRequest(serverUrl + `orientatore/gruppo/imposta_tappa/${gruppo.id}?tappa=${gruppo.numero_tappa}&arrivato=${gruppo.arrivato}`, "PUT", headers).then((result) => {
             res(result);
         }).catch((err) => {
             rej(err);
