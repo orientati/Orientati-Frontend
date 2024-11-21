@@ -1,5 +1,5 @@
-const ps = "PORTA SERVER"
-const pl = "PORTA LOCALHOST"
+const ps = "8001"
+const pl = "8000"
 const ep = "api/v1/"
 let serverUrl;
 
