@@ -14,10 +14,10 @@ function getGruppi() {
         console.log(response);
         gruppi = response.gruppi;
 
-        const aulaDet = getAulaFromTappa(gruppi[i].numero_tappa);
-        gruppi.aula = aulaDet;
-
         for (let i = 0; i < gruppi.length; i++) {
+          const aulaDet = getAulaFromTappa(gruppi[i].numero_tappa);
+          gruppi[i].aula = aulaDet;
+
           vallauriRequest(
             `${serverUrl}admin/gruppi/tappe/${gruppi[i].id}`,
             "GET",
@@ -42,8 +42,9 @@ function getGruppi() {
 
 function findNextTappa(tappe, tappaId) {
   let i;
-  for (i = 0; i < tappe.length; i++) {
+  while( i < tappe.length){
     if (tappe[i].id == tappaId) break;
+    i++;
   }
 
   if (i < tappe.length){
