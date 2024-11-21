@@ -58,7 +58,6 @@ function login(username, password) {
         localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
         res(response);
-        location.href = "index.html";
       })
       .catch((error) => {
         rej(semplificaErrore(error));
@@ -82,7 +81,6 @@ function loginTemp() {
         localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
         res(response);
-        location.href = "index.html";
       })
       .catch((error) => {
         rej(semplificaErrore(error));
