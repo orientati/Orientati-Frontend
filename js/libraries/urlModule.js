@@ -1,4 +1,4 @@
-const ps = "8001"
+const ps = "8000"
 const pl = "8000"
 const ep = "api/v1/"
 let serverUrl;
