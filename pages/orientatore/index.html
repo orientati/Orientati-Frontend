@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="it">
-<meta charset="UTF-8"/>
-<title>orientatore</title>
-<base href="../../">
+<head>
+    <meta charset="UTF-8"/>
+    <title>orientatore</title>
+    <base href="../../">
 
-<!-- umami -->
-<!--<script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
--->
+    <!-- umami -->
+    <!--<script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
+    -->
 
-<!-- Libraries -->
-<script src="js/libraries/urlModule.js"></script>
-<script src="js/libraries/requestModule.js"></script>
-<script src="js/libraries/loginModule.js"></script>
-<script src="js/libraries/errorModule.js"></script>
-<script src="js/libraries/loginModule.js"></script>
+    <!-- Libraries -->
+    <script src="js/libraries/urlModule.js"></script>
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
 
-<!-- Model-->
-<script src="js/Model/User.js"></script>
+    <!-- Model-->
+    <script src="js/Model/User.js"></script>
 
-<!-- Controllers -->
-<script src="js/Controllers/usersController.js"></script>
-<script src="js/Controllers/dashboardOrientatoreController.js"></script>
-<script src="js/pages/orientatore/dashboardOrientatore.js"></script>
+    <!-- Controllers -->
+    <script src="js/Controllers/usersController.js"></script>
+    <script src="js/Controllers/dashboardOrientatoreController.js"></script>
+    <script src="js/pages/orientatore/dashboardOrientatore.js"></script>
 
 
-<script>
-    document.addEventListener("loginSucceded", () => {
-        getMe().then((user) => {
-            console.log(user);
-            if (!user.isAdmin) {
-                if (user.orientatoreId == null || user.orientatoreId == 0)
-                    location.href = "pages/orientatore/collegaOrientatore.html";
-            } else {
-                location.href = "pages/login.html";
-            }
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            getMe().then((user) => {
+                console.log(user);
+                if (!user.isAdmin) {
+                    if (user.orientatoreId == null || user.orientatoreId == 0)
+                        location.href = "pages/orientatore/collegaOrientatore.html";
+                } else {
+                    location.href = "pages/login.html";
+                }
+            });
         });
-    });
-</script>
+    </script>
 
-<!-- Styles -->
-<link rel="stylesheet" href="css/mobile.css"/>
-<link rel="stylesheet" href="css/style.css"/>
-
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
     <div class="top">
-        <p id="data">SABATO 23/11 - 15:20</p>
-        <h1 id="nome-gruppo">GRUPPO N01</h1>
+        <p id="data"></p>
+        <h1 id="nome-gruppo"></h1>
     </div>
     <div class="bottom">
-        <p id="azione-in-corso">Prossimo Laboratorio</p>
-        <p id="aula-attuale">LAB. T59 PLC</p>
-        <h1 id="laboratorio-attuale">SISTEMI AUTOMATICI</h1>
-        <p id="orari-teorico-attuale">15:20 - 15:30</p>
+        <p id="azione-in-corso"></p>
+        <p id="aula-attuale"></p>
+        <h1 id="laboratorio-attuale"></h1>
+        <p id="orari-teorico-attuale"></p>
         <div class="separatore"></div>
         <div class="timer">
             <p>Tempo teorico rimanente</p>
             <div class="timer-layout">
-                <h1 id="minuti" class="timer-h1">10</h1>
+                <h1 id="minuti" class="timer-h1"></h1>
                 <h1>:</h1>
-                <h1 id="secondi" class="timer-h1">00</h1>
+                <h1 id="secondi" class="timer-h1"></h1>
             </div>
         </div>
         <div class="separatore"></div>
         <p>Prossimo Laboratorio</p>
-        <p id="aula-futura">LAB. S48 ENERGIA</p>
-        <h1 id="laboratorio-futuro">MECCANICA</h1>
-        <p id="orari-teorico-futuro">15:35 - 15:45</p>
-        <button id="btn-indietro" class="btn-tappe" onclick="statoPrecedente()">Tappa Indietro</button>
-        <button id="btn-avanti" class="btn-tappe" onclick="statoSuccessivo()">Tappa Avanti</button>
+        <p id="aula-futura"></p>
+        <h1 id="laboratorio-futuro"></h1>
+        <p id="orari-teorico-futuro"></p>
+        <button id="btn-indietro" class="btn-tappe" onclick="statoPrecedente()"></button>
+        <button id="btn-avanti" class="btn-tappe" onclick="statoSuccessivo()"></button>
     </div>
 </div>
 <div class="nav-bar">
