@@ -1,6 +1,5 @@
 "use strict";
 let scuoleDiProvenienza = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutte le scuole di provenienza registrate sul server. Richiede l'admin
@@ -14,7 +13,7 @@ function getScuoleDiProvenienza() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/scuoleDiProvenienza`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/scuoleDiProvenienza`, "GET", headers)
       .then((response) => {
         response.scuoleDiProvenienza.forEach((scuola) => {
           scuoleDiProvenienza.push(
@@ -47,7 +46,7 @@ function getScuolaDiProvenienzaById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/scuoleDiProvenienza/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/scuoleDiProvenienza/${id}`, "GET", headers)
         .then((response) => {
           res(
             new ScuolaDiProvenienza(
@@ -84,7 +83,7 @@ function patchScuolaDiProvenienza(id, name, city) {
         citta: city,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/scuoleDiProvenienza/${id}`, "PUT", headers, body)
+      vallauriRequest(`${serverUrl}admin/scuoleDiProvenienza/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new ScuolaDiProvenienza(
@@ -120,7 +119,7 @@ function addScuolaDiProvenienza(name, city) {
         citta: city,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/scuoleDiProvenienza`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/scuoleDiProvenienza`, "POST", headers, body)
         .then((response) => {
           res(
             new ScuolaDiProvenienza(
@@ -151,7 +150,7 @@ function delScuolaDiProvenienza(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/scuoleDiProvenienza/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/scuoleDiProvenienza/${id}`, "DELETE", headers)
         .then((response) => {
           res("Scuola di provenienza rimossa con successo!");
         })

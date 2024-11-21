@@ -1,6 +1,4 @@
 "use strict";
-const port = 8000;
-let url = findUrl();
 const htmlpage =
   window.location.href.split("/")[window.location.href.split("/").length - 1];
 
@@ -46,7 +44,7 @@ window.addEventListener("load", () => {
  */
 function login(username, password) {
   return new Promise((res, rej) => {
-    const endpointUrl = url + "/api/v1/login";
+    const endpointUrl = serverUrl + "login";
     const method = "POST";
 
     const body = new FormData();
@@ -71,7 +69,7 @@ function login(username, password) {
  */
 function loginTemp() {
   return new Promise((res, rej) => {
-    const endpointUrl = url + "/api/v1/utenti/temp";
+    const endpointUrl = serverUrl + "utenti/temp";
     const method = "POST";
 
     const body = new FormData();
@@ -96,7 +94,7 @@ function loginTemp() {
  */
 function testAccessToken(
   access_token = localStorage.getItem("access_token"),
-  endpointUrl = url + "/api/v1/utenti/me"
+  endpointUrl = serverUrl + "utenti/me"
 ) {
   return new Promise((res, rej) => {
     const headers = {
@@ -120,7 +118,7 @@ function testAccessToken(
  */
 function requestNewToken(
   refresh_token = localStorage.getItem("refresh_token"),
-  endpointUrl = url + "/api/v1/token/refresh"
+  endpointUrl = serverUrl + "token/refresh"
 ) {
   return new Promise((res, rej) => {
     const body = {
@@ -190,7 +188,7 @@ function semplificaErrore(errorCode) {
 
 async function getAdminStatus() {
   const access_token = localStorage.getItem("access_token");
-  const endpointUrl = url + "/api/v1/utenti/me";
+  const endpointUrl = serverUrl + "utenti/me";
 
   if (!access_token) {
     throw new Error("Access token non trovato");

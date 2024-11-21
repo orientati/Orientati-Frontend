@@ -1,6 +1,5 @@
 "use strict";
 let percorsiDiStudio = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti i percorsi di studio registrati sul server. Richiede l'admin
@@ -14,7 +13,7 @@ function getPercorsiDiStudio() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "GET", headers)
       .then((response) => {
         response.percorsiDiStudi.forEach((percorso) => {
           percorsiDiStudio.push(
@@ -46,7 +45,7 @@ function getPercorsoDiStudioById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "GET", headers)
         .then((response) => {
           res(
             new PercorsoDiStudi(
@@ -80,7 +79,7 @@ function patchPercorsoDiStudio(id, name) {
         nome: name
       };
 
-      vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi/${id}`, "PUT", headers, body)
+      vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new PercorsoDiStudi(
@@ -113,7 +112,7 @@ function addPercorsoDiStudio(name) {
         nome: name
       };
 
-      vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "POST", headers, body)
         .then((response) => {
           res(
             new PercorsoDiStudi(
@@ -143,7 +142,7 @@ function delPercorsoDiStudio(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "DELETE", headers)
         .then((response) => {
           res("Percorso di studio rimosso con successo!");
         })

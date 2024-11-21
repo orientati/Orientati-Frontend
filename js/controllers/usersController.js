@@ -1,7 +1,6 @@
 "use strict";
 
 let utenti = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Collega l'utente con l'orientatore specificato dal codice
@@ -15,7 +14,7 @@ function linkOrientatore(codiceOrientatore) {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}utenti/orientatore?orientatore_codice=`+codiceOrientatore, "POST", headers)
+    vallauriRequest(`${serverUrl}utenti/orientatore?orientatore_codice=`+codiceOrientatore, "POST", headers)
       .then((response) => {
         res("Utente collegato come Orientatore!");
       })
@@ -46,7 +45,7 @@ function changePassword(currentPassword, newPassword) {
     };
 
     vallauriRequest(
-      `${urlEndpoint}utenti/me/change_password`,
+      `${serverUrl}utenti/me/change_password`,
       "POST",
       headers,
       body
@@ -72,7 +71,7 @@ function getMe() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}utenti/me`, "GET", headers)
+    vallauriRequest(`${serverUrl}utenti/me`, "GET", headers)
       .then((user) => {
         res(
           new User(
@@ -102,7 +101,7 @@ function getUsers() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/utenti`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/utenti`, "GET", headers)
       .then((response) => {
         response.users.forEach((user) => {
           utenti.push(
@@ -137,7 +136,7 @@ function getUserById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/utenti/${id}`, "GET", headers)
         .then((response) => {
           res(
             new User(
@@ -195,7 +194,7 @@ function patchUser(
         orientatore_id: idOrientatore,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "PUT", headers, body)
+      vallauriRequest(`${serverUrl}admin/utenti/${id}`, "PUT", headers, body)
         .then((response) => {
           res(
             new User(
@@ -244,7 +243,7 @@ function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
         orientatore_id: idOrientatore,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/utenti`, "POST", headers, body)
         .then((response) => {
           res(
             new User(
@@ -277,7 +276,7 @@ function delUser(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/utenti/${id}`, "DELETE", headers)
         .then((response) => {
           res("Utente rimosso con successo!");
         })

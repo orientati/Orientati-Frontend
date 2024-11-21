@@ -1,6 +1,5 @@
 "use strict";
 let indirizzi = [];
-const urlEndpoint = "http://localhost:8000/api/v1/";
 
 /**
  * Ritorna tutti gli indirizzi registrati sul server. Richiede l'admin
@@ -14,7 +13,7 @@ function getIndirizzi() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/indirizzi`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/indirizzi`, "GET", headers)
       .then((response) => {
         response.indirizzi.forEach((indirizzo) => {
           indirizzi.push(
@@ -46,7 +45,7 @@ function getPercorsiDiStudio() {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${urlEndpoint}admin/percorsiDiStudi`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "GET", headers)
       .then((response) => {
         response.percorsiDiStudi.forEach((percorso) => {
           percorsiDiStudio.push(
@@ -78,7 +77,7 @@ function getIndirizzoById(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/indirizzi/${id}`, "GET", headers)
+      vallauriRequest(`${serverUrl}admin/indirizzi/${id}`, "GET", headers)
         .then((response) => {
           res(
             new Indirizzo(
@@ -120,7 +119,7 @@ function patchIndirizzo(id, nome, percorsoDiStudioId) {
         percorsoDiStudi_id: percorsoDiStudioId,
       };
       vallauriRequest(
-        `${urlEndpoint}admin/indirizzi/${id}`,
+        `${serverUrl}admin/indirizzi/${id}`,
         "PUT",
         headers,
         body
@@ -162,7 +161,7 @@ function addIndirizzo(name, percorsoDiStudioId, percorsoDiStudioName) {
         percorsoDiStudi_id: percorsoDiStudioId,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/indirizzi`, "POST", headers, body)
+      vallauriRequest(`${serverUrl}admin/indirizzi`, "POST", headers, body)
         .then((response) => {
           res(
             new Indirizzo(
@@ -194,7 +193,7 @@ function delIndirizzo(id) {
         Authorization: `Bearer ${access_token}`,
       };
 
-      vallauriRequest(`${urlEndpoint}admin/indirizzi/${id}`, "DELETE", headers)
+      vallauriRequest(`${serverUrl}admin/indirizzi/${id}`, "DELETE", headers)
         .then((response) => {
           res("Indirizzo rimosso con successo!");
         })
