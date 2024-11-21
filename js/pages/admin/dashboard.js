@@ -235,15 +235,23 @@ function loadTable(orientati) {
     td.textContent = orientati[i].scuolaDiProvenienza_nome;
     tr.appendChild(td);
 
+    let lable = document.createElement("lable");
+    lable.classList.add("switch");
+
     td = document.createElement("td");
     let chk = document.createElement("input");
     chk.id = orientati[i].id;
     chk.type = "checkbox";
     chk.checked = orientati[i].presente
-
     chk.addEventListener("change", changePresenzaLocal)
-    tr.appendChild(chk);
+    lable.appendChild(chk);
 
+    let span = new document.createElement("span");
+    span.classList.add("slider round");
+    lable.appendChild(span);
+
+    td.appendChild(lable);
+    tr.appendChild(td);
     tableOrientati.appendChild(tr);
   }
 }
