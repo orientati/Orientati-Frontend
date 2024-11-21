@@ -58,7 +58,6 @@ function login(username, password) {
         localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
         res(response);
-        location.href = "index.html";
       })
       .catch((error) => {
         rej(semplificaErrore(error));
@@ -82,7 +81,6 @@ function loginTemp() {
         localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
         res(response);
-        location.href = "index.html";
       })
       .catch((error) => {
         rej(semplificaErrore(error));
@@ -151,6 +149,7 @@ function autoReLogin() {
     testAccessToken(access_token)
       .then(() => {
         console.log("Login sessione effettuato");
+        document.dispatchEvent( new CustomEvent("loginSucceded"));
       })
       .catch((err) => {
         if (err) {
@@ -161,6 +160,8 @@ function autoReLogin() {
           .then((res)=>{
             localStorage.setItem("access_token", res.access_token);
             localStorage.setItem("refresh_token", res.refresh_token);
+
+            document.dispatchEvent( new CustomEvent("loginSucceded"));
           })
           .catch((err)=>{
             console.error(err);

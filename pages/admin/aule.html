@@ -5,6 +5,12 @@
     <title>Aule</title>
     <base href="../../" />
 
+    <script>
+      document.addEventListener("loginSucceded", () => {
+        checkAdmin();
+      });
+    </script>
+
     <!-- umami -->
     <script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
 
@@ -37,11 +43,6 @@
 
     <!-- Scripts -->
     <script src="js/pages/admin/aule.js"></script>
-
-    <!-- Scripts-->
-    <script>
-      checkAdmin();
-    </script>
 
     <!-- Stili -->
     <link rel="stylesheet" href="css/style.css" />
