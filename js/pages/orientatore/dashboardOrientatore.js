@@ -5,21 +5,22 @@ let tappe;
 let data;
 let oraInizio;
 
-let tempoRimanente;
+let tempoRimanenteOld;
 let timerReload = null;
 let timerInterval = null;
 
 document.addEventListener("DOMContentLoaded", function () {
-    downloadData();
+    downloadData(true);
+    sessionStorage.setItem("tempoRimanente", 0);
 });
 
-function downloadData(){
+function downloadData(negation = false){
     getGruppo().then((result) => {
         gruppo = result.gruppi[0];
         console.log(result.gruppi[0]);
         getTappe(gruppo.id).then((result) => {
             tappe = result.tappe;
-            aggiorna();
+            aggiorna(negation);
         }).catch((err) => {
             console.error(err);
         });
@@ -29,8 +30,8 @@ function downloadData(){
     avviaTimerReload();
 }
 
-function aggiorna(){
-    setHead();
+function aggiorna(negation = false){
+    setHead(negation);
 }
 
 function avviaTimerInterval(){
@@ -60,12 +61,12 @@ function stoppaTimerReload(){
 }
 
 function aggiornaTimer(){
-    tempoRimanente--;
-    let minuti = Math.floor(tempoRimanente / 60);
-    let secondi = tempoRimanente % 60;
-    if(tempoRimanente <= 0){
+    sessionStorage.setItem("tempoRimanente", sessionStorage.getItem("tempoRimanente")-1);
+    let minuti = Math.floor(sessionStorage.getItem("tempoRimanente") / 60);
+    let secondi = sessionStorage.getItem("tempoRimanente") % 60;
+    if(sessionStorage.getItem("tempoRimanente") <= 0){
         if(secondi == 59)
-            tempoRimanente--;
+            sessionStorage.setItem("tempoRimanente", sessionStorage.getItem("tempoRimanente")-1);
         document.getElementById("minuti").innerText = "+ " + ((minuti*-1)-1).toString().padStart(2, "0");
         document.getElementById("secondi").innerText = (secondi*-1).toString().padStart(2, "0");
         document.getElementById("minuti").classList.remove("timer-h1");
@@ -75,8 +76,12 @@ function aggiornaTimer(){
         //clearInterval(timerInterval);
         
     }else{
-        document.getElementById("minuti").innerText = minuti;
-        document.getElementById("secondi").innerText = secondi;
+        document.getElementById("minuti").innerText = minuti.toString().padStart(2, "0");
+        document.getElementById("secondi").innerText = secondi.toString().padStart(2, "0");
+        document.getElementById("minuti").classList.remove("timer-h1-red");
+        document.getElementById("minuti").classList.add("timer-h1");
+        document.getElementById("secondi").classList.remove("timer-h1-red");
+        document.getElementById("secondi").classList.add("timer-h1");
     }
 
     //document.getElementById("tempo-rimanente").innerText = tempoRimanente + " minuti";
@@ -103,7 +108,7 @@ function setHead(){
     setAula();
 }
 
-function setAula(){
+function setAula(negation = false){
     console.log(tappe);
     if(gruppo.numero_tappa != 0 && gruppo.numero_tappa <= tappe.length){
         let inizio = aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_arrivo).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
@@ -117,18 +122,24 @@ function setAula(){
         else
             document.getElementById("azione-in-corso").innerText = "in viaggio verso: ";
         if(timerInterval == null){
+            tempoRimanenteOld = parseInt(sessionStorage.getItem("tempoRimanente"));
             if(gruppo.arrivato){
                 document.getElementById("btn-avanti").innerText = "mettiti in viaggio";
-                tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_partenza - tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
+                sessionStorage.setItem("tempoRimanente", (parseInt(tappe[gruppo.numero_tappa-1].minuti_partenza - tappe[gruppo.numero_tappa-1].minuti_arrivo)*60));
+                if(!negation)
+                    sessionStorage.setItem("tempoRimanente", parseInt(sessionStorage.getItem("tempoRimanente"))+tempoRimanenteOld);
                 if(gruppo.numero_tappa == tappe.length){
                     document.getElementById("btn-avanti").innerText = "fine percorso";
                 }
             }else{
                 if(gruppo.numero_tappa != tappe.length+1 && gruppo.numero_tappa != 1){
-                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_arrivo - tappe[gruppo.numero_tappa-2].minuti_partenza)*60;
-                    console.log(tempoRimanente);
+                    sessionStorage.setItem("tempoRimanente", (parseInt(tappe[gruppo.numero_tappa-1].minuti_arrivo - tappe[gruppo.numero_tappa-2].minuti_partenza)*60));
+                    if(!negation)
+                        sessionStorage.setItem("tempoRimanente", parseInt(sessionStorage.getItem("tempoRimanente"))+tempoRimanenteOld);
                 }else if(gruppo.numero_tappa == 1){
-                    tempoRimanente = parseInt(tappe[gruppo.numero_tappa-1].minuti_arrivo)*60;
+                    sessionStorage.setItem("tempoRimanente", (parseInt(tappe[gruppo.numero_tappa-1].minuti_arrivo)*60));
+                    if(!negation)
+                        sessionStorage.setItem("tempoRimanente", parseInt(sessionStorage.getItem("tempoRimanente"))+tempoRimanenteOld);
                 }
                 document.getElementById("btn-avanti").innerText = "arrivato alla tappa";
             }
@@ -139,6 +150,7 @@ function setAula(){
             if(!gruppo.arrivato){
                 document.getElementById("orari-teorico-attuale").innerText = "orario teorico partenza: "+ oraInizio.toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
                 document.getElementById("laboratorio-attuale").innerText = "DEVI ANCORA PARTIRE";
+                localStorage.setItem("tempoRimanente", 0);
                 document.getElementById("aula-attuale").innerText = "";
                 document.getElementById("btn-indietro").enabled = false;
             }else{
@@ -159,7 +171,7 @@ function setProssimo(){
         document.getElementById("laboratorio-futuro").innerText = tappe[gruppo.numero_tappa].aula_materia.toUpperCase();
         document.getElementById("aula-futura").innerText = tappe[gruppo.numero_tappa].aula_posizione.toUpperCase() + "  " + tappe[gruppo.numero_tappa].aula_nome.toUpperCase();
     }else{
-        document.getElementById("orari-teorico-futuro").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+        document.getElementById("orari-teorico-futuro").innerText = "arrivo teorico: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
         document.getElementById("laboratorio-futuro").innerText = "FINE PERCORSO";
         document.getElementById("aula-futura").innerText = "";
     }
@@ -167,9 +179,11 @@ function setProssimo(){
 
 function setFinito(){
     document.getElementById("laboratorio-attuale").innerText = "PERCORSO COMPLETATO";
-    document.getElementById("btn-inietro").enabled = false;
+    //document.getElementById("btn-inietro").enabled = false;
     stoppaTimerInterval();
-    stoppaTimerReload();
+    console.warn("PERCORSO COMPLETATO");
+    //stoppaTimerReload();
+    document.getElementById("btn-avanti").innerText = "Ricomincia Percorso";
 }
 
 function statoSuccessivo(){
@@ -211,7 +225,7 @@ function statoPrecedente(){
     putGruppo(gruppo).then((result) => {
         console.log(result);
         stoppaTimerInterval();
-        setHead();
+        setHead(true);
     }).catch((err) => {
         console.error(err);
     });
