@@ -92,3 +92,21 @@ function getOrientati() {
       });
   });
 }
+
+function changePresenza(orientatoId, presenza){
+  return new Promise((res, rej) => {
+    const access_token = localStorage.getItem("access_token");
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
+    vallauriRequest(`${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presenza}`, "GET", headers)
+      .then((response) => {
+        res("Presenza cambiata con successo!");
+      })
+      .catch((err) => {
+        console.error(err);
+        rej("Errore nel cambiamento della presenza dell'orientato");
+      });
+  });
+}

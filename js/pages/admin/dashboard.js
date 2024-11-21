@@ -1,7 +1,7 @@
 "use strict";
 
 const pollingTime = 5000;
-let groupsWrapper;
+let groupsWrapper, tableOrientati;
 
 window.addEventListener("DOMContentLoaded", function () {
   getGruppi()
@@ -11,7 +11,15 @@ window.addEventListener("DOMContentLoaded", function () {
       mostraAlert("errore", err);
     });
 
-    groupsWrapper = this.document.getElementById("groupsWrapper");
+  getOrientati()
+    .then(loadTable)
+    .catch((err) => {
+      console.error(err);
+      mostraAlert("errore", err);
+    });
+
+  groupsWrapper = this.document.getElementById("groupsWrapper");
+  tableOrientati = this.document.getElementById("tableOrientati");
 });
 
 function loadGraphic(groups) {
@@ -208,4 +216,47 @@ function updateInfo(group) {
       " - " +
       group.prossima_tappa.aula.posizione;
   }
+}
+
+function loadTable(orientati) {
+  let i;
+  for(i = 0;i<orientati.length;i++){
+    let tr = document.createElement("tr");
+    tr.id = "orientato-"+orientati[i].id;
+
+    let td = document.createElement("td");
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    td.textContent = orientati[i].nome + " " + orientati[i].cognome;
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    td.textContent = orientati[i].scuolaDiProvenienza_nome;
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    let chk = document.createElement("input");
+    chk.id = orientati[i].id;
+    chk.type = "checkbox";
+    chk.checked = orientati[i].presente
+
+    chk.addEventListener("change", changePresenzaLocal)
+    tr.appendChild(chk);
+
+    tableOrientati.appendChild(tr);
+  }
+}
+
+function changePresenzaLocal(e){
+  changePresenza(e.id, e.checked)
+  .then(res => mostraAlert("successo", res, 3))
+  .catch(res => {
+    e.removeEventListener("change", changePresenzaLocal);
+
+    e.checked = !e.checked;
+    mostraAlert("successo", res, 3)
+    e.addEventListener("change", changePresenzaLocal)
+
+  });
 }
