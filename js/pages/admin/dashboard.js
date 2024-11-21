@@ -1,6 +1,7 @@
 "use strict";
 
 const pollingTime = 5000;
+let groupsWrapper;
 
 window.addEventListener("DOMContentLoaded", function () {
   getGruppi()
@@ -9,6 +10,8 @@ window.addEventListener("DOMContentLoaded", function () {
       console.error(err);
       mostraAlert("errore", err);
     });
+
+    groupsWrapper = this.document.getElementById("groupsWrapper");
 });
 
 function loadGraphic(groups) {
@@ -100,7 +103,7 @@ function creaGruppo(group) {
   contentDiv.appendChild(bottomDiv);
 
   // Aggiungi il contenitore principale al body o a un altro elemento della pagina
-  document.body.appendChild(contentDiv);
+  groupsWrapper.appendChild(contentDiv);
 }
 
 function getInOrario(group) {
