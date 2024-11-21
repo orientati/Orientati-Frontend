@@ -1,7 +1,5 @@
 "use strict";
 
-//const urlEndpoint = "http://localhost:8000/api/v1/";
-
 const access_token = localStorage.getItem("access_token");
 const headers = {
     Authorization: `Bearer ${access_token}`,
@@ -9,7 +7,7 @@ const headers = {
 
 function getGruppo(){
     return new Promise((res, rej) => {
-        vallauriRequest(urlEndpoint + "orientatore/gruppo/", "GET", headers).then((result) => {
+        vallauriRequest(serverUrl + "orientatore/gruppo/", "GET", headers).then((result) => {
             res(result);
         }).catch((err) => {
             rej(err);
@@ -19,7 +17,7 @@ function getGruppo(){
 
 function getTappe(id){
     return new Promise((res, rej) => {
-        vallauriRequest(urlEndpoint + "orientatore/gruppo/tappe/"+id, "GET", headers).then((result) => {
+        vallauriRequest(serverUrl + "orientatore/gruppo/tappe/"+id, "GET", headers).then((result) => {
             res(result);
         }).catch((err) => {
             rej(err);
