@@ -1,9 +1,9 @@
 "use strict";
 let user;
 
-window.addEventListener("DOMContentLoaded", ()=>{
-    controllaOrientatore();
+document.addEventListener("loginSucceded", controllaOrientatore);
 
+window.addEventListener("DOMContentLoaded", ()=>{
     document.getElementById("btnLink").addEventListener("click", collegaOrientatore);
 }); 
 

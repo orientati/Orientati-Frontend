@@ -5,6 +5,12 @@
     <title>Aule</title>
     <base href="../../" />
 
+    <script>
+      document.addEventListener("loginSucceded", () => {
+        checkAdmin();
+      });
+    </script>
+
     <!-- Icone -->
     <link
       rel="stylesheet"
@@ -34,11 +40,6 @@
 
     <!-- Scripts -->
     <script src="js/pages/admin/aule.js"></script>
-
-    <!-- Scripts-->
-    <script>
-      checkAdmin();
-    </script>
 
     <!-- Stili -->
     <link rel="stylesheet" href="css/style.css" />

@@ -6,6 +6,13 @@
     <title>Dashboard</title>
     <base href="../../">
 
+    
+    <script>
+        document.addEventListener("loginSucceded", ()=>{
+            checkAdmin();
+        });
+    </script>
+
     <!-- Modelli -->
     <script src="js/model/Route.js"></script>
 
@@ -16,9 +23,6 @@
     <script src="js/libraries/routingModule.js"></script>
 
     <!-- Scripts-->
-    <script>
-        checkAdmin();
-    </script>
     <script src="js/pages/admin/dashboard.js"></script>
 
     <link rel="stylesheet" href="css/dashboard.css">

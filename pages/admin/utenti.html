@@ -1,21 +1,30 @@
 <html lang="it">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Utenti</title>
-    <base href="../../">
+    <base href="../../" />
+
+    <script>
+      document.addEventListener("loginSucceded", () => {
+        checkAdmin();
+      });
+    </script>
 
     <!-- Icone -->
     <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
 
     <!-- Classi -->
     <script src="js/Model/User.js"></script>
 
     <!-- bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Librerie -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -25,7 +34,6 @@
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
     <script src="js/libraries/inputModalModule.js"></script>
-    
 
     <!-- Controllers -->
     <script src="js/controllers/usersController.js"></script>
@@ -33,38 +41,32 @@
     <!-- Scripts -->
     <script src="js/pages/admin/users.js"></script>
 
-    <script>
-        checkAdmin();
-    </script>
-
     <!-- Stili -->
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/tableStyle.css"/>
-
-
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/tableStyle.css" />
+  </head>
+  <body>
     <button onclick="logout();">LOGOUT</button>
-<nav>
-    <p>Lista degli utenti</p>
-    <div>
+    <nav>
+      <p>Lista degli utenti</p>
+      <div>
         <button id="editSelected">
-            <span class="material-symbols-outlined"> edit </span>Modifica
+          <span class="material-symbols-outlined"> edit </span>Modifica
         </button>
         <button id="deleteSelected">
-            <span class="material-symbols-outlined"> delete </span>Elimina
+          <span class="material-symbols-outlined"> delete </span>Elimina
         </button>
-    </div>
-</nav>
-<table id="tableUtenti" class="table">
-    <tr>
+      </div>
+    </nav>
+    <table id="tableUtenti" class="table">
+      <tr>
         <th></th>
         <th>#</th>
         <th>Username</th>
         <th>Admin?</th>
         <th>Temporaneo?</th>
         <th>Id Orientatore</th>
-    </tr>
-</table>
-</body>
+      </tr>
+    </table>
+  </body>
 </html>
