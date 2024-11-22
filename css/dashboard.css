@@ -82,6 +82,13 @@ main {
     color: white;
 }
 
+.not-started {
+    background-color: gray;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+}
+
 .next-lab {
     font-size: 18px;
     margin-bottom: 6px;
@@ -395,7 +402,7 @@ input:checked + .slider:before {
     transform: translateX(24px);
 }
 
-.chk-td{
+.chk-td {
     display: flex;
     align-items: center;
     justify-content: center;
