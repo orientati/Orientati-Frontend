@@ -32,9 +32,9 @@ function downloadData(negation = false) {
         });
     }).catch((err) => {
         console.error(err);
-        if (err == 401)
+        if (err === 401)
             location.href = "pages/login.html";
-        else if (err == 404)
+        else if (err === 404)
             location.href = "pages/orientatore/collegaOrientatore.html";
         else
             MostraPaginaErrore("Errore nel server", err);
