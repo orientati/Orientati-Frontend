@@ -21,11 +21,11 @@ function getGruppi() {
             "GET",
             headers
           ).then((tappeGruppo) => {
-            getAulaFromTappa(/*gruppi[i].numero_tappa*/1).then(
+            getAulaFromTappa(gruppi[i].numero_tappa).then(
               (aulaDet) => {
                 gruppi[i].aula = aulaDet;
 
-                findNextTappa(tappeGruppo.tappe, /*gruppi[i].numero_tappa*/1).then(
+                findNextTappa(tappeGruppo.tappe, gruppi[i].numero_tappa).then(
                   (proxTappa) => {
                     gruppi[i].prossima_tappa = proxTappa;
 
