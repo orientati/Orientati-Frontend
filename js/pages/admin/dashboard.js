@@ -23,8 +23,11 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 function loadGraphic(groups) {
-  for (let i = 0; i < groups.length; i++) creaGruppo(groups[i]);
-  setTimeout(updateGroups, pollingTime);
+  for (let i = 0; i < groups.length; i++) {
+    console.log(groups[i].aula_nome);
+    creaGruppo(groups[i]);
+  }
+  //setTimeout(updateGroups, pollingTime);
 }
 
 function creaGruppo(group) {
@@ -72,11 +75,12 @@ function creaGruppo(group) {
   const centralDiv = document.createElement("div");
   const labInfo = document.createElement("p");
   labInfo.id = group.id + "-aula";
-  labInfo.textContent = group.aula.nome + " - " + group.aula.posizione;
+  console.log("gaga",group.aula_nome);
+  labInfo.textContent = group.aula_nome + " - " + group.aula_posizione;
 
   const subjectTitle = document.createElement("h1");
   subjectTitle.id = group.id + "-materia";
-  subjectTitle.textContent = group.aula.materia;
+  subjectTitle.textContent = group.aula_materia;
 
   centralDiv.appendChild(labInfo);
   centralDiv.appendChild(subjectTitle);
@@ -229,7 +233,6 @@ function updateInfo(group) {
 function loadTable(orientati) {
   let i;
   for (i = 0; i < orientati.length; i++) {
-    console.log(orientati[i]);
     let tr = document.createElement("tr");
     tr.id = "orientato-" + orientati[i].id;
 
