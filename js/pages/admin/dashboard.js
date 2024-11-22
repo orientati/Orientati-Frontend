@@ -53,7 +53,7 @@ function creaGruppo(group) {
     for (j = 1; j < group.nomi_orientatori.length; j++)
       output += " - " + group.nomi_orientatori[j];
   } else if (group.nomi_orientatori.length == 1)
-    output = group.nomi_orientatori[j];
+    output = group.nomi_orientatori[0];
 
   groupMembers.textContent = output;
 
@@ -146,10 +146,9 @@ function getInOrario(group) {
 }
 
 function updateGroups() {
-  console.log("Faccio Polling");
-
   getGruppi()
     .then((groups) => {
+      console.log(groups);
       for (let i = 0; i < groups.length; i++) updateInfo(groups[i]);
       setTimeout(updateGroups, pollingTime);
     })
