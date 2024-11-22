@@ -23,8 +23,8 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 function loadGraphic(groups) {
+  console.log(groups);
   for (let i = 0; i < groups.length; i++) {
-    console.log(groups[i].aula_nome);
     creaGruppo(groups[i]);
   }
   //setTimeout(updateGroups, pollingTime);
@@ -75,7 +75,6 @@ function creaGruppo(group) {
   const centralDiv = document.createElement("div");
   const labInfo = document.createElement("p");
   labInfo.id = group.id + "-aula";
-  console.log("gaga",group.aula_nome);
   labInfo.textContent = group.aula_nome + " - " + group.aula_posizione;
 
   const subjectTitle = document.createElement("h1");
