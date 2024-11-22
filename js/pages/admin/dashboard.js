@@ -53,7 +53,7 @@ function creaGruppo(group) {
     for (j = 1; j < group.nomi_orientatori.length; j++)
       output += " - " + group.nomi_orientatori[j];
   } else if (group.nomi_orientatori.length == 1)
-    output = group.nomi_orientatori[j];
+    output = group.nomi_orientatori[0];
 
   groupMembers.textContent = output;
 
@@ -82,57 +82,60 @@ function creaGruppo(group) {
   centralDiv.appendChild(labInfo);
   centralDiv.appendChild(subjectTitle);
 
-  // Crea la sezione "bottom"
-  const bottomDiv = document.createElement("div");
-  bottomDiv.className = "bottom";
-
-  const nextLabText = document.createElement("p");
-  nextLabText.className = "next-lab";
-  nextLabText.textContent = "Prossimo Laboratorio";
-
-  const nextLabTitle = document.createElement("h2");
-  nextLabTitle.id = group.id + "-materiaprossima";
-  nextLabTitle.textContent = group.prossima_tappa.aula.materia;
-
-  const nextLabInfo = document.createElement("p");
-  nextLabInfo.id = group.id + "-aulaprossima";
-  nextLabInfo.textContent =
-    group.prossima_tappa.aula.nome +
-    " - " +
-    group.prossima_tappa.aula.posizione;
-
-  bottomDiv.appendChild(nextLabText);
-  bottomDiv.appendChild(nextLabTitle);
-  bottomDiv.appendChild(nextLabInfo);
-
   // Aggiungi tutto al contenitore principale
   contentDiv.appendChild(topDiv);
   contentDiv.appendChild(centralDiv);
-  contentDiv.appendChild(bottomDiv);
+
+  if (group.prossima_tappa != null) {
+    // Crea la sezione "bottom"
+    const bottomDiv = document.createElement("div");
+    bottomDiv.className = "bottom";
+
+    const nextLabText = document.createElement("p");
+    nextLabText.className = "next-lab";
+    nextLabText.textContent = "Prossimo Laboratorio";
+
+    const nextLabTitle = document.createElement("h2");
+    nextLabTitle.id = group.id + "-materiaprossima";
+    nextLabTitle.textContent = group.prossima_tappa.aula.materia;
+
+    const nextLabInfo = document.createElement("p");
+    nextLabInfo.id = group.id + "-aulaprossima";
+    nextLabInfo.textContent =
+      group.prossima_tappa.aula.nome +
+      " - " +
+      group.prossima_tappa.aula.posizione;
+
+    bottomDiv.appendChild(nextLabText);
+    bottomDiv.appendChild(nextLabTitle);
+    bottomDiv.appendChild(nextLabInfo);
+
+    contentDiv.appendChild(bottomDiv);
+  }
 
   // Aggiungi il contenitore principale al body o a un altro elemento della pagina
   groupsWrapper.appendChild(contentDiv);
 }
 
 function getInOrario(group) {
-  if (group.prossima_tappa) {
+  if (group.prossima_tappa != null) {
     const hours = parseInt(group.orario_partenza.split(":")[0]);
     const minutes = parseInt(group.orario_partenza.split(":")[1]);
+    console.log(hours + " : " + minutes);
 
     const hoursTappa =
-      (minutes + group.prossima_tappa.minuti_arrivo) / 60 + hours;
+      Math.round((minutes + group.prossima_tappa.minuti_arrivo) / 60) + hours;
     const minutesTappa = (minutes + group.prossima_tappa.minuti_arrivo) % 60;
+    console.log(hoursTappa + " : " + minutesTappa);
 
     var d = new Date();
-    d.getHours();
-    d.getMinutes();
-    d.getSeconds();
 
     if (
-      !group.arrivato &&
-      (d.getHours > hoursTappa ||
-        (d.getHours > hoursTappa && d.getMinutes > minutesTappa))
+      (group.arrivato == null || !group.arrivato) &&
+      (d.getHours() > hoursTappa ||
+        (d.getHours() == hoursTappa && d.getMinutes() > minutesTappa))
     ) {
+      console.log("GAGA");
       return {
         classe: "late",
         text: "IN RITARDO",
@@ -146,10 +149,9 @@ function getInOrario(group) {
 }
 
 function updateGroups() {
-  console.log("Faccio Polling");
-
   getGruppi()
     .then((groups) => {
+      console.log(groups);
       for (let i = 0; i < groups.length; i++) updateInfo(groups[i]);
       setTimeout(updateGroups, pollingTime);
     })
@@ -188,6 +190,12 @@ function updateInfo(group) {
   const onTimeSpan = document.getElementById(group.id + "-ontime");
   if (onTimeSpan) {
     const details = getInOrario(group);
+    if(onTimeSpan.classList.contains('on-time'))
+      onTimeSpan.classList.remove("on-time")
+
+    if(onTimeSpan.classList.contains("late"))
+      onTimeSpan.classList.remove('late');
+    
     onTimeSpan.className = details.classe;
     onTimeSpan.textContent = details.text;
   }
@@ -205,24 +213,29 @@ function updateInfo(group) {
 
   // Aggiorna la sezione "bottom"
   const nextLabTitle = document.getElementById(group.id + "-materiaprossima");
-  if (nextLabTitle) {
-    nextLabTitle.textContent = group.prossima_tappa.aula.materia;
-  }
-
   const nextLabInfo = document.getElementById(group.id + "-aulaprossima");
-  if (nextLabInfo) {
-    nextLabInfo.textContent =
-      group.prossima_tappa.aula.nome +
-      " - " +
-      group.prossima_tappa.aula.posizione;
+
+  if (group.prossima_tappa != null) {
+    if (nextLabTitle) {
+      nextLabTitle.textContent = group.prossima_tappa.aula.materia;
+    }
+
+    if (nextLabInfo) {
+      nextLabInfo.textContent =
+        group.prossima_tappa.aula.nome +
+        " - " +
+        group.prossima_tappa.aula.posizione;
+    }
+  } else {
+    if (nextLabTitle) nextLabTitle.textContent = "Ultima Tappa";
   }
 }
 
 function loadTable(orientati) {
   let i;
-  for(i = 0;i<orientati.length;i++){
+  for (i = 0; i < orientati.length; i++) {
     let tr = document.createElement("tr");
-    tr.id = "orientato-"+orientati[i].id;
+    tr.id = "orientato-" + orientati[i].id;
 
     let td = document.createElement("td");
     tr.appendChild(td);
@@ -242,8 +255,8 @@ function loadTable(orientati) {
     let chk = document.createElement("input");
     chk.id = orientati[i].id;
     chk.type = "checkbox";
-    chk.checked = orientati[i].presente
-    chk.addEventListener("change", changePresenzaLocal)
+    chk.checked = orientati[i].presente;
+    chk.addEventListener("change", changePresenzaLocal);
     lable.appendChild(chk);
 
     let span = new document.createElement("span");
@@ -256,15 +269,14 @@ function loadTable(orientati) {
   }
 }
 
-function changePresenzaLocal(e){
+function changePresenzaLocal(e) {
   changePresenza(e.id, e.checked)
-  .then(res => mostraAlert("successo", res, 3))
-  .catch(res => {
-    e.removeEventListener("change", changePresenzaLocal);
+    .then((res) => mostraAlert("successo", res, 3))
+    .catch((res) => {
+      e.removeEventListener("change", changePresenzaLocal);
 
-    e.checked = !e.checked;
-    mostraAlert("successo", res, 3)
-    e.addEventListener("change", changePresenzaLocal)
-
-  });
+      e.checked = !e.checked;
+      mostraAlert("successo", res, 3);
+      e.addEventListener("change", changePresenzaLocal);
+    });
 }

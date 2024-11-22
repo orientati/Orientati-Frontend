@@ -1,9 +1,11 @@
 "use strict";
 let gruppi;
 let orientati;
+let indexGruppo;
 
 function getGruppi() {
   return new Promise((res, rej) => {
+    indexGruppo = 0;
     const access_token = localStorage.getItem("access_token");
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -11,67 +13,81 @@ function getGruppi() {
 
     vallauriRequest(`${serverUrl}admin/dashboard/gruppi`, "GET", headers)
       .then((response) => {
-        console.log(response);
         gruppi = response.gruppi;
 
         for (let i = 0; i < gruppi.length; i++) {
-          const aulaDet = getAulaFromTappa(gruppi[i].numero_tappa);
-          gruppi[i].aula = aulaDet;
-
           vallauriRequest(
             `${serverUrl}admin/gruppi/tappe/${gruppi[i].id}`,
             "GET",
             headers
           ).then((tappeGruppo) => {
-            let proxTappa = findNextTappa(
-              tappeGruppo.tappe,
-              gruppi[i].numero_tappa
+            getAulaFromTappa(gruppi[i].numero_tappa).then(
+              (aulaDet) => {
+                gruppi[i].aula = aulaDet;
+
+                findNextTappa(tappeGruppo.tappe, gruppi[i].numero_tappa).then(
+                  (proxTappa) => {
+                    gruppi[i].prossima_tappa = proxTappa;
+
+                    indexGruppo++;
+                    if(indexGruppo == gruppi.length)
+                      res(gruppi);
+                  }
+                );
+              }
             );
-            gruppi[i].prossima_tappa = proxTappa;
           });
         }
-
-        res(gruppi);
       })
       .catch((err) => {
         console.error(err);
         rej("Errore nella ricezione dei gruppi");
-      });
+      })
   });
 }
 
 function findNextTappa(tappe, tappaId) {
-  let i;
-  while( i < tappe.length){
-    if (tappe[i].id == tappaId) break;
-    i++;
-  }
+  return new Promise((res, rej) => {
+    let i = 0;
+    while (i < tappe.length) {
+      if (tappe[i].id == tappaId) break;
+      i++;
+    }
 
-  if (i < tappe.length){
-    const aulaDet = getAulaFromTappa(tappe[i].id);
-    tappe[i].aula = aulaDet;
-    return tappe[i];
-  } 
-  else return null;
+    if (i < tappe.length) {
+      getAulaFromTappa(tappe[i].id).then((aulaDet) => {
+        tappe[i].aula = aulaDet;
+        res(tappe[i]);
+      });
+    } else res(null);
+  });
 }
 
-function getAulaFromTappa(tappaId){
-  const headers = {
-    Authorization: `Bearer ${access_token}`,
-  };
+function getAulaFromTappa(tappaId) {
+  return new Promise((res, rej) => {
+    const access_token = localStorage.getItem("access_token");
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
 
-  vallauriRequest(`${serverUrl}admin/tappe/${tappaId}`, "GET", headers)
-  .then(tappa => {
-    vallauriRequest(`${serverUrl}admin/aule/${tappa.aula_id}`)
-    .then(aula => {
-      return aula;
-    }).catch(()=>{
-      return null;
-    })
-
-  }).catch(()=>{
-    return null;
-  })
+    vallauriRequest(`${serverUrl}admin/tappe/${tappaId}`, "GET", headers)
+      .then((tappa) => {
+        vallauriRequest(
+          `${serverUrl}admin/aule/${tappa.aula_id}`,
+          "GET",
+          headers
+        )
+          .then((aula) => {
+            res(aula);
+          })
+          .catch(() => {
+            res(null);
+          });
+      })
+      .catch(() => {
+        res(null);
+      });
+  });
 }
 
 function getOrientati() {
@@ -93,14 +109,18 @@ function getOrientati() {
   });
 }
 
-function changePresenza(orientatoId, presenza){
+function changePresenza(orientatoId, presenza) {
   return new Promise((res, rej) => {
     const access_token = localStorage.getItem("access_token");
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presenza}`, "GET", headers)
+    vallauriRequest(
+      `${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presenza}`,
+      "GET",
+      headers
+    )
       .then((response) => {
         res("Presenza cambiata con successo!");
       })
