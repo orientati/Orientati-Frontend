@@ -23,7 +23,6 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 function loadGraphic(groups) {
-  console.log(groups);
   for (let i = 0; i < groups.length; i++) creaGruppo(groups[i]);
   setTimeout(updateGroups, pollingTime);
 }
@@ -121,12 +120,10 @@ function getInOrario(group) {
   if (group.prossima_tappa != null) {
     const hours = parseInt(group.orario_partenza.split(":")[0]);
     const minutes = parseInt(group.orario_partenza.split(":")[1]);
-    console.log(hours + " : " + minutes);
 
     const hoursTappa =
       Math.round((minutes + group.prossima_tappa.minuti_arrivo) / 60) + hours;
     const minutesTappa = (minutes + group.prossima_tappa.minuti_arrivo) % 60;
-    console.log(hoursTappa + " : " + minutesTappa);
 
     var d = new Date();
 
@@ -135,7 +132,6 @@ function getInOrario(group) {
       (d.getHours() > hoursTappa ||
         (d.getHours() == hoursTappa && d.getMinutes() > minutesTappa))
     ) {
-      console.log("GAGA");
       return {
         classe: "late",
         text: "IN RITARDO",
@@ -151,7 +147,6 @@ function getInOrario(group) {
 function updateGroups() {
   getGruppi()
     .then((groups) => {
-      console.log(groups);
       for (let i = 0; i < groups.length; i++) updateInfo(groups[i]);
       setTimeout(updateGroups, pollingTime);
     })
@@ -195,7 +190,7 @@ function updateInfo(group) {
 
     if(onTimeSpan.classList.contains("late"))
       onTimeSpan.classList.remove('late');
-    
+
     onTimeSpan.className = details.classe;
     onTimeSpan.textContent = details.text;
   }
@@ -248,10 +243,12 @@ function loadTable(orientati) {
     td.textContent = orientati[i].scuolaDiProvenienza_nome;
     tr.appendChild(td);
 
-    let lable = document.createElement("lable");
+    let lable = document.createElement("label");
     lable.classList.add("switch");
 
     td = document.createElement("td");
+    td.classList.add("chk-td");
+    
     let chk = document.createElement("input");
     chk.id = orientati[i].id;
     chk.type = "checkbox";
@@ -259,8 +256,8 @@ function loadTable(orientati) {
     chk.addEventListener("change", changePresenzaLocal);
     lable.appendChild(chk);
 
-    let span = new document.createElement("span");
-    span.classList.add("slider round");
+    let span = document.createElement("span");
+    span.classList.add("slider", "round");
     lable.appendChild(span);
 
     td.appendChild(lable);
@@ -270,13 +267,13 @@ function loadTable(orientati) {
 }
 
 function changePresenzaLocal(e) {
-  changePresenza(e.id, e.checked)
+  changePresenza(e.target.id, e.target.checked)
     .then((res) => mostraAlert("successo", res, 3))
-    .catch((res) => {
+    .catch((err) => {
       e.removeEventListener("change", changePresenzaLocal);
 
       e.checked = !e.checked;
-      mostraAlert("successo", res, 3);
+      mostraAlert("errore", err, 3);
       e.addEventListener("change", changePresenzaLocal);
     });
 }
