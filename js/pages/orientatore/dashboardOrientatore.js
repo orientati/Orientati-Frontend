@@ -287,3 +287,7 @@ function nonDisponibie() {
         }, 800);
     }, 3500); // Display for 2 seconds before fading out
 }
+
+function feedback() {
+    location.href="https://forms.gle/GYVu66aoP1y7AF45A";
+}
