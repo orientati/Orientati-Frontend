@@ -25,7 +25,8 @@ window.addEventListener("DOMContentLoaded", function () {
 function loadGraphic(groups) {
   console.log(groups);
   for (let i = 0; i < groups.length; i++) {
-    creaGruppo(groups[i]);
+    if(groups[i] !== undefined)
+      creaGruppo(groups[i]);
   }
   //setTimeout(updateGroups, pollingTime);
 }

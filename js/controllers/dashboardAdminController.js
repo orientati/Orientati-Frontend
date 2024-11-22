@@ -20,7 +20,7 @@ function getGruppi() {
                         gruppi[i].aula_posizione = "Fermo";
                         gruppi[i].aula_materia = "Fermo";
                     } else if (gruppi[i].numero_tappa === 0 && gruppi[i].arrivato === true) {
-                        gruppi.splice(i, 1);
+                        gruppi[i] = undefined;
                     }
                     res(gruppi);
                 }
