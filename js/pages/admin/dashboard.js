@@ -229,6 +229,7 @@ function updateInfo(group) {
 function loadTable(orientati) {
   let i;
   for (i = 0; i < orientati.length; i++) {
+    console.log(orientati[i]);
     let tr = document.createElement("tr");
     tr.id = "orientato-" + orientati[i].id;
 
@@ -240,7 +241,11 @@ function loadTable(orientati) {
     tr.appendChild(td);
 
     td = document.createElement("td");
-    td.textContent = orientati[i].scuolaDiProvenienza_nome;
+    td.textContent = orientati[i].gruppo_nome;
+    tr.appendChild(td);
+    
+    td = document.createElement("td");
+    td.textContent = orientati[i].gruppo_orario_partenza;
     tr.appendChild(td);
 
     let lable = document.createElement("label");
