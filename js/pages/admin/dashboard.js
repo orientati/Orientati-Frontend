@@ -190,6 +190,12 @@ function updateInfo(group) {
   const onTimeSpan = document.getElementById(group.id + "-ontime");
   if (onTimeSpan) {
     const details = getInOrario(group);
+    if(onTimeSpan.classList.contains('on-time'))
+      onTimeSpan.classList.remove("on-time")
+
+    if(onTimeSpan.classList.contains("late"))
+      onTimeSpan.classList.remove('late');
+    
     onTimeSpan.className = details.classe;
     onTimeSpan.textContent = details.text;
   }
