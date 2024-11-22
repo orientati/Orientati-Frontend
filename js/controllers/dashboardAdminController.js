@@ -118,8 +118,9 @@ function changePresenza(orientatoId, presenza) {
 
     vallauriRequest(
       `${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presenza}`,
-      "GET",
-      headers
+      "PUT",
+      headers,
+      {}
     )
       .then((response) => {
         res("Presenza cambiata con successo!");

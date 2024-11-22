@@ -395,6 +395,12 @@ input:checked + .slider:before {
     transform: translateX(24px);
 }
 
+.chk-td{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Rounded sliders */
 .slider.round {
     border-radius: 34px;
