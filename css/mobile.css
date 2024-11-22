@@ -110,3 +110,7 @@ body {
     background-color: #506AFF;
     border: solid #020181;
 }
+
+#non-disp {
+    transition: opacity 0.5s ease-in-out;
+  }

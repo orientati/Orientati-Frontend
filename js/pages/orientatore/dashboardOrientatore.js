@@ -23,9 +23,17 @@ function downloadData(negation = false){
             aggiorna(negation);
         }).catch((err) => {
             console.error(err);
+            if(err == 401)
+                location.href = "pages/login.html";
+            else
+                MostraPaginaErrore("Errore nel server", err);
         });
     }).catch((err) => {
         console.error(err);
+        if(err == 401)
+            location.href = "pages/login.html";
+        else
+            MostraPaginaErrore("Errore nel server", err);
     });
     avviaTimerReload();
 }
@@ -64,7 +72,7 @@ function aggiornaTimer(){
     sessionStorage.setItem("tempoRimanente", sessionStorage.getItem("tempoRimanente")-1);
     let minuti = Math.floor(sessionStorage.getItem("tempoRimanente") / 60);
     let secondi = sessionStorage.getItem("tempoRimanente") % 60;
-    if(sessionStorage.getItem("tempoRimanente") <= 0){
+    if(sessionStorage.getItem("tempoRimanente") < 0){
         if(secondi == 59)
             sessionStorage.setItem("tempoRimanente", sessionStorage.getItem("tempoRimanente")-1);
         document.getElementById("minuti").innerText = "+ " + ((minuti*-1)-1).toString().padStart(2, "0");
@@ -154,8 +162,8 @@ function setAula(negation = false){
                 document.getElementById("aula-attuale").innerText = "";
                 document.getElementById("btn-indietro").enabled = false;
             }else{
-                document.getElementById("orari-teorico-attuale").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
-                document.getElementById("aula-attuale").innerText = "";
+                //document.getElementById("orari-teorico-attuale").innerText = "arrivo previsto: "+ aggiungiMinuti(oraInizio, tappe[gruppo.numero_tappa-1].minuti_partenza).toLocaleTimeString("it-IT", {hour: "2-digit", minute: "2-digit"});
+                //document.getElementById("aula-attuale").innerText = "";
             }
         }
     }
@@ -184,6 +192,8 @@ function setFinito(){
     console.warn("PERCORSO COMPLETATO");
     //stoppaTimerReload();
     document.getElementById("btn-avanti").innerText = "Ricomincia Percorso";
+    sessionStorage.setItem("tempoRimanente", 0);
+    sessionStorage.setItem("finito", true);
 }
 
 function statoSuccessivo(){
@@ -199,6 +209,8 @@ function statoSuccessivo(){
             gruppo.numero_tappa = 0;
             setFinito();
         }else{
+            if(gruppo.numero_tappa == 0)
+                sessionStorage.setItem("finito", false);
             gruppo.numero_tappa++;
             gruppo.arrivato = false;
         }
@@ -237,3 +249,15 @@ function aggiungiMinuti(data, minuti) {
     nuovaData.setMinutes(nuovaData.getMinutes() + minuti);
     return nuovaData;
 }
+
+function nonDisponibie() {
+    const nonDispElement = document.getElementById('non-disp');
+    nonDispElement.style.display = 'block';
+    nonDispElement.style.opacity = '1';
+    setTimeout(() => {
+      nonDispElement.style.opacity = '0';
+      setTimeout(() => {
+        nonDispElement.style.display = 'none';
+      }, 800);
+    }, 3500); // Display for 2 seconds before fading out
+  }

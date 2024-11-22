@@ -27,7 +27,7 @@ function controllaOrientatore(){
 
 
 function collegaOrientatore(){
-    linkOrientatore(document.getElementById("codiceOrientatore").value)
+    linkOrientatore(document.getElementById("codiceOrientatore").value.toUpperCase())
     .then(res => {
         mostraAlert("successo", res, 3);
         location.href = "./pages/orientatore/index.html";
