@@ -23,12 +23,11 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 function loadGraphic(groups) {
-  console.log(groups);
   for (let i = 0; i < groups.length; i++) {
     if(groups[i] !== undefined)
       creaGruppo(groups[i]);
   }
-  //setTimeout(updateGroups, pollingTime);
+  setTimeout(updateGroups, pollingTime);
 }
 
 function creaGruppo(group) {
@@ -121,6 +120,21 @@ function creaGruppo(group) {
 }
 
 function getInOrario(group) {
+
+  if(group.numero_tappa === 0 && group.arrivato === false)
+  {
+    return {
+      classe: "not-started",
+      text: "NON PARTITO",
+    };
+  }
+  if(group.numero_tappa === 0 && group.arrivato === true)
+  {
+    return {
+      classe: "not-started",
+      text: "USCITO",
+    };
+  }
   if (group.prossima_tappa != null) {
     const hours = parseInt(group.orario_partenza.split(":")[0]);
     const minutes = parseInt(group.orario_partenza.split(":")[1]);
