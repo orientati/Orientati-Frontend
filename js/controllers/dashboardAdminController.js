@@ -21,7 +21,7 @@ function getGruppi() {
             "GET",
             headers
           ).then((tappeGruppo) => {
-            getAulaFromTappa(gruppi[i].numero_tappa).then(
+            getAulaFromTappa(gruppi[i].id , gruppi[i].numero_tappa).then(
               (aulaDet) => {
                 gruppi[i].aula = aulaDet;
 
@@ -63,14 +63,14 @@ function findNextTappa(tappe, tappaId) {
   });
 }
 
-function getAulaFromTappa(tappaId) {
+function getAulaFromTappa(idGruppo, numTappa) {
   return new Promise((res, rej) => {
     const access_token = localStorage.getItem("access_token");
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
 
-    vallauriRequest(`${serverUrl}admin/tappe/${tappaId}`, "GET", headers)
+    vallauriRequest(`${serverUrl}admin/dashboard/gruppi/tappe/${idGruppo}/${numTappa}`, "GET", headers)
       .then((tappa) => {
         vallauriRequest(
           `${serverUrl}admin/aule/${tappa.aula_id}`,
