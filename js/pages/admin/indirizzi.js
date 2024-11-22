@@ -7,22 +7,22 @@ window.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             const selectedIds = prendiIdSelezionati();
             if (selectedIds.length === 1) {
-                getIndirizzoById(parseInt(selectedIds[0])).then((resInd) => {        
+                getIndirizzoById(parseInt(selectedIds[0])).then((resInd) => {
                     getPercorsiDiStudio().then((res) => {
                         let percorsiDiStudio = [];
                         for (let i = 0; i < res.length; i++) {
-                            if(res[i].id == resInd.percorsoDiStudio.id)
+                            if (res[i].id == resInd.percorsoDiStudio.id)
                                 percorsiDiStudio.push({id: res[i].id, label: res[i].nome, selected: true});
                             else
                                 percorsiDiStudio.push({id: res[i].id, label: res[i].nome});
                         }
                         let values = {
                             id: resInd.id,
-                            name: resInd.name,  
+                            name: resInd.name,
                             percorsoDiStudio: percorsiDiStudio
                         }
-                        openModal(values, function(formData) {
-                            patchIndirizzo(formData.id,formData.name, formData.percorsoDiStudio).then((res) => {
+                        openModal(values, function (formData) {
+                            patchIndirizzo(formData.id, formData.name, formData.percorsoDiStudio).then((res) => {
                                 mostraAlert("successo", res, 3);
                                 aggiornaTabellaIndirizzi();
                             }).catch((err) => {

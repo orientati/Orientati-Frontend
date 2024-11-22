@@ -1,19 +1,19 @@
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Dashboard</title>
-    <base href="../../" />
+    <base href="../../"/>
 
     <script>
-      document.addEventListener("loginSucceded", () => {
-        checkAdmin();
-      });
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
     </script>
 
     <!-- umami -->
-    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
+    <script data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef" defer src="http://10.0.5.81:3000/script.js"></script>
 
     <!-- Librerie -->
     <script src="js/libraries/urlModule.js"></script>
@@ -25,45 +25,45 @@
     <!-- Scripts-->
 
     <style>
-      #navbar {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 200px;
-        background-color: #f1f1f1;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
-      }
+        #navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
 
-      #navbar a {
-        display: block;
-        color: #000;
-        padding: 8px 16px;
-        text-decoration: none;
-      }
+        #navbar a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
     </style>
-  </head>
-  <body>
-    <h1>
-      home per la parte di amministrazione ci sono le parti di gesitone degli
-      utenti, percorsi di studi, indirizzi, aule, percorsi. accompagnatori,
-      accompagnati.
-    </h1>
-    <div>
-      <!-- navbar a sx -->
-      <ul id="navbar">
+</head>
+<body>
+<h1>
+    home per la parte di amministrazione ci sono le parti di gesitone degli
+    utenti, percorsi di studi, indirizzi, aule, percorsi. accompagnatori,
+    accompagnati.
+</h1>
+<div>
+    <!-- navbar a sx -->
+    <ul id="navbar">
         <li><a href="pages/admin/dashboard.html">Home</a></li>
         <li><a href="pages/admin/utenti.html">Utenti</a></li>
         <li>
-          <a href="pages/admin/percorsoDiStudi.html">Percorsi di Studi</a>
+            <a href="pages/admin/percorsoDiStudi.html">Percorsi di Studi</a>
         </li>
         <li><a href="pages/admin/indirizzi.html">Indirizzi</a></li>
         <li><a href="pages/admin/aule.html">Aule</a></li>
         <li><a href="pages/admin/percorsi.html">Percorsi</a></li>
         <li><a href="pages/admin/accompagnatori.html">Accompagnatori</a></li>
         <li><a href="pages/admin/accompagnati.html">Accompagnati</a></li>
-      </ul>
-    </div>
-  </body>
+    </ul>
+</div>
+</body>
 </html>

@@ -135,6 +135,7 @@ function getInOrario(group) {
             text: "USCITO",
         };
     }
+    /*
     if (group.prossima_tappa != null) {
         const hours = parseInt(group.orario_partenza.split(":")[0]);
         const minutes = parseInt(group.orario_partenza.split(":")[1]);
@@ -142,20 +143,24 @@ function getInOrario(group) {
         const hoursTappa =
             Math.round((minutes + group.prossima_tappa.minuti_arrivo) / 60) + hours;
         const minutesTappa = (minutes + group.prossima_tappa.minuti_arrivo) % 60;
+*/
+    let data = new Date();
+    data.setHours(parseInt(group.orario_partenza.split(":")[0]));
+    data.setMinutes(parseInt(group.orario_partenza.split(":")[1]));
 
-        var d = new Date();
+    data.setMinutes(data.getMinutes() + group.minuti_partenza);
 
-        if (
-            (group.arrivato == null || !group.arrivato) &&
-            (d.getHours() > hoursTappa ||
-                (d.getHours() == hoursTappa && d.getMinutes() > minutesTappa))
-        ) {
-            return {
-                classe: "late",
-                text: "IN RITARDO",
-            };
-        }
+
+    var d = new Date();
+    d.setSeconds(0);
+    data.setSeconds(0);
+    if (d.getHours() > data.getHours() || (d.getHours() === data.getHours() && d.getMinutes() > data.getMinutes())) {
+        return {
+            classe: "late",
+            text: "IN RITARDO",
+        };
     }
+    // }
     return {
         classe: "on-time",
         text: "IN ORARIO",

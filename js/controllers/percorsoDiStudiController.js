@@ -6,30 +6,30 @@ let percorsiDiStudio = [];
  * @returns Una LISTA di classe PERCORSODISTUDIO con i dettagli
  */
 function getPercorsiDiStudio() {
-  return new Promise((res, rej) => {
-    percorsiDiStudio = [];
-    const access_token = localStorage.getItem("access_token");
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-    };
+    return new Promise((res, rej) => {
+        percorsiDiStudio = [];
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
 
-    vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "GET", headers)
-      .then((response) => {
-        response.percorsiDiStudi.forEach((percorso) => {
-          percorsiDiStudio.push(
-            new PercorsoDiStudi(
-              percorso.nome,
-              percorso.id
-            )
-          );
-        });
-        res(percorsiDiStudio);
-      })
-      .catch((err) => {
-        rej(semplificaErrore(500));
-        console.error(err);
-      });
-  });
+        vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "GET", headers)
+            .then((response) => {
+                response.percorsiDiStudi.forEach((percorso) => {
+                    percorsiDiStudio.push(
+                        new PercorsoDiStudi(
+                            percorso.nome,
+                            percorso.id
+                        )
+                    );
+                });
+                res(percorsiDiStudio);
+            })
+            .catch((err) => {
+                rej(semplificaErrore(500));
+                console.error(err);
+            });
+    });
 }
 
 /**
@@ -38,28 +38,28 @@ function getPercorsiDiStudio() {
  * @returns Nuova classe PERCORSODISTUDIO con i dettagli
  */
 function getPercorsoDiStudioById(id) {
-  return new Promise((res, rej) => {
-    if (id) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
+    return new Promise((res, rej) => {
+        if (id) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
 
-      vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "GET", headers)
-        .then((response) => {
-          res(
-            new PercorsoDiStudi(
-              response.nome,
-              response.id
-            )
-          );
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Nessun id percorso di studio selezionato");
-  });
+            vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "GET", headers)
+                .then((response) => {
+                    res(
+                        new PercorsoDiStudi(
+                            response.nome,
+                            response.id
+                        )
+                    );
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Nessun id percorso di studio selezionato");
+    });
 }
 
 /**
@@ -69,31 +69,31 @@ function getPercorsoDiStudioById(id) {
  * @returns Una classe PERCORSODISTUDIO con i dettagli
  */
 function patchPercorsoDiStudio(id, name) {
-  return new Promise((res, rej) => {
-    if (id && name.trim()) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
-      const body = {
-        nome: name
-      };
+    return new Promise((res, rej) => {
+        if (id && name.trim()) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
+            const body = {
+                nome: name
+            };
 
-      vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "PUT", headers, body)
-        .then((response) => {
-          res(
-            new PercorsoDiStudi(
-              response.nome,
-              response.id
-            )
-          );
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Dati aggiornati immessi non validi");
-  });
+            vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "PUT", headers, body)
+                .then((response) => {
+                    res(
+                        new PercorsoDiStudi(
+                            response.nome,
+                            response.id
+                        )
+                    );
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Dati aggiornati immessi non validi");
+    });
 }
 
 /**
@@ -102,31 +102,31 @@ function patchPercorsoDiStudio(id, name) {
  * @returns Una classe PERCORSODISTUDIO con i dettagli
  */
 function addPercorsoDiStudio(name) {
-  return new Promise((res, rej) => {
-    if (name.trim()) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
-      const body = {
-        nome: name
-      };
+    return new Promise((res, rej) => {
+        if (name.trim()) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
+            const body = {
+                nome: name
+            };
 
-      vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "POST", headers, body)
-        .then((response) => {
-          res(
-            new PercorsoDiStudi(
-              response.nome,
-              response.id
-            )
-          );
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Dati immessi non validi");
-  });
+            vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "POST", headers, body)
+                .then((response) => {
+                    res(
+                        new PercorsoDiStudi(
+                            response.nome,
+                            response.id
+                        )
+                    );
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Dati immessi non validi");
+    });
 }
 
 /**
@@ -135,23 +135,23 @@ function addPercorsoDiStudio(name) {
  * @returns Un messaggio di avvenuta cancellazione del percorso di studio.
  */
 function delPercorsoDiStudio(id) {
-  return new Promise((res, rej) => {
-    if (id) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
+    return new Promise((res, rej) => {
+        if (id) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
 
-      vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "DELETE", headers)
-        .then((response) => {
-          res("Percorso di studio rimosso con successo!");
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Nessun id percorso di studio selezionato");
-  });
+            vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "DELETE", headers)
+                .then((response) => {
+                    res("Percorso di studio rimosso con successo!");
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Nessun id percorso di studio selezionato");
+    });
 }
 
 /**
@@ -160,7 +160,7 @@ function delPercorsoDiStudio(id) {
  * @returns Una stringa messaggio generalizzata dell'errore
  */
 function semplificaErrore(errorCode) {
-  if (errorCode == 401 || errorCode == 403)
-    return "Azione non consentita per questo percorso di studio";
-  else return "Errore interno nel server";
+    if (errorCode == 401 || errorCode == 403)
+        return "Azione non consentita per questo percorso di studio";
+    else return "Errore interno nel server";
 }

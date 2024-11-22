@@ -40,8 +40,8 @@
     </script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/mobile.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="layout">
@@ -58,9 +58,9 @@
         <div class="timer">
             <p>Tempo teorico rimanente</p>
             <div class="timer-layout">
-                <h1 id="minuti" class="timer-h1"></h1>
+                <h1 class="timer-h1" id="minuti"></h1>
                 <h1>:</h1>
-                <h1 id="secondi" class="timer-h1"></h1>
+                <h1 class="timer-h1" id="secondi"></h1>
             </div>
         </div>
         <div class="separatore"></div>
@@ -68,15 +68,15 @@
         <p id="aula-futura"></p>
         <h1 id="laboratorio-futuro"></h1>
         <p id="orari-teorico-futuro"></p>
-        <button id="btn-indietro" class="btn-tappe" onclick="nonDisponibie()">Tappa indietro</button>
-        <button id="btn-avanti" class="btn-tappe" onclick="statoSuccessivo()">Tappa avanti</button>
+        <button class="btn-tappe" id="btn-indietro" onclick="nonDisponibie()">Tappa indietro</button>
+        <button class="btn-tappe" id="btn-avanti" onclick="statoSuccessivo()">Tappa avanti</button>
         <p id="non-disp" style="color: red; display: none;">Questa funzione non e' disponibile al momento</p>
     </div>
 </div>
 <div class="nav-bar">
     <div class="nav-item">
         <div class="nav-icon-selected">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 12C12.55 12 13.0208 11.8042 13.4125 11.4125C13.8042 11.0208 14 10.55 14 10C14 9.45 13.8042 8.97917 13.4125 8.5875C13.0208 8.19583 12.55 8 12 8C11.45 8 10.9792 8.19583 10.5875 8.5875C10.1958 8.97917 10 9.45 10 10C10 10.55 10.1958 11.0208 10.5875 11.4125C10.9792 11.8042 11.45 12 12 12ZM12 22C9.31667 19.7167 7.3125 17.5958 5.9875 15.6375C4.6625 13.6792 4 11.8667 4 10.2C4 7.7 4.80417 5.70833 6.4125 4.225C8.02083 2.74167 9.88333 2 12 2C14.1167 2 15.9792 2.74167 17.5875 4.225C19.1958 5.70833 20 7.7 20 10.2C20 11.8667 19.3375 13.6792 18.0125 15.6375C16.6875 17.5958 14.6833 19.7167 12 22Z"
                       fill="white"/>
             </svg>
@@ -85,7 +85,7 @@
     </div>
     <div class="nav-item" onclick="logout()">
         <div class="nav-icon-selected">
-            <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg fill="none" height="24" viewBox="0 0 18 18" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 18C1.45 18 0.979167 17.8042 0.5875 17.4125C0.195833 17.0208 0 16.55 0 16V2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0H9V2H2V16H9V18H2ZM13 14L11.625 12.55L14.175 10H6V8H14.175L11.625 5.45L13 4L18 9L13 14Z"
                       fill="white"/>
             </svg>

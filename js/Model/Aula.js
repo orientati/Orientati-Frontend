@@ -7,7 +7,7 @@ class Aula {
         subject = "",
         details = "",
         id = 0
-    ){
+    ) {
         this.name = name;
         this.position = position;
         this.subject = subject;

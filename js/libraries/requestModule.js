@@ -29,7 +29,7 @@ function vallauriRequest(url, method = "GET", headers = {}, body = null, neg = f
             fetch(url, options)
                 .then((response) => {
                     if (!response.ok) {
-                        if(response.status === 401 && !neg){
+                        if (response.status === 401 && !neg) {
                             autoReLogin();
                         }
                         rej(response.status);

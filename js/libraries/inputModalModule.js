@@ -1,5 +1,6 @@
 // Funzione per creare il modale dinamico
 let callback;
+
 function createModal() {
     const modalHTML = `
         <div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -36,7 +37,7 @@ function openModal(data, Fcallback) {
     const form = $('#dynamicEditForm');
     form.empty(); // Pulisce eventuali campi esistenti
 
-    $.each(data, function(key, value) {
+    $.each(data, function (key, value) {
         const formGroup = $('<div class="form-group"></div>');
         const label = $(`<label for="modal-${key}">${key.charAt(0).toUpperCase() + key.slice(1)}</label>`);
 

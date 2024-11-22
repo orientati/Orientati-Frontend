@@ -1,11 +1,11 @@
 "use strict";
 
-class ScuolaDiProvenienza{
+class ScuolaDiProvenienza {
     constructor(
         nome = "",
         citta = "",
         id = 0
-    ){
+    ) {
         this.nome = nome;
         this.citta = citta;
         this.id = id;

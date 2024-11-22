@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Aule</title>
-    <base href="../../" />
+    <base href="../../"/>
 
     <script>
-      document.addEventListener("loginSucceded", () => {
-        checkAdmin();
-      });
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
     </script>
 
     <!-- umami -->
-    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef"></script>
+    <script data-website-id="5f9386ee-1d57-4de2-864d-2771700b45ef" defer src="http://10.0.5.81:3000/script.js"></script>
 
     <!-- Icone -->
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
     />
 
     <!-- Classi -->
@@ -25,8 +25,8 @@
 
     <!-- bootstrap -->
     <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
     />
 
     <!-- Librerie -->
@@ -46,35 +46,35 @@
     <script src="js/pages/admin/aule.js"></script>
 
     <!-- Stili -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/tableStyle.css" />
-  </head>
-  <body>
-    <button onclick="logout();">LOGOUT</button>
-    <nav>
-      <p>Lista delle aule</p>
-      <div>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/tableStyle.css" rel="stylesheet"/>
+</head>
+<body>
+<button onclick="logout();">LOGOUT</button>
+<nav>
+    <p>Lista delle aule</p>
+    <div>
         <button id="editSelectedAula">
-          <span class="material-symbols-outlined"> edit </span>Modifica
+            <span class="material-symbols-outlined"> edit </span>Modifica
         </button>
         <button id="deleteSelectedAula">
-          <span class="material-symbols-outlined"> delete </span>Elimina
+            <span class="material-symbols-outlined"> delete </span>Elimina
         </button>
-      </div>
-    </nav>
-    <table id="tableAule" class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Nome Aula</th>
-          <th>Posizione Aula</th>
-          <th>Materia</th>
-          <th>Dettagli</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Righe generate dinamicamente -->
-      </tbody>
-    </table>
-  </body>
+    </div>
+</nav>
+<table class="table" id="tableAule">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Nome Aula</th>
+        <th>Posizione Aula</th>
+        <th>Materia</th>
+        <th>Dettagli</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Righe generate dinamicamente -->
+    </tbody>
+</table>
+</body>
 </html>
