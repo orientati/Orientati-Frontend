@@ -1,3 +1,122 @@
+@media (max-width: 480px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
+    
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    .layout {
+        background-color: #f5f5f7;
+        flex-grow: 1;
+        padding: 52px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .top {
+        background-color: #C4CFE9;
+        border-radius: 18px;
+        padding: 24px;
+    }
+    
+    .bottom {
+        background-color: #C4CFE9;
+        border-radius: 18px;
+        padding: 24px;
+    }
+    
+    .nav-bar {
+        background-color: #C4CFE9;
+        height: 92px;
+        display: flex;
+        align-items: start;
+        justify-content: space-evenly;
+        padding: 18px 0 0 0;
+    }
+    
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-icon-selected {
+        display: flex;
+        padding: 4px 16px 4px 16px;
+        background-color: #506AFF;
+        color: white;
+        border-radius: 16px;
+    }
+    
+    .timer {
+        margin-top: 22px;
+        margin-bottom: 22px;
+    }
+    
+    .timer-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: end;
+    }
+    
+    #aula-futura {
+        margin-top: 8px;
+    }
+    
+    .timer-layout {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0px 10px;
+        gap: 4px;
+    }
+    
+    .timer-h1 {
+        text-align: center;
+        padding: 4px;
+        background-color: #506AFF;
+        border: solid #020181;
+        width: 86px;
+        border-radius: 8px;
+        color: white;
+    }
+    
+    .timer-h1-red {
+        text-align: center;
+        padding: 4px;
+        background-color: #ef3b3b;
+        border: solid #ff0000;
+        width: 86px;
+        border-radius: 8px;
+        color: white;
+    }
+    
+    .btn-tappe {
+        padding: 12px;
+        border-radius: 18px;
+        color: white;
+        background-color: #506AFF;
+        border: solid #020181;
+    }
+    
+    #non-disp {
+        transition: opacity 0.5s ease-in-out;
+    }
+
+}
 * {
     margin: 0;
     padding: 0;
