@@ -6,9 +6,10 @@
  * @param {string = "GET" o "POST"} method
  * @param {json = {}} headers
  * @param {json = null} body
+ * @param {bool = false} negation - se true, in caso di errore 401, esegue il relogin
  * @returns Nuova PROMISE
  */
-function vallauriRequest(url, method = "GET", headers = {}, body = null) {
+function vallauriRequest(url, method = "GET", headers = {}, body = null, neg = false) {
     return new Promise((res, rej) => {
         try {
             const options = {
@@ -28,6 +29,9 @@ function vallauriRequest(url, method = "GET", headers = {}, body = null) {
             fetch(url, options)
                 .then((response) => {
                     if (!response.ok) {
+                        if (response.status === 401 && !neg) {
+                            autoReLogin();
+                        }
                         rej(response.status);
                     }
 

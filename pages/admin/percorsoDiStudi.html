@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8"/>
-    <title>Aule</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Percorsi di Studio</title>
     <base href="../../"/>
 
     <script>
@@ -21,7 +22,7 @@
     />
 
     <!-- Classi -->
-    <script src="js/Model/Aula.js"></script>
+    <script src="js/Model/PercorsoDiStudi.js"></script>
 
     <!-- bootstrap -->
     <link
@@ -40,10 +41,10 @@
     <script src="js/libraries/inputModalModule.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/auleController.js"></script>
+    <script src="js/controllers/percorsoDiStudiController.js"></script>
 
     <!-- Scripts -->
-    <script src="js/pages/admin/aule.js"></script>
+    <script src="js/pages/admin/percorsoDiStudi.js"></script>
 
     <!-- Stili -->
     <link href="css/style.css" rel="stylesheet"/>
@@ -52,29 +53,22 @@
 <body>
 <button onclick="logout();">LOGOUT</button>
 <nav>
-    <p>Lista delle aule</p>
+    <p>Lista dei percorsi di studio</p>
     <div>
-        <button id="editSelectedAula">
+        <button id="editSelectedPercorso">
             <span class="material-symbols-outlined"> edit </span>Modifica
         </button>
-        <button id="deleteSelectedAula">
+        <button id="deleteSelectedPercorso">
             <span class="material-symbols-outlined"> delete </span>Elimina
         </button>
     </div>
 </nav>
-<table class="table" id="tableAule">
-    <thead>
+<table class="table" id="tablePercorsi">
     <tr>
         <th></th>
-        <th>Nome Aula</th>
-        <th>Posizione Aula</th>
-        <th>Materia</th>
-        <th>Dettagli</th>
+        <th>#</th>
+        <th>Nome Percorso</th>
     </tr>
-    </thead>
-    <tbody>
-    <!-- Righe generate dinamicamente -->
-    </tbody>
 </table>
 </body>
 </html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <title>orientatore</title>
+    <base href="../../">
+
+    <!-- Libraries -->
+    <script src="js/libraries/urlModule.js"></script>
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+
+    <!-- Model-->
+    <script src="js/Model/User.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/Controllers/usersController.js"></script>
+    <script src="js/Controllers/dashboardOrientatoreController.js"></script>
+    <script src="js/pages/orientatore/dashboardOrientatore.js"></script>
+
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            console.log("loginSucceded");
+        });
+    </script>
+
+    <!-- Styles -->
+    <link href="css/mobile.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="layout">
+    <div class="top">
+        <p id="data"></p>
+        <h1 id="nome-gruppo"></h1>
+    </div>
+    <div class="bottom">
+        <p id="azione-in-corso"></p>
+        <p id="aula-attuale"></p>
+        <h1 id="laboratorio-attuale"></h1>
+        <p id="orari-teorico-attuale"></p>
+        <div class="separatore"></div>
+        <div class="timer">
+            <p>Tempo teorico rimanente</p>
+            <div class="timer-layout">
+                <h1 class="timer-h1" id="minuti"></h1>
+                <h1>:</h1>
+                <h1 class="timer-h1" id="secondi"></h1>
+            </div>
+        </div>
+        <div class="separatore"></div>
+        <p>Prossimo Laboratorio</p>
+        <p id="aula-futura"></p>
+        <h1 id="laboratorio-futuro"></h1>
+        <p id="orari-teorico-futuro"></p>
+        <button class="btn-tappe" id="btn-indietro" onclick="nonDisponibie()">Tappa indietro</button>
+        <button class="btn-tappe" id="btn-avanti" onclick="statoSuccessivo()">Tappa avanti</button>
+        <p id="non-disp" style="color: red; display: none;">Questa funzione non e' disponibile al momento</p>
+    </div>
+</div>
+<div class="nav-bar">
+    <div class="nav-item">
+        <div class="nav-icon-selected">
+            <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12C12.55 12 13.0208 11.8042 13.4125 11.4125C13.8042 11.0208 14 10.55 14 10C14 9.45 13.8042 8.97917 13.4125 8.5875C13.0208 8.19583 12.55 8 12 8C11.45 8 10.9792 8.19583 10.5875 8.5875C10.1958 8.97917 10 9.45 10 10C10 10.55 10.1958 11.0208 10.5875 11.4125C10.9792 11.8042 11.45 12 12 12ZM12 22C9.31667 19.7167 7.3125 17.5958 5.9875 15.6375C4.6625 13.6792 4 11.8667 4 10.2C4 7.7 4.80417 5.70833 6.4125 4.225C8.02083 2.74167 9.88333 2 12 2C14.1167 2 15.9792 2.74167 17.5875 4.225C19.1958 5.70833 20 7.7 20 10.2C20 11.8667 19.3375 13.6792 18.0125 15.6375C16.6875 17.5958 14.6833 19.7167 12 22Z"
+                      fill="white"/>
+            </svg>
+        </div>
+        <p>Home</p>
+    </div>
+    <div class="nav-item" onclick="feedback()">
+        <div class="nav-icon-selected">
+            <svg viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 16C9.1 16 10.0417 15.6083 10.825 14.825C11.6083 14.0417 12 13.1 12 12V8C12 6.9 11.6083 5.95833 10.825 5.175C10.0417 4.39167 9.1 4 8 4C6.9 4 5.95833 4.39167 5.175 5.175C4.39167 5.95833 4 6.9 4 8V12C4 13.1 4.39167 14.0417 5.175 14.825C5.95833 15.6083 6.9 16 8 16ZM6 13H10V11H6V13ZM6 9H10V7H6V9ZM8 18C6.91667 18 5.9125 17.7333 4.9875 17.2C4.0625 16.6667 3.33333 15.9333 2.8 15H0V13H2.1C2.05 12.6667 2.02083 12.3333 2.0125 12C2.00417 11.6667 2 11.3333 2 11H0V9H2C2 8.66667 2.00417 8.33333 2.0125 8C2.02083 7.66667 2.05 7.33333 2.1 7H0V5H2.8C3.03333 4.61667 3.29583 4.25833 3.5875 3.925C3.87917 3.59167 4.21667 3.3 4.6 3.05L3 1.4L4.4 0L6.55 2.15C7.01667 2 7.49167 1.925 7.975 1.925C8.45833 1.925 8.93333 2 9.4 2.15L11.6 0L13 1.4L11.35 3.05C11.7333 3.3 12.0792 3.5875 12.3875 3.9125C12.6958 4.2375 12.9667 4.6 13.2 5H16V7H13.9C13.95 7.33333 13.9792 7.66667 13.9875 8C13.9958 8.33333 14 8.66667 14 9H16V11H14C14 11.3333 13.9958 11.6667 13.9875 12C13.9792 12.3333 13.95 12.6667 13.9 13H16V15H13.2C12.6667 15.9333 11.9375 16.6667 11.0125 17.2C10.0875 17.7333 9.08333 18 8 18Z" fill="white"/>
+            </svg>
+        </div>
+        <p>Form</p>
+    </div>
+    <div class="nav-item" onclick="logout()">
+        <div class="nav-icon-selected">
+            <svg fill="none" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 18C1.45 18 0.979167 17.8042 0.5875 17.4125C0.195833 17.0208 0 16.55 0 16V2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0H9V2H2V16H9V18H2ZM13 14L11.625 12.55L14.175 10H6V8H14.175L11.625 5.45L13 4L18 9L13 14Z"
+                      fill="white"/>
+            </svg>
+        </div>
+        <p>Logout</p>
+    </div>
+</div>
+</body>
+</html>

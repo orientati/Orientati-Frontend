@@ -1,29 +1,33 @@
 "use strict";
-let percorsiDiStudio = [];
+
+let aule = [];
 
 /**
- * Ritorna tutti i percorsi di studio registrati sul server. Richiede l'admin
- * @returns Una LISTA di classe PERCORSODISTUDIO con i dettagli
+ * Ritorna tutte le aule registrate sul server. Richiede l'admin
+ * @returns Una LISTA di classe AULA con i dettagli
  */
-function getPercorsiDiStudio() {
+function getAule() {
     return new Promise((res, rej) => {
-        percorsiDiStudio = [];
+        aule = [];
         const access_token = localStorage.getItem("access_token");
         const headers = {
             Authorization: `Bearer ${access_token}`,
         };
 
-        vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "GET", headers)
+        vallauriRequest(`${serverUrl}admin/aule`, "GET", headers)
             .then((response) => {
-                response.percorsiDiStudi.forEach((percorso) => {
-                    percorsiDiStudio.push(
-                        new PercorsoDiStudi(
-                            percorso.nome,
-                            percorso.id
+                response.aule.forEach((aula) => {
+                    aule.push(
+                        new Aula(
+                            aula.nome,
+                            aula.posizione,
+                            aula.materia,
+                            aula.dettagli,
+                            aula.id
                         )
                     );
                 });
-                res(percorsiDiStudio);
+                res(aule);
             })
             .catch((err) => {
                 rej(semplificaErrore(500));
@@ -33,11 +37,11 @@ function getPercorsiDiStudio() {
 }
 
 /**
- * Ritorna il percorso di studio con l'id specificato. Richiede l'admin
+ * Ritorna l'aula con l'id specificato. Richiede l'admin
  * @param {int} id
- * @returns Nuova classe PERCORSODISTUDIO con i dettagli
+ * @returns Nuova classe AULA con i dettagli
  */
-function getPercorsoDiStudioById(id) {
+function getAulaById(id) {
     return new Promise((res, rej) => {
         if (id) {
             const access_token = localStorage.getItem("access_token");
@@ -45,11 +49,14 @@ function getPercorsoDiStudioById(id) {
                 Authorization: `Bearer ${access_token}`,
             };
 
-            vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "GET", headers)
+            vallauriRequest(`${serverUrl}admin/aule/${id}`, "GET", headers)
                 .then((response) => {
                     res(
-                        new PercorsoDiStudi(
+                        new Aula(
                             response.nome,
+                            response.posizione,
+                            response.materia,
+                            response.dettagli,
                             response.id
                         )
                     );
@@ -58,32 +65,47 @@ function getPercorsoDiStudioById(id) {
                     rej(semplificaErrore(500));
                     console.error(err);
                 });
-        } else rej("Nessun id percorso di studio selezionato");
+        } else rej("Nessun id aula selezionato");
     });
 }
 
 /**
- * Aggiorna il percorso di studio con l'id specificato con i dati passati. Richiede l'admin
+ * Modifica i dati dell'aula con l'id passato.
  * @param {int} id
  * @param {string} name
- * @returns Una classe PERCORSODISTUDIO con i dettagli
+ * @param {string} position
+ * @param {string} subject
+ * @param {string} details
+ * @returns Una classe AULA con i dati aggiornati.
  */
-function patchPercorsoDiStudio(id, name) {
+function patchAula(id, name, position, subject, details) {
     return new Promise((res, rej) => {
-        if (id && name.trim()) {
+        if (
+            id &&
+            name.trim() &&
+            position.trim() &&
+            subject.trim() &&
+            details.trim()
+        ) {
             const access_token = localStorage.getItem("access_token");
             const headers = {
                 Authorization: `Bearer ${access_token}`,
             };
             const body = {
-                nome: name
+                nome: name,
+                posizione: position,
+                materia: subject,
+                dettagli: details,
             };
 
-            vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "PUT", headers, body)
+            vallauriRequest(`${serverUrl}admin/aule/${id}`, "PUT", headers, body)
                 .then((response) => {
                     res(
-                        new PercorsoDiStudi(
+                        new Aula(
                             response.nome,
+                            response.posizione,
+                            response.materia,
+                            response.dettagli,
                             response.id
                         )
                     );
@@ -97,26 +119,40 @@ function patchPercorsoDiStudio(id, name) {
 }
 
 /**
- * Aggiunge un nuovo Percorso di Studio con i dati passati. Richiede l'admin
+ * Aggiunge una nuova Aula con i dati passati al server
  * @param {string} name
- * @returns Una classe PERCORSODISTUDIO con i dettagli
+ * @param {string} position
+ * @param {string} subject
+ * @param {string} details
+ * @returns Una classe AULA con i dettagli
  */
-function addPercorsoDiStudio(name) {
+function addAula(name, position, subject, details) {
     return new Promise((res, rej) => {
-        if (name.trim()) {
+        if (
+            name.trim() &&
+            position.trim() &&
+            subject.trim() &&
+            details.trim()
+        ) {
             const access_token = localStorage.getItem("access_token");
             const headers = {
                 Authorization: `Bearer ${access_token}`,
             };
             const body = {
-                nome: name
+                nome: name,
+                posizione: position,
+                materia: subject,
+                dettagli: details,
             };
 
-            vallauriRequest(`${serverUrl}admin/percorsiDiStudi`, "POST", headers, body)
+            vallauriRequest(`${serverUrl}admin/aule`, "POST", headers, body)
                 .then((response) => {
                     res(
-                        new PercorsoDiStudi(
+                        new Aula(
                             response.nome,
+                            response.posizione,
+                            response.materia,
+                            response.dettagli,
                             response.id
                         )
                     );
@@ -130,11 +166,11 @@ function addPercorsoDiStudio(name) {
 }
 
 /**
- * Rimuove il percorso di studio con l'id passato dal server
+ * Rimuove l'aula con l'id passato dal server
  * @param {int} id
- * @returns Un messaggio di avvenuta cancellazione del percorso di studio.
+ * @returns Un messaggio di avvenuta cancellazione dell'aula.
  */
-function delPercorsoDiStudio(id) {
+function delAula(id) {
     return new Promise((res, rej) => {
         if (id) {
             const access_token = localStorage.getItem("access_token");
@@ -142,15 +178,15 @@ function delPercorsoDiStudio(id) {
                 Authorization: `Bearer ${access_token}`,
             };
 
-            vallauriRequest(`${serverUrl}admin/percorsiDiStudi/${id}`, "DELETE", headers)
+            vallauriRequest(`${serverUrl}admin/aule/${id}`, "DELETE", headers)
                 .then((response) => {
-                    res("Percorso di studio rimosso con successo!");
+                    res("Aula rimossa con successo!");
                 })
                 .catch((err) => {
                     rej(semplificaErrore(500));
                     console.error(err);
                 });
-        } else rej("Nessun id percorso di studio selezionato");
+        } else rej("Nessun id aula selezionato");
     });
 }
 
@@ -161,6 +197,6 @@ function delPercorsoDiStudio(id) {
  */
 function semplificaErrore(errorCode) {
     if (errorCode == 401 || errorCode == 403)
-        return "Azione non consentita per questo percorso di studio";
+        return "Azione non consentita per questa aula";
     else return "Errore interno nel server";
 }

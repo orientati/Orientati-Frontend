@@ -6,7 +6,7 @@ class Indirizzo {
         percorsoDiStudioId = 0,
         nomePercorsoDiStudi = "",
         id = 0
-    ){
+    ) {
         this.name = nome;
         this.percorsoDiStudio = new PercorsoDiStudi(nomePercorsoDiStudi, percorsoDiStudioId)
         this.id = id;

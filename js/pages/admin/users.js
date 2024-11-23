@@ -52,7 +52,7 @@ function aggiungiRigaUtente(data) {
 
         const adminClass = utente.isAdmin ? "yes" : "no";
         const temporaryClass = utente.temporaneo ? "yes" : "no";
-        const groupClass = utente.inGroup ? "yes" : "no";
+        const orientatoreClass = utente.orientatoreId ? utente.orientatoreId : "no";
 
         row.innerHTML = `
       <td class="chk-cell">
@@ -66,7 +66,7 @@ function aggiungiRigaUtente(data) {
       <td class="temporary-cell ${temporaryClass}">${
             utente.temporaneo ? "Si" : "No"
         }</td>
-      <td class="group-cell ${groupClass}">${utente.inGroup ? "Si" : "No"}</td>
+      <td class="group-cell ${orientatoreClass}">${utente.inGroup ? "Si" : "No"}</td>
     `;
 
         row.addEventListener("click", function (event) {
