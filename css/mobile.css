@@ -25,6 +25,7 @@
         align-items: start;
         justify-content: space-evenly;
         padding: 18px 0 0 0;
+        margin-top: -200px;
       }
 
       .nav-item {
@@ -119,6 +120,7 @@ body {
   align-items: start;
   justify-content: space-evenly;
   padding: 18px 0 0 0;
+  margin-top: -200px;
 }
 
 .nav-item {
