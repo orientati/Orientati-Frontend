@@ -83,8 +83,8 @@ function creaGruppo(group) {
     subjectTitle.id = group.id + "-materia";
     subjectTitle.textContent = group.aula_materia;
 
-    centralDiv.appendChild(labInfo);
     centralDiv.appendChild(subjectTitle);
+    centralDiv.appendChild(labInfo);
 
     // Aggiungi tutto al contenitore principale
     contentDiv.appendChild(topDiv);
