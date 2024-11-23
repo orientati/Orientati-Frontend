@@ -1,6 +1,17 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", function () {
+    getMe().then((u) => {
+        console.log("Utente loggato: ", u);
+        if (u.isAdmin) {
+            location.href = "pages/admin/dashboard.html";
+        } else {
+            location.href = "pages/orientatore/index.html";
+        }
+    }).catch((err) => {
+        console.log("Utente non loggato, procedere con il login.");
+    });
+
     const form = document.getElementById("formLogin");
     form.addEventListener("submit", function (event) {
         event.preventDefault();
