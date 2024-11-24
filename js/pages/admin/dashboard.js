@@ -75,11 +75,11 @@ function creaGruppo(group) {
 
     // Crea la sezione centrale
     const centralDiv = document.createElement("div");
-    const labInfo = document.createElement("h1");
+    const labInfo = document.createElement("p");
     labInfo.id = group.id + "-aula";
     labInfo.textContent = group.aula_nome + " - " + group.aula_posizione;
 
-    const subjectTitle = document.createElement("p");
+    const subjectTitle = document.createElement("h1");
     subjectTitle.id = group.id + "-materia";
     subjectTitle.textContent = group.aula_materia;
 
