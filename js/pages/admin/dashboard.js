@@ -78,44 +78,22 @@ function creaGruppo(group) {
     const labInfo = document.createElement("p");
     labInfo.id = group.id + "-materia";
     labInfo.textContent = group.aula_materia + " - " + group.aula_posizione;
-
     const subjectTitle = document.createElement("h1");
+
     subjectTitle.id = group.id + "-aula";
     subjectTitle.textContent = group.aula_nome;
-
     centralDiv.appendChild(labInfo);
     centralDiv.appendChild(subjectTitle);
+
+    const infoPresenze = document.createElement("p");
+    infoPresenze.textContent = "Partecipanti: " + group.orientati_presenti + "/" + group.totale_orientati;
+    centralDiv.appendChild(infoPresenze);
+
+
 
     // Aggiungi tutto al contenitore principale
     contentDiv.appendChild(topDiv);
     contentDiv.appendChild(centralDiv);
-
-    if (group.prossima_tappa != null) {
-        // Crea la sezione "bottom"
-        const bottomDiv = document.createElement("div");
-        bottomDiv.className = "bottom";
-
-        const nextLabText = document.createElement("p");
-        nextLabText.className = "next-lab";
-        nextLabText.textContent = "Prossimo Laboratorio";
-
-        const nextLabTitle = document.createElement("h2");
-        nextLabTitle.id = group.id + "-materiaprossima";
-        nextLabTitle.textContent = group.prossima_tappa.aula.materia;
-
-        const nextLabInfo = document.createElement("p");
-        nextLabInfo.id = group.id + "-aulaprossima";
-        nextLabInfo.textContent =
-            group.prossima_tappa.aula.nome +
-            " - " +
-            group.prossima_tappa.aula.posizione;
-
-        bottomDiv.appendChild(nextLabText);
-        bottomDiv.appendChild(nextLabTitle);
-        bottomDiv.appendChild(nextLabInfo);
-
-        contentDiv.appendChild(bottomDiv);
-    }
 
     // Aggiungi il contenitore principale al body o a un altro elemento della pagina
     groupsWrapper.appendChild(contentDiv);
