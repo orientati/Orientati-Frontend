@@ -89,7 +89,15 @@ function creaGruppo(group) {
     infoPresenze.textContent = "Partecipanti: " + group.orientati_presenti + "/" + group.totale_orientati;
     centralDiv.appendChild(infoPresenze);
 
+    const orarioPartenzaFine = document.createElement("p");
+    if (gruppo.numero_tappa !== 0) {
+        orarioPartenzaFine.textContent = "Partenza: " + gruppo.orario_partenza_effettivo;
+        centralDiv.appendChild(orarioPartenzaFine);
+    }
 
+    if (group.numero_tappa === 0 && group.arrivato === true) {
+        orarioPartenzaFine.textContent += " Fine: " + gruppo.orario_fine_effettivo;
+    }
 
     // Aggiungi tutto al contenitore principale
     contentDiv.appendChild(topDiv);
