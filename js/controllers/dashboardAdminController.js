@@ -18,8 +18,6 @@ function getGruppi() {
                         gruppi[i].aula_nome = "Fermo";
                         gruppi[i].aula_posizione = "Fermo";
                         gruppi[i].aula_materia = "Fermo";
-                    } else if (gruppi[i].numero_tappa === 0 && gruppi[i].arrivato === true) {
-                        gruppi[i] = undefined;
                     }
                     res(gruppi);
                 }
