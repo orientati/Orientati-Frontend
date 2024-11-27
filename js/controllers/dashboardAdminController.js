@@ -29,7 +29,7 @@ function getGruppi() {
     });
 }
 
-function changePresenza(orientatoId, presenza) {
+function changePresenza(orientatoId, presente, assente) {
     return new Promise((res, rej) => {
         const access_token = localStorage.getItem("access_token");
         const headers = {
@@ -37,7 +37,7 @@ function changePresenza(orientatoId, presenza) {
         };
 
         vallauriRequest(
-            `${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presenza}`,
+            `${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presente}&assente=${assente}`,
             "PUT",
             headers,
             {}

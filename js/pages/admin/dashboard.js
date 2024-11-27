@@ -204,12 +204,29 @@ function loadTable(orientati) {
         td = document.createElement("td");
         td.classList.add("chk-td");
 
-        let chk = document.createElement("input");
-        chk.id = orientati[i].id;
-        chk.type = "checkbox";
-        chk.checked = orientati[i].presente;
-        chk.addEventListener("change", changePresenzaLocal);
-        lable.appendChild(chk);
+        let range = document.createElement("input");
+        range.id = orientati[i].id;
+        range.type = "range";
+        range.min = 1;
+        range.max = 3;
+        range.classList.add("tgl-def", "custom-toggle");
+        if (orientati[i].presente) {
+            range.classList.add("tgl-on");
+            range.classList.remove("tgl-def", "tgl-off");
+            range.value = 3;
+        } else if (orientati[i].assente) {
+            range.classList.add("tgl-off");
+            range.classList.remove("tgl-def", "tgl-on");
+            range.value = 1;
+        }
+        else {
+            range.classList.add("tgl-def");
+            range.classList.remove("tgl-off", "tgl-on");
+            range.value = 2;
+        }
+
+        range.addEventListener("change", changePresenzaLocal);
+        lable.appendChild(range);
 
         let span = document.createElement("span");
         span.classList.add("slider", "round");
@@ -222,7 +239,20 @@ function loadTable(orientati) {
 }
 
 function changePresenzaLocal(e) {
-    changePresenza(e.target.id, e.target.checked)
+    let presente, assente;
+
+    if (e.target.value == 1) {
+        presente = false;
+        assente = true;
+    } else if (e.target.value == 2) {
+        presente = false;
+        assente = false;
+    } else {
+        presente = true;
+        assente = false;
+    }
+
+    changePresenza(e.target.id, presente, assente)
         .then((res) => mostraAlert("successo", res, 3))
         .catch((err) => {
             e.removeEventListener("change", changePresenzaLocal);
