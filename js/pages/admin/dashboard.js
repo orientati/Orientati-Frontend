@@ -42,9 +42,10 @@ function creaGruppo(group) {
     topDiv.className = "top";
 
     const groupDiv = document.createElement("div");
-    const groupTitle = document.createElement("h2");
+    const groupTitle = document.createElement("h1");
     groupTitle.id = group.id + "-nome";
-    groupTitle.textContent = group.nome;
+    groupTitle.innerHTML = group.nome + "<span style='font-size: 18px; margin-left: 14px'>" + group.orario_partenza + "</span>";
+
 
     const groupMembers = document.createElement("p");
     groupMembers.id = group.id + "-orientatori";
