@@ -4,6 +4,8 @@ const pollingTime = 5000;
 let groupsWrapper, tableOrientati;
 
 window.addEventListener("DOMContentLoaded", function () {
+    groupsWrapper = this.document.getElementById("groupsWrapper");
+    tableOrientati = this.document.getElementById("tableOrientati");
     getGruppi()
         .then(loadGraphic)
         .catch((err) => {
@@ -18,8 +20,6 @@ window.addEventListener("DOMContentLoaded", function () {
             mostraAlert("errore", err);
         });
 
-    groupsWrapper = this.document.getElementById("groupsWrapper");
-    tableOrientati = this.document.getElementById("tableOrientati");
 
     setInterval(updatePage, pollingTime);
 });
@@ -90,13 +90,13 @@ function creaGruppo(group) {
     centralDiv.appendChild(infoPresenze);
 
     const orarioPartenzaFine = document.createElement("p");
-    if (gruppo.numero_tappa !== 0) {
-        orarioPartenzaFine.textContent = "Partenza: " + gruppo.orario_partenza_effettivo;
+    if (group.numero_tappa !== 0) {
+        orarioPartenzaFine.textContent = "Partenza: " + group.orario_partenza_effettivo;
         centralDiv.appendChild(orarioPartenzaFine);
     }
 
     if (group.numero_tappa === 0 && group.arrivato === true) {
-        orarioPartenzaFine.textContent += " Fine: " + gruppo.orario_fine_effettivo;
+        orarioPartenzaFine.textContent += " Fine: " + group.orario_fine_effettivo;
     }
 
     // Aggiungi tutto al contenitore principale
@@ -121,15 +121,7 @@ function getInOrario(group) {
             text: "USCITO",
         };
     }
-    /*
-    if (group.prossima_tappa != null) {
-        const hours = parseInt(group.orario_partenza.split(":")[0]);
-        const minutes = parseInt(group.orario_partenza.split(":")[1]);
 
-        const hoursTappa =
-            Math.round((minutes + group.prossima_tappa.minuti_arrivo) / 60) + hours;
-        const minutesTappa = (minutes + group.prossima_tappa.minuti_arrivo) % 60;
-*/
     let data = new Date();
     data.setHours(parseInt(group.orario_partenza.split(":")[0]));
     data.setMinutes(parseInt(group.orario_partenza.split(":")[1]));
@@ -171,6 +163,7 @@ function updatePage() {
 }
 
 function loadTable(orientati) {
+    console.log(orientati);
     tableOrientati.innerHTML = "<tr class=\"tableHeader\">\n" +
         "                              <th style=\"width: 30px\"></th>\n" +
         "                              <th>Cognome e Nome</th>\n" +
