@@ -14,16 +14,21 @@ function getOrientati() {
             Authorization: `Bearer ${access_token}`,
         };
 
-        vallauriRequest(`${serverUrl}admin/orientati`, "GET", headers)
+        vallauriRequest(`${serverUrl}admin/dashboard/orientati`, "GET", headers)
             .then((response) => {
                 response.orientati.forEach((orientato) => {
                     orientati.push(
                         new Orientato(
+                            orientato.id,
                             orientato.nome,
                             orientato.cognome,
-                            orientato.scuoladiprovenienza_id,
-                            orientato.nomeScuolaDiProvenienza,
-                            orientato.id
+                            orientato.scuolaDiProvenienza_id,
+                            orientato.scuolaDiProvenienza_nome,
+                            orientato.gruppo_id,
+                            orientato.gruppo_nome,
+                            orientato.gruppo_orario_partenza,
+                            orientato.presente,
+                            orientato.assente
                         )
                     );
                     res(orientati);
@@ -99,11 +104,16 @@ function patchOrientato(id, nome, cognome, scuolaProvenienzaId) {
                 .then((response) => {
                     res(
                         new Orientato(
+                            response.id,
                             response.nome,
                             response.cognome,
-                            response.scuoladiprovenienza_id,
-                            response.nomeScuolaDiProvenienza,
-                            response.id
+                            response.scuolaDiProvenienza_id,
+                            response.scuolaDiProvenienza_nome,
+                            response.gruppo_id,
+                            response.gruppo_nome,
+                            response.gruppo_orario_partenza,
+                            response.presente,
+                            response.assente
                         )
                     );
                 })

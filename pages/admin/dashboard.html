@@ -12,11 +12,9 @@
         });
     </script>
 
-    <!-- umami -->
-    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
-
     <!-- Modelli -->
     <script src="js/model/Route.js"></script>
+    <script src="js/Model/Orientato.js"></script>
 
     <!-- Librerie -->
     <script src="js/libraries/urlModule.js"></script>
@@ -25,8 +23,8 @@
     <script src="js/libraries/errorModule.js"></script>
 
     <!-- Scripts-->
-    <script src="js/controllers/dashboardAdminController.js"></script>
     <script src="js/controllers/orientatiController.js"></script>
+    <script src="js/controllers/dashboardAdminController.js"></script>
     <script src="js/pages/admin/dashboard.js"></script>
 
     <!-- Styles -->
@@ -106,14 +104,20 @@
 
                 </div>
                 <div class="tableWrapper">
-                    <table class="defaultTable" id="tableOrientati">
+                    <table class="defaultTable">
+                        <thead>
                         <tr class="tableHeader">
                             <th style="width: 30px"></th>
                             <th>Cognome e Nome</th>
+                            <th>Scuola di Provenienza</th>
                             <th>Nome Gruppo</th>
                             <th>Ora di partenza</th>
                             <th>Presenza</th>
                         </tr>
+                        </thead>
+                        <tbody id="tableOrientati">
+
+                        </tbody>
                     </table>
                 </div>
             </div>

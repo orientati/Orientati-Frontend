@@ -20,7 +20,6 @@ window.addEventListener("DOMContentLoaded", function () {
             mostraAlert("errore", err);
         });
 
-
     setInterval(updatePage, pollingTime);
 });
 
@@ -163,93 +162,86 @@ function updatePage() {
 }
 
 function loadTable(orientati) {
-    console.log(orientati);
-    tableOrientati.innerHTML = "<tr class=\"tableHeader\">\n" +
-        "                              <th style=\"width: 30px\"></th>\n" +
-        "                              <th>Cognome e Nome</th>\n" +
-        "                              <th>Nome Gruppo</th>\n" +
-        "                              <th>Ora di partenza</th>\n" +
-        "                              <th>Presenza</th>\n" +
-        "                          </tr>";
-    let i;
-    for (i = 0; i < orientati.length; i++) {
+    tableOrientati.innerHTML = "";
+
+    orientati.forEach((datiOrientato) => {
         let tr = document.createElement("tr");
-        tr.id = "orientato-" + orientati[i].id;
+        tr.id = "orientato-" + datiOrientato.id;
 
         let td = document.createElement("td");
         tr.appendChild(td);
 
         td = document.createElement("td");
-        td.textContent = orientati[i].nome + " " + orientati[i].cognome;
+        td.textContent = datiOrientato.cognome + " " + datiOrientato.nome;
         tr.appendChild(td);
 
         td = document.createElement("td");
-        td.textContent = orientati[i].gruppo_nome;
+        td.id = "scuola-" + datiOrientato.scuolaDiProvenienza_id;
+        td.textContent = datiOrientato.scuolaDiProvenienza_nome;
         tr.appendChild(td);
 
         td = document.createElement("td");
-        td.textContent = orientati[i].gruppo_orario_partenza;
+        td.id = "gruppo-" + datiOrientato.gruppo_id;
+        td.textContent = datiOrientato.gruppo_nome;
         tr.appendChild(td);
 
-        let lable = document.createElement("label");
-        lable.classList.add("switch");
+        td = document.createElement("td");
+        td.textContent = datiOrientato.gruppo_orario_partenza;
+        tr.appendChild(td);
 
         td = document.createElement("td");
-        td.classList.add("chk-td");
-
         let range = document.createElement("input");
-        range.id = orientati[i].id;
+        range.id = datiOrientato.id;
         range.type = "range";
         range.min = 1;
         range.max = 3;
         range.classList.add("tgl-def", "custom-toggle");
-        if (orientati[i].presente) {
+        if (datiOrientato.presente) {
             range.classList.add("tgl-on");
             range.classList.remove("tgl-def", "tgl-off");
             range.value = 3;
-        } else if (orientati[i].assente) {
+        } else if (datiOrientato.assente) {
             range.classList.add("tgl-off");
             range.classList.remove("tgl-def", "tgl-on");
             range.value = 1;
-        }
-        else {
+        } else {
             range.classList.add("tgl-def");
             range.classList.remove("tgl-off", "tgl-on");
             range.value = 2;
         }
 
-        range.addEventListener("change", changePresenzaLocal);
-        lable.appendChild(range);
+        range.addEventListener("input", changePresenzaLocal);
+        td.appendChild(range);
 
-        let span = document.createElement("span");
-        span.classList.add("slider", "round");
-        lable.appendChild(span);
-
-        td.appendChild(lable);
         tr.appendChild(td);
         tableOrientati.appendChild(tr);
-    }
+    });
 }
 
 function changePresenzaLocal(e) {
     let presente, assente;
 
+    let range = e.target;
     if (e.target.value == 1) {
         presente = false;
         assente = true;
+        range.classList.add("tgl-off");
+        range.classList.remove("tgl-def", "tgl-on");
     } else if (e.target.value == 2) {
         presente = false;
         assente = false;
+        range.classList.add("tgl-def");
+        range.classList.remove("tgl-off", "tgl-on");
     } else {
         presente = true;
         assente = false;
+        range.classList.add("tgl-on");
+        range.classList.remove("tgl-def", "tgl-off");
     }
 
     changePresenza(e.target.id, presente, assente)
-        .then((res) => mostraAlert("successo", res, 3))
         .catch((err) => {
             e.removeEventListener("change", changePresenzaLocal);
-
             e.checked = !e.checked;
             mostraAlert("errore", err, 3);
             e.addEventListener("change", changePresenzaLocal);
