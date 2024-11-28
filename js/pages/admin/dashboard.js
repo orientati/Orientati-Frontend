@@ -2,7 +2,7 @@
 
 const pollingTime = 5000;
 let groupsWrapper, tableOrientati;
-
+let reloadPagina;
 window.addEventListener("DOMContentLoaded", function () {
     groupsWrapper = this.document.getElementById("groupsWrapper");
     tableOrientati = this.document.getElementById("tableOrientati");
@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", function () {
             mostraAlert("errore", err);
         });
 
-    setInterval(updatePage, pollingTime);
+    reloadPagina = setInterval(updatePage, pollingTime);
 });
 
 function loadGraphic(groups) {
@@ -210,7 +210,23 @@ function loadTable(orientati) {
             range.value = 2;
         }
 
-        range.addEventListener("input", changePresenzaLocal);
+        range.addEventListener("mousedown", function () {
+            clearInterval(reloadPagina);
+        });
+        range.addEventListener("mouseup", changePresenzaLocal);
+        range.addEventListener("input", function (e) {
+            let range = e.target;
+            if (e.target.value == 1) {
+                range.classList.add("tgl-off");
+                range.classList.remove("tgl-def", "tgl-on");
+            } else if (e.target.value == 2) {
+                range.classList.add("tgl-def");
+                range.classList.remove("tgl-off", "tgl-on");
+            } else {
+                range.classList.add("tgl-on");
+                range.classList.remove("tgl-def", "tgl-off");
+            }
+        });
         td.appendChild(range);
 
         tr.appendChild(td);
@@ -225,18 +241,12 @@ function changePresenzaLocal(e) {
     if (e.target.value == 1) {
         presente = false;
         assente = true;
-        range.classList.add("tgl-off");
-        range.classList.remove("tgl-def", "tgl-on");
     } else if (e.target.value == 2) {
         presente = false;
         assente = false;
-        range.classList.add("tgl-def");
-        range.classList.remove("tgl-off", "tgl-on");
     } else {
         presente = true;
         assente = false;
-        range.classList.add("tgl-on");
-        range.classList.remove("tgl-def", "tgl-off");
     }
 
     changePresenza(e.target.id, presente, assente)
@@ -246,4 +256,6 @@ function changePresenzaLocal(e) {
             mostraAlert("errore", err, 3);
             e.addEventListener("change", changePresenzaLocal);
         });
+
+    reloadPagina = setInterval(updatePage, pollingTime);
 }
