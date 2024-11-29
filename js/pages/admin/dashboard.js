@@ -237,6 +237,10 @@ function loadTable(orientati) {
         button.classList.add("btnModifica");
         button.textContent = "Modifica";
         button.id = "modifca-" + datiOrientato.id;
+        if (datiOrientato.gruppo_orario_partenza === "") {
+            button.style.backgroundColor = "gray";
+            button.disabled = true;
+        }
 
         button.addEventListener("click", function () {
             const modal = document.getElementById("modal");
@@ -246,9 +250,28 @@ function loadTable(orientati) {
 
             //Chiamata per sapere i gruppi passare il gruppo gia selezionato
 
+            getGruppi()
+                .then((gruppi) => {
+                    comboBox.innerHTML = "";
+                    gruppi.forEach((gruppo) => {
+                        if (!gruppo.percorsoFinito) {
+                            let option = document.createElement("option");
+                            option.value = gruppo.id;
+                            option.textContent = gruppo.nome;
+                            comboBox.appendChild(option);
+                        }
+                    });
+                })
+                .catch((err) => {
+                        console.error(err);
+                        mostraAlert("errore", err);
+                    }
+                )
+                .finally(() => {
+                        comboBox.value = datiOrientato.gruppo_id;
+                    }
+                );
 
-
-            comboBox.appendChild();
             modal.style.display = "block";
 
             closeModalButton.addEventListener("click", function () {
@@ -263,6 +286,20 @@ function loadTable(orientati) {
 
             applyButton.addEventListener("click", function () {
                 const selectedOption = document.getElementById("comboBox").value;
+                const orientatoId = datiOrientato.id;
+
+                vallauriRequest(`${serverUrl}admin/dashboard/orientati/gruppo/${orientatoId}?gruppo_id=${selectedOption}`, "PUT",
+                    {
+                        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                    })
+                    .then(() => {
+                        modal.style.display = "none";
+                        updatePage();
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        mostraAlert("errore", err);
+                    });
 
                 modal.style.display = "none";
             });
