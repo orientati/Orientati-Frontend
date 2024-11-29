@@ -1,6 +1,7 @@
 "use strict";
 
 let aule = [];
+
 /**
  * Ritorna tutte le aule registrate sul server. Richiede l'admin
  * @returns Una LISTA di classe AULA con i dettagli
