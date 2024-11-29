@@ -1,53 +1,63 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <base href="../">
 
+    <!-- umami -->
+    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
+
+    <!-- Model -->
+    <script src="js/Model/User.js"></script>
+
     <!-- Librerie -->
+    <script src="js/libraries/urlModule.js"></script>
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
-    <script src="js/libraries/errorModule.js"></script> 
+    <script src="js/libraries/errorModule.js"></script>
+
+    <!-- Controllres -->
+    <script src="js/controllers/usersController.js"></script>
 
     <!-- Scripts -->
     <script src="js/pages/login.js"></script>
 
     <!-- Stili Globali -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/login.css" />
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/login.css" rel="stylesheet"/>
 
     <title>Pagina Login</title>
-  </head>
-  <body>
-    <main>
-      <p class="title">Login</p>
-      <p class="subtitle">Applicativo per la gestione dei turni</p>
+</head>
+<body>
+<main>
+    <p class="title">Login</p>
+    <p class="subtitle">Applicativo per la gestione dei turni</p>
 
-      <!-- Modulo di login -->
-      <form id="formLogin">
+    <!-- Modulo di login -->
+    <form id="formLogin">
         <label for="txtUsername">Inserisci il tuo nome utente/email</label>
         <input
-          class="input"
-          type="text"
-          id="txtUsername"
-          placeholder="Inserisci il tuo nome utente/email"
-          required
+                class="input"
+                id="txtUsername"
+                placeholder="Inserisci il tuo nome utente/email"
+                required
+                type="text"
         />
 
         <label for="txtPassword">Inserisci la tua password</label>
         <input
-          class="input"
-          type="password"
-          id="txtPassword"
-          placeholder="Inserisci la tua password"
-          required
+                class="input"
+                id="txtPassword"
+                placeholder="Inserisci la tua password"
+                required
+                type="password"
         />
 
         <button class="btn-vallauri" type="submit">Login</button>
-      </form>
+    </form>
 
-      <a id="ALoginUtenteTemporaneo">Entra come utente temporaneo</a>
+    <a id="ALoginUtenteTemporaneo">Entra come utente temporaneo</a>
 
-    </main>
-  </body>
+</main>
+</body>
 </html>

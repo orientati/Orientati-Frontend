@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Aule</title>
-    <base href="../../" />
+    <base href="../../"/>
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
+    </script>
+
+    <!-- umami -->
+    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
 
     <!-- Icone -->
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
     />
 
     <!-- Classi -->
@@ -16,14 +25,15 @@
 
     <!-- bootstrap -->
     <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
     />
 
     <!-- Librerie -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/libraries/urlModule.js"></script>
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
@@ -35,41 +45,36 @@
     <!-- Scripts -->
     <script src="js/pages/admin/aule.js"></script>
 
-    <!-- Scripts-->
-    <script>
-      checkAdmin();
-    </script>
-
     <!-- Stili -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/tableStyle.css" />
-  </head>
-  <body>
-    <button onclick="logout();">LOGOUT</button>
-    <nav>
-      <p>Lista delle aule</p>
-      <div>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/tableStyle.css" rel="stylesheet"/>
+</head>
+<body>
+<button onclick="logout();">LOGOUT</button>
+<nav>
+    <p>Lista delle aule</p>
+    <div>
         <button id="editSelectedAula">
-          <span class="material-symbols-outlined"> edit </span>Modifica
+            <span class="material-symbols-outlined"> edit </span>Modifica
         </button>
         <button id="deleteSelectedAula">
-          <span class="material-symbols-outlined"> delete </span>Elimina
+            <span class="material-symbols-outlined"> delete </span>Elimina
         </button>
-      </div>
-    </nav>
-    <table id="tableAule" class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Nome Aula</th>
-          <th>Posizione Aula</th>
-          <th>Materia</th>
-          <th>Dettagli</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Righe generate dinamicamente -->
-      </tbody>
-    </table>
-  </body>
+    </div>
+</nav>
+<table class="table" id="tableAule">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Nome Aula</th>
+        <th>Posizione Aula</th>
+        <th>Materia</th>
+        <th>Dettagli</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Righe generate dinamicamente -->
+    </tbody>
+</table>
+</body>
 </html>

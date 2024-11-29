@@ -1,31 +1,43 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Utenti</title>
-    <base href="../../">
+    <base href="../../"/>
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
+    </script>
+
+    <!-- umami -->
+    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
 
     <!-- Icone -->
     <link
-            rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
     />
 
     <!-- Classi -->
     <script src="js/Model/User.js"></script>
 
     <!-- bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
 
     <!-- Librerie -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/libraries/urlModule.js"></script>
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
     <script src="js/libraries/inputModalModule.js"></script>
-    
 
     <!-- Controllers -->
     <script src="js/controllers/usersController.js"></script>
@@ -33,18 +45,12 @@
     <!-- Scripts -->
     <script src="js/pages/admin/users.js"></script>
 
-    <script>
-        checkAdmin();
-    </script>
-
     <!-- Stili -->
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/tableStyle.css"/>
-
-
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/tableStyle.css" rel="stylesheet"/>
 </head>
 <body>
-    <button onclick="logout();">LOGOUT</button>
+<button onclick="logout();">LOGOUT</button>
 <nav>
     <p>Lista degli utenti</p>
     <div>
@@ -56,7 +62,7 @@
         </button>
     </div>
 </nav>
-<table id="tableUtenti" class="table">
+<table class="table" id="tableUtenti">
     <tr>
         <th></th>
         <th>#</th>

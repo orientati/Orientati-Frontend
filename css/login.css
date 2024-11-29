@@ -74,7 +74,7 @@ input:focus {
 
 a {
     width: 100%;
-    margin: auto ;
+    margin: auto;
     margin-bottom: 20px;
     text-align: center;
     color: var(--primary-color);
@@ -132,6 +132,9 @@ a {
     }
 
     #formLogin input {
-        width: 100%;
-    }
+        width: 100
+
+    %;
+            
+    }
 }

@@ -1,37 +1,128 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Dashboard</title>
-    <base href="../../">
+    <base href="../../"/>
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
+    </script>
 
     <!-- Modelli -->
     <script src="js/model/Route.js"></script>
+    <script src="js/Model/Orientato.js"></script>
 
     <!-- Librerie -->
+    <script src="js/libraries/urlModule.js"></script>
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
-    <script src="js/libraries/routingModule.js"></script>
 
     <!-- Scripts-->
-    <script>
-        checkAdmin();
-    </script>
+    <script src="js/controllers/orientatiController.js"></script>
+    <script src="js/controllers/dashboardAdminController.js"></script>
     <script src="js/pages/admin/dashboard.js"></script>
 
-
+    <!-- Styles -->
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/dashboard.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>
-    pagina dashboard admin
-    a sinistra ci sono i gruppi e il loro stato
-    a destra ci sono gli studenti orientati, ordinando per quelli che non sono ancora arrivati e che devono arrivare per
-    primi
-</h1>
-<div>
-    <button onclick="window.location.href = 'pages/admin/index.html'">vai a admin</button>
-</div>
+<main>
+    <div id="navbarWrapper">
+        <div id="navbarBurger" style="opacity: 0">
+            <svg fill="none" height="12" viewBox="0 0 18 12" width="18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 12V10H18V12H0ZM0 7V5H18V7H0ZM0 2V0H18V2H0Z" fill="#020181"/>
+            </svg>
+        </div>
+        <div id="navbarList">
+            <div class="navbarItem" id="DashboardNavbar">
+                <div class="navbarItemBtn">
+                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                                d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H11V21H5ZM13 21V12H21V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H13ZM13 10V3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V10H13Z"
+                                fill="white"/>
+                    </svg>
+                </div>
+                <div class="navbarItemText">Dash</div>
+            </div>
+            <div class="navbarItem" id="FilesNavbar">
+                <div class="navbarItemBtn">
+                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                                d="M11 19H13V14.825L14.6 16.425L16 15L12 11L8 15L9.425 16.4L11 14.825V19ZM6 22C5.45 22 4.97917 21.8042 4.5875 21.4125C4.19583 21.0208 4 20.55 4 20V4C4 3.45 4.19583 2.97917 4.5875 2.5875C4.97917 2.19583 5.45 2 6 2H14L20 8V20C20 20.55 19.8042 21.0208 19.4125 21.4125C19.0208 21.8042 18.55 22 18 22H6ZM13 9V4H6V20H18V9H13Z"
+                                fill="white"/>
+                    </svg>
+                </div>
+                <div class="navbarItemText">Files</div>
+            </div>
+            <div class="navbarItem" id="GroupNavbar">
+                <div class="navbarItemBtn">
+                    <svg fill="none" height="12" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                                d="M0 12V10.425C0 9.70833 0.366667 9.125 1.1 8.675C1.83333 8.225 2.8 8 4 8C4.21667 8 4.425 8.00417 4.625 8.0125C4.825 8.02083 5.01667 8.04167 5.2 8.075C4.96667 8.425 4.79167 8.79167 4.675 9.175C4.55833 9.55833 4.5 9.95833 4.5 10.375V12H0ZM6 12V10.375C6 9.84167 6.14583 9.35417 6.4375 8.9125C6.72917 8.47083 7.14167 8.08333 7.675 7.75C8.20833 7.41667 8.84583 7.16667 9.5875 7C10.3292 6.83333 11.1333 6.75 12 6.75C12.8833 6.75 13.6958 6.83333 14.4375 7C15.1792 7.16667 15.8167 7.41667 16.35 7.75C16.8833 8.08333 17.2917 8.47083 17.575 8.9125C17.8583 9.35417 18 9.84167 18 10.375V12H6ZM19.5 12V10.375C19.5 9.94167 19.4458 9.53333 19.3375 9.15C19.2292 8.76667 19.0667 8.40833 18.85 8.075C19.0333 8.04167 19.2208 8.02083 19.4125 8.0125C19.6042 8.00417 19.8 8 20 8C21.2 8 22.1667 8.22083 22.9 8.6625C23.6333 9.10417 24 9.69167 24 10.425V12H19.5ZM8.125 10H15.9C15.7333 9.66667 15.2708 9.375 14.5125 9.125C13.7542 8.875 12.9167 8.75 12 8.75C11.0833 8.75 10.2458 8.875 9.4875 9.125C8.72917 9.375 8.275 9.66667 8.125 10ZM4 7C3.45 7 2.97917 6.80417 2.5875 6.4125C2.19583 6.02083 2 5.55 2 5C2 4.43333 2.19583 3.95833 2.5875 3.575C2.97917 3.19167 3.45 3 4 3C4.56667 3 5.04167 3.19167 5.425 3.575C5.80833 3.95833 6 4.43333 6 5C6 5.55 5.80833 6.02083 5.425 6.4125C5.04167 6.80417 4.56667 7 4 7ZM20 7C19.45 7 18.9792 6.80417 18.5875 6.4125C18.1958 6.02083 18 5.55 18 5C18 4.43333 18.1958 3.95833 18.5875 3.575C18.9792 3.19167 19.45 3 20 3C20.5667 3 21.0417 3.19167 21.425 3.575C21.8083 3.95833 22 4.43333 22 5C22 5.55 21.8083 6.02083 21.425 6.4125C21.0417 6.80417 20.5667 7 20 7ZM12 6C11.1667 6 10.4583 5.70833 9.875 5.125C9.29167 4.54167 9 3.83333 9 3C9 2.15 9.29167 1.4375 9.875 0.8625C10.4583 0.2875 11.1667 0 12 0C12.85 0 13.5625 0.2875 14.1375 0.8625C14.7125 1.4375 15 2.15 15 3C15 3.83333 14.7125 4.54167 14.1375 5.125C13.5625 5.70833 12.85 6 12 6ZM12 4C12.2833 4 12.5208 3.90417 12.7125 3.7125C12.9042 3.52083 13 3.28333 13 3C13 2.71667 12.9042 2.47917 12.7125 2.2875C12.5208 2.09583 12.2833 2 12 2C11.7167 2 11.4792 2.09583 11.2875 2.2875C11.0958 2.47917 11 2.71667 11 3C11 3.28333 11.0958 3.52083 11.2875 3.7125C11.4792 3.90417 11.7167 4 12 4Z"
+                                fill="white"/>
+                    </svg>
+                </div>
+                <div class="navbarItemText">Gruppi</div>
+            </div>
+            <div class="navbarItem" id="ChatNavbar">
+                <div class="navbarItemBtn">
+                    <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                                d="M0 20V2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0H18C18.55 0 19.0208 0.195833 19.4125 0.5875C19.8042 0.979167 20 1.45 20 2V14C20 14.55 19.8042 15.0208 19.4125 15.4125C19.0208 15.8042 18.55 16 18 16H4L0 20ZM3.15 14H18V2H2V15.125L3.15 14Z"
+                                fill="white"/>
+                    </svg>
+                </div>
+                <div class="navbarItemText">Chat</div>
+            </div>
+
+            <div class="navbarItem" id="LogoutNavbar" onclick="logout()">
+                <div class="navbarItemBtn">
+                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H12V5H5V19H12V21H5ZM16 17L14.625 15.55L17.175 13H9V11H17.175L14.625 8.45L16 7L21 12L16 17Z"
+                              fill="white"/>
+                    </svg>
+                </div>
+                <div class="navbarItemText">Logout</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="layout left">
+            <div class="scrollable" id="groupsWrapper">
+
+            </div>
+        </div>
+        <div class="layout right">
+            <div class="pageWrapper">
+                <div class="tableButtonsWrapper">
+
+                </div>
+                <div class="tableWrapper">
+                    <table class="defaultTable">
+                        <thead>
+                        <tr class="tableHeader">
+                            <th style="width: 30px"></th>
+                            <th>Cognome e Nome</th>
+                            <th>Scuola di Provenienza</th>
+                            <th>Nome Gruppo</th>
+                            <th>Ora di partenza</th>
+                            <th>Presenza</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableOrientati">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

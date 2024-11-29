@@ -1,21 +1,28 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Dashboard</title>
-    <base href="../../">
+    <base href="../../"/>
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
+    </script>
+
+    <!-- umami -->
+    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
 
     <!-- Librerie -->
+    <script src="js/libraries/urlModule.js"></script>
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
     <script src="js/libraries/routingModule.js"></script>
 
     <!-- Scripts-->
-    <script>
-        checkAdmin();
-    </script>
 
     <style>
         #navbar {
@@ -35,30 +42,28 @@
             padding: 8px 16px;
             text-decoration: none;
         }
-
     </style>
-
 </head>
 <body>
 <h1>
-    home per la parte di amministrazione
-    ci sono le parti di gesitone degli utenti, percorsi di studi, indirizzi, aule, percorsi. accompagnatori,
+    home per la parte di amministrazione ci sono le parti di gesitone degli
+    utenti, percorsi di studi, indirizzi, aule, percorsi. accompagnatori,
     accompagnati.
-
 </h1>
 <div>
     <!-- navbar a sx -->
     <ul id="navbar">
         <li><a href="pages/admin/dashboard.html">Home</a></li>
         <li><a href="pages/admin/utenti.html">Utenti</a></li>
-        <li><a href="pages/admin/percorsoDiStudi.html">Percorsi di Studi</a></li>
+        <li>
+            <a href="pages/admin/percorsoDiStudi.html">Percorsi di Studi</a>
+        </li>
         <li><a href="pages/admin/indirizzi.html">Indirizzi</a></li>
         <li><a href="pages/admin/aule.html">Aule</a></li>
         <li><a href="pages/admin/percorsi.html">Percorsi</a></li>
         <li><a href="pages/admin/accompagnatori.html">Accompagnatori</a></li>
         <li><a href="pages/admin/accompagnati.html">Accompagnati</a></li>
     </ul>
-
 </div>
 </body>
 </html>

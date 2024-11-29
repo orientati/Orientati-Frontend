@@ -1,7 +1,7 @@
 "use strict";
 
 let utenti = [];
-let urlEndpoint = "http://localhost:8000/api/v1/";
+
 
 /**
  * Collega l'utente con l'orientatore specificato dal codice
@@ -9,26 +9,23 @@ let urlEndpoint = "http://localhost:8000/api/v1/";
  * @returns Errore del server o risposta OK
  */
 function linkOrientatore(codiceOrientatore) {
-  return new Promise((res, rej) => {
-    const access_token = localStorage.getItem("access_token");
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-    };
-    const body = {
-      orientatore_codice: codiceOrientatore,
-    };
+    return new Promise((res, rej) => {
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
 
-    vallauriRequest(`${urlEndpoint}utenti/orientatore`, "POST", headers, body)
-      .then((response) => {
-        res("Utente collegato come Orientatore!");
-      })
-      .catch((err) => {
-        if (err == 422)
-          rej("Codice non valido, inserire il codice corretto...", 422);
-        else rej(semplificaErrore(err), err);
-        console.error(err);
-      });
-  });
+        vallauriRequest(`${serverUrl}utenti/orientatore?orientatore_codice=` + codiceOrientatore, "POST", headers)
+            .then((response) => {
+                res("Utente collegato come Orientatore!");
+            })
+            .catch((err) => {
+                if (err == 422)
+                    rej("Codice non valido, inserire il codice corretto...", 422);
+                else rej(semplificaErrore(err), err);
+                console.error(err);
+            });
+    });
 }
 
 /**
@@ -38,30 +35,30 @@ function linkOrientatore(codiceOrientatore) {
  * @returns Response con successo o errore da mostrare
  */
 function changePassword(currentPassword, newPassword) {
-  return new Promise((res, rej) => {
-    const access_token = localStorage.getItem("access_token");
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-    };
-    const body = {
-      old_password: currentPassword,
-      new_password: newPassword,
-    };
+    return new Promise((res, rej) => {
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
+        const body = {
+            old_password: currentPassword,
+            new_password: newPassword,
+        };
 
-    vallauriRequest(
-      `${urlEndpoint}utenti/me/change_password`,
-      "POST",
-      headers,
-      body
-    )
-      .then((response) => {
-        res("Password cambiata con successo!");
-      })
-      .catch((err) => {
-        rej(semplificaErrore(err));
-        console.error(err);
-      });
-  });
+        vallauriRequest(
+            `${serverUrl}utenti/me/change_password`,
+            "POST",
+            headers,
+            body
+        )
+            .then((response) => {
+                res("Password cambiata con successo!");
+            })
+            .catch((err) => {
+                rej(semplificaErrore(err));
+                console.error(err);
+            });
+    });
 }
 
 /**
@@ -69,28 +66,28 @@ function changePassword(currentPassword, newPassword) {
  * @returns classe USER con i dettagli dell'utente corrente
  */
 function getMe() {
-  return new Promise((res, rej) => {
-    const access_token = localStorage.getItem("access_token");
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-    };
+    return new Promise((res, rej) => {
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
 
-    vallauriRequest(`${urlEndpoint}utenti/me`, "GET", headers)
-      .then((user) => {
-        res(
-          new User(
-            user.username,
-            user.admin,
-            user.temporaneo,
-            user.orientatore_id
-          )
-        );
-      })
-      .catch((err) => {
-        rej(semplificaErrore(err), err);
-        console.error(err);
-      });
-  });
+        vallauriRequest(`${serverUrl}utenti/me`, "GET", headers)
+            .then((user) => {
+                res(
+                    new User(
+                        user.username,
+                        user.admin,
+                        user.temporaneo,
+                        user.orientatore_id
+                    )
+                );
+            })
+            .catch((err) => {
+                rej(semplificaErrore(err), err);
+                console.error(err);
+            });
+    });
 }
 
 /**
@@ -98,33 +95,33 @@ function getMe() {
  * @returns Una LISTA di classe USER con i dettagli
  */
 function getUsers() {
-  return new Promise((res, rej) => {
-    utenti = [];
-    const access_token = localStorage.getItem("access_token");
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-    };
+    return new Promise((res, rej) => {
+        utenti = [];
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
 
-    vallauriRequest(`${urlEndpoint}admin/utenti`, "GET", headers)
-      .then((response) => {
-        response.users.forEach((user) => {
-          utenti.push(
-            new User(
-              user.username,
-              user.admin,
-              user.temporaneo,
-              user.orientatore_id,
-              user.id
-            )
-          );
-          res(utenti);
-        });
-      })
-      .catch((err) => {
-        rej(semplificaErrore(500));
-        console.error(err);
-      });
-  });
+        vallauriRequest(`${serverUrl}admin/utenti`, "GET", headers)
+            .then((response) => {
+                response.users.forEach((user) => {
+                    utenti.push(
+                        new User(
+                            user.username,
+                            user.admin,
+                            user.temporaneo,
+                            user.orientatore_id,
+                            user.id
+                        )
+                    );
+                    res(utenti);
+                });
+            })
+            .catch((err) => {
+                rej(semplificaErrore(500));
+                console.error(err);
+            });
+    });
 }
 
 /**
@@ -133,31 +130,31 @@ function getUsers() {
  * @returns Nuova classe USER con i dettagli
  */
 function getUserById(id) {
-  return new Promise((res, rej) => {
-    if (id) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
+    return new Promise((res, rej) => {
+        if (id) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "GET", headers)
-        .then((response) => {
-          res(
-            new User(
-              response.username,
-              response.admin,
-              response.temporaneo,
-              response.orientatore_id,
-              response.id
-            )
-          );
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Nessun id utente selezionato");
-  });
+            vallauriRequest(`${serverUrl}admin/utenti/${id}`, "GET", headers)
+                .then((response) => {
+                    res(
+                        new User(
+                            response.username,
+                            response.admin,
+                            response.temporaneo,
+                            response.orientatore_id,
+                            response.id
+                        )
+                    );
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Nessun id utente selezionato");
+    });
 }
 
 /**
@@ -171,51 +168,51 @@ function getUserById(id) {
  * @returns Una classe USER con i dati aggiornati.
  */
 function patchUser(
-  id,
-  username,
-  password,
-  isAdmin,
-  isTemporary,
-  idOrientatore
+    id,
+    username,
+    password,
+    isAdmin,
+    isTemporary,
+    idOrientatore
 ) {
-  return new Promise((res, rej) => {
-    if (
-      id &&
-      username.trim() &&
-      password.trim() &&
-      typeof isAdmin === Boolean &&
-      typeof isTemporary === Boolean
-    ) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
-      const body = {
-        username: username,
-        password: password,
-        admin: isAdmin,
-        temporaneo: isTemporary,
-        orientatore_id: idOrientatore,
-      };
+    return new Promise((res, rej) => {
+        if (
+            id &&
+            username.trim() &&
+            password.trim() &&
+            typeof isAdmin === Boolean &&
+            typeof isTemporary === Boolean
+        ) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
+            const body = {
+                username: username,
+                password: password,
+                admin: isAdmin,
+                temporaneo: isTemporary,
+                orientatore_id: idOrientatore,
+            };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "PUT", headers, body)
-        .then((response) => {
-          res(
-            new User(
-              response.username,
-              response.admin,
-              response.temporaneo,
-              response.orientatore_id,
-              response.id
-            )
-          );
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Dati aggiornati immessi non validi");
-  });
+            vallauriRequest(`${serverUrl}admin/utenti/${id}`, "PUT", headers, body)
+                .then((response) => {
+                    res(
+                        new User(
+                            response.username,
+                            response.admin,
+                            response.temporaneo,
+                            response.orientatore_id,
+                            response.id
+                        )
+                    );
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Dati aggiornati immessi non validi");
+    });
 }
 
 /**
@@ -228,43 +225,43 @@ function patchUser(
  * @returns Un messaggio di avvenuta modifica dei dati sul server
  */
 function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
-  return new Promise((res, rej) => {
-    if (
-      username.trim() &&
-      password.trim() &&
-      typeof isAdmin === "boolean" &&
-      typeof isTemporary === "boolean"
-    ) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
-      const body = {
-        username: username,
-        password: password,
-        admin: isAdmin,
-        temporaneo: isTemporary,
-        orientatore_id: idOrientatore,
-      };
+    return new Promise((res, rej) => {
+        if (
+            username.trim() &&
+            password.trim() &&
+            typeof isAdmin === "boolean" &&
+            typeof isTemporary === "boolean"
+        ) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
+            const body = {
+                username: username,
+                password: password,
+                admin: isAdmin,
+                temporaneo: isTemporary,
+                orientatore_id: idOrientatore,
+            };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti`, "POST", headers, body)
-        .then((response) => {
-          res(
-            new User(
-              response.username,
-              response.admin,
-              response.temporaneo,
-              response.orientatore_id,
-              response.id
-            )
-          );
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Dati immessi non validi");
-  });
+            vallauriRequest(`${serverUrl}admin/utenti`, "POST", headers, body)
+                .then((response) => {
+                    res(
+                        new User(
+                            response.username,
+                            response.admin,
+                            response.temporaneo,
+                            response.orientatore_id,
+                            response.id
+                        )
+                    );
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Dati immessi non validi");
+    });
 }
 
 /**
@@ -273,23 +270,23 @@ function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
  * @returns Un messaggio di avvenuta cancellazione del'user.
  */
 function delUser(id) {
-  return new Promise((res, rej) => {
-    if (id) {
-      const access_token = localStorage.getItem("access_token");
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
+    return new Promise((res, rej) => {
+        if (id) {
+            const access_token = localStorage.getItem("access_token");
+            const headers = {
+                Authorization: `Bearer ${access_token}`,
+            };
 
-      vallauriRequest(`${urlEndpoint}admin/utenti/${id}`, "DELETE", headers)
-        .then((response) => {
-          res("Utente rimosso con successo!");
-        })
-        .catch((err) => {
-          rej(semplificaErrore(500));
-          console.error(err);
-        });
-    } else rej("Nessun id utente selezionato");
-  });
+            vallauriRequest(`${serverUrl}admin/utenti/${id}`, "DELETE", headers)
+                .then((response) => {
+                    res("Utente rimosso con successo!");
+                })
+                .catch((err) => {
+                    rej(semplificaErrore(500));
+                    console.error(err);
+                });
+        } else rej("Nessun id utente selezionato");
+    });
 }
 
 /**
@@ -298,9 +295,9 @@ function delUser(id) {
  * @returns Una stringa messaggio generalizzata dell'errore
  */
 function semplificaErrore(errorCode) {
-  if (errorCode == 401 || errorCode == 403)
-    return "Azione non consentita a questo utente";
-  else if (errorCode == 422) return "La password corrente è errata";
-  else if (errorCode == 400) return "La password corrente è errata";
-  else return "Errore interno nel server";
+    if (errorCode == 401 || errorCode == 403)
+        return "Azione non consentita a questo utente";
+    else if (errorCode == 422) return "La password corrente è errata";
+    else if (errorCode == 400) return "La password corrente è errata";
+    else return "Errore interno nel server";
 }

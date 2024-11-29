@@ -6,16 +6,16 @@
  * @param {int} codiceErrore
  */
 function MostraPaginaErrore(
-  messaggioErrore = "Pagina inesistente",
-  codiceErrore = 404
+    messaggioErrore = "Pagina inesistente",
+    codiceErrore = 404
 ) {
-  const jsonMsg = {
-    msg: messaggioErrore,
-    code: codiceErrore,
-  };
+    const jsonMsg = {
+        msg: messaggioErrore,
+        code: codiceErrore,
+    };
 
-  sessionStorage.setItem("errorMsg", JSON.stringify(jsonMsg));
-  window.location.href = "pages/error.html";
+    sessionStorage.setItem("errorMsg", JSON.stringify(jsonMsg));
+    window.location.href = "pages/error.html";
 }
 
 /**
@@ -25,41 +25,41 @@ function MostraPaginaErrore(
  * @param {int} tempo
  */
 function mostraAlert(
-  tipo = "errore",
-  msg = "Errore nel server...",
-  tempo = 5000
+    tipo = "errore",
+    msg = "Errore nel server...",
+    tempo = 5000
 ) {
-  if (tempo < 10) tempo *= 1000;
+    if (tempo < 10) tempo *= 1000;
 
-  let alertWrapper = document.getElementById("alert-wrapper");
-  if (!alertWrapper) {
-    const body = document.querySelector("body");
-    alertWrapper = document.createElement("div");
-    alertWrapper.id = "alert-wrapper";
-    body.appendChild(alertWrapper);
-  }
+    let alertWrapper = document.getElementById("alert-wrapper");
+    if (!alertWrapper) {
+        const body = document.querySelector("body");
+        alertWrapper = document.createElement("div");
+        alertWrapper.id = "alert-wrapper";
+        body.appendChild(alertWrapper);
+    }
 
-  const alertDiv = document.createElement("div");
+    const alertDiv = document.createElement("div");
 
-  switch (tipo) {
-    case "errore":
-      alertDiv.classList.add("alert-danger");
-      break;
-    case "successo":
-      alertDiv.classList.add("alert-success");
-      break;
-    default:
-      alertDiv.classList.add("alert-info");
-      break;
-  }
-  alertDiv.innerText = msg;
-  alertDiv.classList.add("alert-enter");
+    switch (tipo) {
+        case "errore":
+            alertDiv.classList.add("alert-danger");
+            break;
+        case "successo":
+            alertDiv.classList.add("alert-success");
+            break;
+        default:
+            alertDiv.classList.add("alert-info");
+            break;
+    }
+    alertDiv.innerText = msg;
+    alertDiv.classList.add("alert-enter");
 
-  alertWrapper.appendChild(alertDiv);
+    alertWrapper.appendChild(alertDiv);
 
-  setTimeout(() => {
-    rimuoviAlert(alertWrapper, alertDiv);
-  }, tempo);
+    setTimeout(() => {
+        rimuoviAlert(alertWrapper, alertDiv);
+    }, tempo);
 }
 
 /**
@@ -68,11 +68,11 @@ function mostraAlert(
  * @param {Node} alert L'alert
  */
 function rimuoviAlert(e, alert) {
-  alert.classList.add("alert-exit");
-  alert.addEventListener("animationend", () => {
-    e.removeChild(alert);
+    alert.classList.add("alert-exit");
+    alert.addEventListener("animationend", () => {
+        e.removeChild(alert);
 
-    if(!e.firstChild)
-      document.removeChild(e);
-  });
+        if (!e.firstChild)
+            e.remove();
+    });
 }

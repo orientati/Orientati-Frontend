@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="it">
-<h>
-    <meta charset="UTF-8">
-    <title>orientatore</title>
-    <base href="../../">
+<meta charset="UTF-8">
+<title>orientatore</title>
+<base href="../../">
 
-    <!-- Libraries -->
-     <script src="js/Libraries/requestModule.js"></script>
-     <script src="js/Libraries/errorModule.js"></script>
-     <script src="js/Libraries/loginModule.js"></script>
+<!-- umami -->
+<script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
 
-    <!-- Model -->
-     <script src="js/Model/User.js"></script>
+<!-- Libraries -->
+<script src="js/libraries/urlModule.js"></script>
+<script src="js/Libraries/requestModule.js"></script>
+<script src="js/Libraries/errorModule.js"></script>
+<script src="js/Libraries/loginModule.js"></script>
 
-    <!-- Controllers -->
-     <script src="js/controllers/usersController.js"></script>
+<!-- Model -->
+<script src="js/Model/User.js"></script>
 
-     <!-- Scripts -->
-     <script src="js/pages/orientatore/collegaOrientatore.js"></script>
+<!-- Controllers -->
+<script src="js/controllers/usersController.js"></script>
 
-    <!-- Styles -->
-     <link rel="stylesheet" href="css/style.css">
+<!-- Scripts -->
+<script src="js/pages/orientatore/collegaOrientatore.js"></script>
+
+<!-- Styles -->
+<link href="css/collegaOrientatore.css" rel="stylesheet">
+
+<link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
-<label for="codiceOrientatore">Inserisci il codice dell'orientatore</label>
-<input type="text" id="codiceOrientatore">
-<button id="btnLink">collegati</button>
+<main>
+    <div class="container">
+        <div class="card">
+            <h1>Accedi</h1>
+            <input id="codiceOrientatore" placeholder="Inserisci il tuo codice" type="text">
+            <button id="btnLink">Accedi</button>
+        </div>
+    </div>
+</main>
 </body>
 </html>

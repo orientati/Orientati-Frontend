@@ -1,14 +1,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Area Personale</title>
     <base href="../">
+
+    <!-- umami -->
+    <script defer src="http://10.0.5.81:3000/script.js" data-website-id="d70b3813-ed92-4dad-a339-d622acf47ae6"></script>
 
     <!-- Classi -->
     <script src="js/Model/User.js"></script>
 
     <!-- Librerie -->
+    <script src="js/libraries/urlModule.js"></script>
     <script src="js/libraries/requestModule.js"></script>
     <script src="js/libraries/loginModule.js"></script>
     <script src="js/libraries/errorModule.js"></script>
@@ -20,34 +24,34 @@
     <script src="js/pages/areaPersonale.js"></script>
 
     <!-- Stili -->
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/areaPersonale.css"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/areaPersonale.css" rel="stylesheet"/>
 
 </head>
 <body>
-    <div class="card">
-        <div class="card-left">
-            <img src="assets/user.jpg" alt="Immagine Profilo" class="profile-image">
-            <p id="role">Admin</p>
-        </div>
-        <div class="card-right">
-            <h2>Modifica Dati</h2>
-            <form id="formData">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="Super Banana" readonly>
-                
-                <label for="passwordLabel">Password:</label>
-                <input type="password" id="passwordLabel" value="Bananone" readonly>
-                <br>
-                <h4>Cambia password:</h4>
-
-                <input type="password" id="password" placeholder="Password corrente" required>
-                <input type="password" id="newPassword" placeholder="Nuova password" minlength="8" required>
-                <input type="password" id="newPasswordCheck" placeholder="Reinserisci password" minlength="8" required>
-                
-                <button type="submit">Aggiorna Password</button>
-            </form>
-        </div>
+<div class="card">
+    <div class="card-left">
+        <img alt="Immagine Profilo" class="profile-image" src="assets/user.jpg">
+        <p id="role">Admin</p>
     </div>
+    <div class="card-right">
+        <h2>Modifica Dati</h2>
+        <form id="formData">
+            <label for="username">Username:</label>
+            <input id="username" name="username" readonly type="text" value="Super Banana">
+
+            <label for="passwordLabel">Password:</label>
+            <input id="passwordLabel" readonly type="password" value="Bananone">
+            <br>
+            <h4>Cambia password:</h4>
+
+            <input id="password" placeholder="Password corrente" required type="password">
+            <input id="newPassword" minlength="8" placeholder="Nuova password" required type="password">
+            <input id="newPasswordCheck" minlength="8" placeholder="Reinserisci password" required type="password">
+
+            <button type="submit">Aggiorna Password</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
