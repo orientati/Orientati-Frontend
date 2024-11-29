@@ -2,6 +2,7 @@
 
 let utenti = [];
 
+
 /**
  * Collega l'utente con l'orientatore specificato dal codice
  * @param {string} codiceOrientatore Codice dato dall'amministratore per il collegamento
