@@ -229,6 +229,51 @@ function loadTable(orientati) {
             }
         });
         td.appendChild(range);
+        tr.appendChild(td);
+
+
+        td = document.createElement("td");
+        let button = document.createElement("button");
+        button.classList.add("btnModifica");
+        button.textContent = "Modifica";
+        button.id = "modifca-" + datiOrientato.id;
+
+        button.addEventListener("click", function () {
+            const modal = document.getElementById("modal");
+            const comboBox = document.getElementById("comboBox");
+            const closeModalButton = document.getElementById("closeModalButton");
+            const applyButton = document.getElementById("applyButton");
+
+            //Chiamata per sapere i gruppi passare il gruppo gia selezionato
+
+
+
+            comboBox.appendChild();
+            modal.style.display = "block";
+
+            closeModalButton.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            applyButton.addEventListener("click", function () {
+                const selectedOption = document.getElementById("comboBox").value;
+
+                modal.style.display = "none";
+            });
+
+
+        });
+
+        td.appendChild(button);
+
+        tr.appendChild(td);
+
 
         tr.appendChild(td);
         tableOrientati.appendChild(tr);

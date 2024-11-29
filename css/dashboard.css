@@ -158,10 +158,10 @@ main {
 
 .navbarItem:hover {
     cursor: pointer;
+}
 
-    .navbarItemBtn {
-        background-color: #6481ff;
-    }
+.navbarItemBtn {
+    background-color: #6481ff;
 }
 
 .navbarItemText {
@@ -317,6 +317,8 @@ main {
     align-items: center;
     justify-content: center;
     padding-top: 30px;
+    width: fit-content;
+    height: fit-content;
 }
 
 .tableWrapper::-webkit-scrollbar {
@@ -404,4 +406,53 @@ p {
 
 .custom-toggle:focus {
     outline: none;
+}
+
+.btnModifica {
+    padding: 6px;
+    border-radius: 24px;
+    color: white;
+    background-color: #506aff;
+    border: none;
+}
+
+/* Stile della modale */
+.modal {
+    display: none; /* La modale è nascosta inizialmente */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Sfondo trasparente */
+    padding-top: 60px;
+}
+
+/* Contenuto della modale */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    text-align: center;
+}
+
+/* Pulsante di chiusura (X) */
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+/* Effetto hover sulla X */
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
