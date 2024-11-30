@@ -81,7 +81,7 @@ function creaGruppo(group) {
 
         //Chiamata per sapere i gruppi passare il gruppo gia selezionato
 
-        inputOrario.innerText = group.gruppo_orario_partenza;
+        inputOrario.value = group.orario_partenza;
         modal.style.display = "block";
 
         closeModalButton.addEventListener("click", function () {
@@ -95,10 +95,10 @@ function creaGruppo(group) {
         });
 
         applyButton.addEventListener("click", function () {
-            const selectedOption = document.getElementById("comboBox").value;
-            const orientatoId = datiOrientato.id;
+            const orario = document.getElementById("inputOrario").value;
+            const gruppoId = group.id;
 
-            vallauriRequest(`${serverUrl}admin/dashboard/orientati/gruppo/${orientatoId}?gruppo_id=${selectedOption}`, "PUT",
+            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/orario_partenza/${gruppoId}?orario_partenza=${orario}`, "PUT",
                 {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`
                 })
@@ -113,13 +113,14 @@ function creaGruppo(group) {
 
             modal.style.display = "none";
         });
-
-
     });
 
+    const divWrapper = document.createElement("div");
+    divWrapper.id="divWrapper";
+    divWrapper.appendChild(onTimeSpan);
+    divWrapper.appendChild(button)
     topDiv.appendChild(groupDiv);
-    topDiv.appendChild(button);
-    topDiv.appendChild(onTimeSpan);
+    topDiv.appendChild(divWrapper);
 
     // Crea la sezione centrale
     const centralDiv = document.createElement("div");

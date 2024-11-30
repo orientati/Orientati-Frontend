@@ -59,12 +59,10 @@ main {
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
 }
 
 .top {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
@@ -456,4 +454,10 @@ p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#divWrapper {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 }
