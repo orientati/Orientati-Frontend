@@ -301,8 +301,12 @@ main {
 
 .defaultTable tr {
     background-color: white;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     width: 100%;
+}
+
+.td {
+    margin-bottom: 10   00em;
 }
 
 .defaultTable th {
