@@ -90,6 +90,14 @@ main {
     height: fit-content;
 }
 
+.bit-late{
+    background-color: yellow;
+    padding: 6px;
+    border-radius: 8px;
+    color: black;
+    height: fit-content;
+}
+
 .next-lab {
     font-size: 18px;
     margin-bottom: 6px;
