@@ -362,6 +362,7 @@ body {
     font-family: "Overpass";
     font-size: 0.8em;
     font-weight: bold;
+    touch-action: none;
 }
 
 p {
