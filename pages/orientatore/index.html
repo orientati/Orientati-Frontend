@@ -32,6 +32,35 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+<div class="layout">
+    <div class="top">
+        <p id="data"></p>
+        <h1 id="nome-gruppo"></h1>
+    </div>
+    <div class="bottom">
+        <p id="azione-in-corso"></p>
+        <p id="laboratorio-attuale"></p>
+        <h1 id="aula-attuale"></h1>
+        <p id="orari-teorico-attuale"></p>
+        <div class="separatore"></div>
+        <div class="timer">
+            <p>Tempo teorico rimanente</p>
+            <div class="timer-layout">
+                <h1 class="timer-h1" id="minuti"></h1>
+                <h1>:</h1>
+                <h1 class="timer-h1" id="secondi"></h1>
+            </div>
+        </div>
+        <div class="separatore"></div>
+        <p>Prossimo Laboratorio</p>
+        <p id="aula-futura"></p>
+        <h1 id="laboratorio-futuro"></h1>
+        <p id="orari-teorico-futuro"></p>
+        <button class="btn-tappe" id="btn-indietro" onclick="nonDisponibie()">Tappa indietro</button>
+        <button class="btn-tappe" id="btn-avanti" onclick="statoSuccessivo()">Tappa avanti</button>
+        <p id="non-disp" style="color: red; display: none;">Questa funzione non e' disponibile al momento</p>
+    </div>
+</div>
 <div class="nav-bar">
     <div class="nav-item">
         <div class="nav-icon-selected">
@@ -58,35 +87,6 @@
             </svg>
         </div>
         <p>Logout</p>
-    </div>
-</div>
-<div class="layout">
-    <div class="top">
-        <p id="data"></p>
-        <h1 id="nome-gruppo"></h1>
-    </div>
-    <div class="bottom">
-        <p id="azione-in-corso"></p>
-        <p id="aula-attuale"></p>
-        <h1 id="laboratorio-attuale"></h1>
-        <p id="orari-teorico-attuale"></p>
-        <div class="separatore"></div>
-        <div class="timer">
-            <p>Tempo teorico rimanente</p>
-            <div class="timer-layout">
-                <h1 class="timer-h1" id="minuti"></h1>
-                <h1>:</h1>
-                <h1 class="timer-h1" id="secondi"></h1>
-            </div>
-        </div>
-        <div class="separatore"></div>
-        <p>Prossimo Laboratorio</p>
-        <p id="aula-futura"></p>
-        <h1 id="laboratorio-futuro"></h1>
-        <p id="orari-teorico-futuro"></p>
-        <button class="btn-tappe" id="btn-indietro" onclick="nonDisponibie()">Tappa indietro</button>
-        <button class="btn-tappe" id="btn-avanti" onclick="statoSuccessivo()">Tappa avanti</button>
-        <p id="non-disp" style="color: red; display: none;">Questa funzione non e' disponibile al momento</p>
     </div>
 </div>
 </body>
