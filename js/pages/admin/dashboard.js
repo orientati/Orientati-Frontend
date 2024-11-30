@@ -237,10 +237,10 @@ function loadTable(orientati) {
         button.classList.add("btnModifica");
         button.textContent = "Modifica";
         button.id = "modifca-" + datiOrientato.id;
-        if (datiOrientato.gruppo_orario_partenza === "") {
-            button.style.backgroundColor = "gray";
-            button.disabled = true;
-        }
+        // if (datiOrientato.gruppo_orario_partenza === "") {
+        //     button.style.backgroundColor = "gray";
+        //     button.disabled = true;
+        // }
 
         button.addEventListener("click", function () {
             const modal = document.getElementById("modal");
