@@ -198,7 +198,7 @@ function getInOrario(group) {
     ) {
         let minutesRitardo = (d.getHours() - data.getHours()) * 60 + d.getMinutes() - data.getMinutes();
 
-        if(minutesRitardo >= 3){
+        if(minutesRitardo <= 3){
             return {
                 classe: "bit-late",
                 text: "LIEVE RITARDO",
