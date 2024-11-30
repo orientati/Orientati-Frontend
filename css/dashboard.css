@@ -414,6 +414,7 @@ p {
     color: white;
     background-color: #506aff;
     border: none;
+    display: flow;
 }
 
 /* Stile della modale */

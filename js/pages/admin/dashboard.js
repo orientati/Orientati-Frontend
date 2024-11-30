@@ -70,7 +70,55 @@ function creaGruppo(group) {
     onTimeSpan.className = details.classe;
     onTimeSpan.textContent = details.text;
 
+    let button = document.createElement("button");
+    button.classList.add("btnModifica");
+    button.textContent = "Modifica";
+    button.addEventListener("click", function () {
+        const modal = document.getElementById("modalGruppo");
+        const inputOrario = document.getElementById("inputOrario");
+        const closeModalButton = document.getElementById("closeModalButtonGruppo");
+        const applyButton = document.getElementById("applyButtonGruppo");
+
+        //Chiamata per sapere i gruppi passare il gruppo gia selezionato
+
+        inputOrario.innerText = group.gruppo_orario_partenza;
+        modal.style.display = "block";
+
+        closeModalButton.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        applyButton.addEventListener("click", function () {
+            const selectedOption = document.getElementById("comboBox").value;
+            const orientatoId = datiOrientato.id;
+
+            vallauriRequest(`${serverUrl}admin/dashboard/orientati/gruppo/${orientatoId}?gruppo_id=${selectedOption}`, "PUT",
+                {
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                })
+                .then(() => {
+                    modal.style.display = "none";
+                    updatePage();
+                })
+                .catch((err) => {
+                    console.error(err);
+                    mostraAlert("errore", err);
+                });
+
+            modal.style.display = "none";
+        });
+
+
+    });
+
     topDiv.appendChild(groupDiv);
+    topDiv.appendChild(button);
     topDiv.appendChild(onTimeSpan);
 
     // Crea la sezione centrale
