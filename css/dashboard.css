@@ -298,6 +298,7 @@ main {
 
 .defaultTable tr {
     background-color: white;
+    margin-bottom: 10px;
     width: 100%;
 }
 

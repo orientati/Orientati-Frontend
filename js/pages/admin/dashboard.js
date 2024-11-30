@@ -244,12 +244,12 @@ function loadTable(orientati) {
     td = document.createElement("td");
     td.textContent = datiOrientato.cognome + " " + datiOrientato.nome;
     tr.appendChild(td);
-
+/*
     td = document.createElement("td");
     td.id = "scuola-" + datiOrientato.scuolaDiProvenienza_id;
     td.textContent = datiOrientato.scuolaDiProvenienza_nome;
     tr.appendChild(td);
-
+*/
     td = document.createElement("td");
     td.id = "gruppo-" + datiOrientato.gruppo_id;
     td.textContent = datiOrientato.gruppo_nome;
