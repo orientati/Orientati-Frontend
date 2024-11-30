@@ -22,15 +22,19 @@
     <script src="js/libraries/errorModule.js"></script>
 
     <!-- Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/pages/admin/statistiche.js"></script>
 
     <!-- Styles -->
     <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/stats.css" rel="stylesheet"/>
 </head>
 <body>
 <main>
-    <h1>Statistiche</h1>
-    <h2 id="output"></h2>
+    <h3 style="text-align: center;">STATISTICHE ORIENTATI</h3>
+    <h4 id="output-orientati"></h4>
+    <h3 style="text-align: center;">I GRUPPI PIU' RITARDONI</h3>
+    <canvas id="chart-ritardo"></canvas>
 </main>
 </body>
 </html>

@@ -1,0 +1,31 @@
+#output-orientati{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#orientatiTotali{
+    background-color: gray;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+}
+
+#orientatiPresenti{
+    background-color: green;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+
+}
+
+#orientatiAssenti{
+    background-color: red;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+
+}
+
+#chart-ritardo{
+}
