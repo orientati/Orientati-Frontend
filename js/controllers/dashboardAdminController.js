@@ -51,3 +51,26 @@ function changePresenza(orientatoId, presente, assente) {
             });
     });
 }
+
+function getAule(){
+    return new Promise((res, rej) => {
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
+
+        vallauriRequest(
+            `${serverUrl}admin/dashboard/aule/`,
+            "GET",
+            headers,
+            {}
+        )
+            .then((response) => {
+                res(response.aule);
+            })
+            .catch((err) => {
+                console.error(err);
+                rej("Errore nel caricamento delle aule");
+            });
+    });
+}

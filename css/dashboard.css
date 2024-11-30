@@ -105,6 +105,7 @@ main {
     user-select: none;
 
     display: flex;
+    position: sticky;
     flex-direction: column;
     gap: 35px;
 
@@ -455,4 +456,44 @@ p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#overviewPage{
+    overflow-y:auto !important;
+    flex-direction: column;
+}
+
+#auleOverview{
+    width: 100%;
+    height: auto;
+    background: #c4cfe9;
+
+    padding: 0 36px 36px 36px;
+}
+
+#auleContainer{
+    display: flex;
+    flex-wrap: wrap;    
+    justify-content: space-between;
+
+    background-color: #fffeff;
+    padding: 22px;
+    border-radius: 16px;
+
+    width: 100%;
+    height: min-content;
+    max-height: 50vh;
+
+    overflow-y: auto;
+}
+
+.templateAula{
+    background-color: #f0f0f0;
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: min-content !important;
+    min-width: 45%;
 }
