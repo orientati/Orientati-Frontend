@@ -78,6 +78,8 @@ main {
     padding: 6px;
     border-radius: 8px;
     color: white;
+    height: fit-content;
+
 }
 
 .not-started {
@@ -85,6 +87,7 @@ main {
     padding: 6px;
     border-radius: 8px;
     color: white;
+    height: fit-content;
 }
 
 .next-lab {
@@ -494,7 +497,8 @@ p {
     flex-direction: column;
     gap: 18px;
     width: min-content !important;
-    min-width: 45%;
+    min-width: 30em;
+    height: 10em;
 }
 
 #divWrapper {

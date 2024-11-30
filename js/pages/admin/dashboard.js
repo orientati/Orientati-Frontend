@@ -427,13 +427,13 @@ function creaAula(aula) {
       "<span style='font-size: 18px; margin-left: 14px'>" +
       aula.posizione +
       "</span>";
-
+/*
     const groupMembers = document.createElement("p");
     groupMembers.id = aula.id + "-dettagli";
     groupMembers.textContent = aula.dettagli;
-
+*/
     groupDiv.appendChild(groupTitle);
-    groupDiv.appendChild(groupMembers);
+    //groupDiv.appendChild(groupMembers);
 
     const onTimeSpan = document.createElement("span");
     onTimeSpan.id = aula.id + "-occupato";
