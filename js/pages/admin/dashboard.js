@@ -81,8 +81,57 @@ function creaGruppo(group) {
   onTimeSpan.className = details.classe;
   onTimeSpan.textContent = details.text;
 
-  topDiv.appendChild(groupDiv);
-  topDiv.appendChild(onTimeSpan);
+    let button = document.createElement("button");
+    button.classList.add("btnModifica");
+    button.textContent = "Modifica";
+    button.addEventListener("click", function () {
+        const modal = document.getElementById("modalGruppo");
+        const inputOrario = document.getElementById("inputOrario");
+        const closeModalButton = document.getElementById("closeModalButtonGruppo");
+        const applyButton = document.getElementById("applyButtonGruppo");
+
+        //Chiamata per sapere i gruppi passare il gruppo gia selezionato
+
+        inputOrario.value = group.orario_partenza;
+        modal.style.display = "block";
+
+        closeModalButton.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        applyButton.addEventListener("click", function () {
+            const orario = document.getElementById("inputOrario").value;
+            const gruppoId = group.id;
+
+            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/orario_partenza/${gruppoId}?orario_partenza=${orario}`, "PUT",
+                {
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                })
+                .then(() => {
+                    modal.style.display = "none";
+                    updatePage();
+                })
+                .catch((err) => {
+                    console.error(err);
+                    mostraAlert("errore", err);
+                });
+
+            modal.style.display = "none";
+        });
+    });
+
+    const divWrapper = document.createElement("div");
+    divWrapper.id="divWrapper";
+    divWrapper.appendChild(onTimeSpan);
+    divWrapper.appendChild(button)
+    topDiv.appendChild(groupDiv);
+    topDiv.appendChild(divWrapper);
 
   // Crea la sezione centrale
   const centralDiv = document.createElement("div");
@@ -251,15 +300,15 @@ function loadTable(orientati) {
     td.appendChild(range);
     tr.appendChild(td);
 
-    td = document.createElement("td");
-    let button = document.createElement("button");
-    button.classList.add("btnModifica");
-    button.textContent = "Modifica";
-    button.id = "modifca-" + datiOrientato.id;
-    if (datiOrientato.gruppo_orario_partenza === "") {
-      button.style.backgroundColor = "gray";
-      button.disabled = true;
-    }
+        td = document.createElement("td");
+        let button = document.createElement("button");
+        button.classList.add("btnModifica");
+        button.textContent = "Modifica";
+        button.id = "modifca-" + datiOrientato.id;
+        // if (datiOrientato.gruppo_orario_partenza === "") {
+        //     button.style.backgroundColor = "gray";
+        //     button.disabled = true;
+        // }
 
     button.addEventListener("click", function () {
       const modal = document.getElementById("modal");

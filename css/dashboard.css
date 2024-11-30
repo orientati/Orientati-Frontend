@@ -59,12 +59,10 @@ main {
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
 }
 
 .top {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
@@ -415,6 +413,7 @@ p {
     color: white;
     background-color: #506aff;
     border: none;
+    display: flow;
 }
 
 /* Stile della modale */
@@ -496,4 +495,10 @@ p {
     gap: 18px;
     width: min-content !important;
     min-width: 45%;
+}
+
+#divWrapper {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 }
