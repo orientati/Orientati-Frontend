@@ -258,6 +258,23 @@ main {
     overflow: hidden;
 }
 
+/*da sistemare*/
+
+.defaultTable {
+    border-collapse: collapse;
+    overflow-y: hidden;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.defaultTable tr:nth-child(odd) {
+    background-color: white;
+}
+
+.defaultTable tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
 .tableButtonsWrapper {
     display: flex;
     flex-direction: row;
@@ -389,6 +406,7 @@ p {
     margin: 0;
     cursor: pointer;
 }
+
 .tgl-def {
     touch-action: none;
 }
@@ -436,7 +454,7 @@ p {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4); /* Sfondo trasparente */
+    background-color: rgba(0, 0, 0, 0.4); /* Sfondo trasparente */
     padding-top: 60px;
 }
 
@@ -468,12 +486,12 @@ p {
     cursor: pointer;
 }
 
-#overviewPage{
-    overflow-y:auto !important;
+#overviewPage {
+    overflow-y: auto !important;
     flex-direction: column;
 }
 
-#auleOverview{
+#auleOverview {
     width: 100%;
     height: auto;
     background: #c4cfe9;
@@ -481,9 +499,9 @@ p {
     padding: 0 36px 36px 36px;
 }
 
-#auleContainer{
+#auleContainer {
     display: flex;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
     justify-content: space-between;
 
     background-color: #fffeff;
@@ -497,7 +515,7 @@ p {
     overflow-y: auto;
 }
 
-.templateAula{
+.templateAula {
     background-color: #f0f0f0;
     padding: 16px 20px;
     border-radius: 16px;
