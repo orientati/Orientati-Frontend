@@ -1,0 +1,40 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dashboard</title>
+    <base href="../../"/>
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
+    </script>
+
+    <!-- Modelli -->
+    <script src="js/model/Route.js"></script>
+
+    <!-- Librerie -->
+    <script src="js/libraries/urlModule.js"></script>
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
+
+    <!-- Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/pages/admin/statistiche.js"></script>
+
+    <!-- Styles -->
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/stats.css" rel="stylesheet"/>
+</head>
+<body>
+<main>
+    <h3 style="text-align: center;">STATISTICHE ORIENTATI</h3>
+    <h4 id="output-orientati"></h4>
+    <h3 style="text-align: center;">I GRUPPI PIU' RITARDONI</h3>
+    <canvas id="chart-ritardo"></canvas>
+</main>
+</body>
+</html>

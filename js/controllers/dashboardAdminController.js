@@ -1,6 +1,5 @@
 "use strict";
 let gruppi;
-let orientati;
 let indexGruppo;
 
 function getGruppi() {
@@ -19,8 +18,6 @@ function getGruppi() {
                         gruppi[i].aula_nome = "Fermo";
                         gruppi[i].aula_posizione = "Fermo";
                         gruppi[i].aula_materia = "Fermo";
-                    } else if (gruppi[i].numero_tappa === 0 && gruppi[i].arrivato === true) {
-                        gruppi[i] = undefined;
                     }
                     res(gruppi);
                 }
@@ -32,70 +29,7 @@ function getGruppi() {
     });
 }
 
-function findNextTappa(tappe, tappaId) {
-    return new Promise((res, rej) => {
-        let i = 0;
-        while (i < tappe.length) {
-            if (tappe[i].id == tappaId) break;
-            i++;
-        }
-
-        if (i < tappe.length) {
-            getAulaFromTappa(tappe[i].id).then((aulaDet) => {
-                tappe[i].aula = aulaDet;
-                res(tappe[i]);
-            });
-        } else res(null);
-    });
-}
-
-function getAulaFromTappa(idGruppo, numTappa) {
-    return new Promise((res, rej) => {
-        const access_token = localStorage.getItem("access_token");
-        const headers = {
-            Authorization: `Bearer ${access_token}`,
-        };
-
-        vallauriRequest(`${serverUrl}admin/dashboard/gruppi/tappe/${idGruppo}/${numTappa}`, "GET", headers)
-            .then((tappa) => {
-                vallauriRequest(
-                    `${serverUrl}admin/aule/${tappa.aula_id}`,
-                    "GET",
-                    headers
-                )
-                    .then((aula) => {
-                        res(aula);
-                    })
-                    .catch(() => {
-                        res(null);
-                    });
-            })
-            .catch(() => {
-                res(null);
-            });
-    });
-}
-
-function getOrientati() {
-    return new Promise((res, rej) => {
-        const access_token = localStorage.getItem("access_token");
-        const headers = {
-            Authorization: `Bearer ${access_token}`,
-        };
-
-        vallauriRequest(`${serverUrl}admin/dashboard/orientati`, "GET", headers)
-            .then((response) => {
-                orientati = response.orientati;
-                res(orientati);
-            })
-            .catch((err) => {
-                console.error(err);
-                rej("Errore nella ricezione degli orientati");
-            });
-    });
-}
-
-function changePresenza(orientatoId, presenza) {
+function changePresenza(orientatoId, presente, assente) {
     return new Promise((res, rej) => {
         const access_token = localStorage.getItem("access_token");
         const headers = {
@@ -103,7 +37,7 @@ function changePresenza(orientatoId, presenza) {
         };
 
         vallauriRequest(
-            `${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presenza}`,
+            `${serverUrl}admin/dashboard/orientati/${orientatoId}?presente=${presente}&assente=${assente}`,
             "PUT",
             headers,
             {}
@@ -114,6 +48,29 @@ function changePresenza(orientatoId, presenza) {
             .catch((err) => {
                 console.error(err);
                 rej("Errore nel cambiamento della presenza dell'orientato");
+            });
+    });
+}
+
+function getAule(){
+    return new Promise((res, rej) => {
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
+
+        vallauriRequest(
+            `${serverUrl}admin/dashboard/aule/`,
+            "GET",
+            headers,
+            {}
+        )
+            .then((response) => {
+                res(response.aule);
+            })
+            .catch((err) => {
+                console.error(err);
+                rej("Errore nel caricamento delle aule");
             });
     });
 }
