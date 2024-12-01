@@ -1,6 +1,6 @@
 "use strict";
 
-const pollingTime = 1000;
+const pollingTime = 3000;
 let groupsWrapper, tableOrientati, auleWrapper;
 let reloadPagina;
 
