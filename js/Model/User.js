@@ -1,11 +1,11 @@
 "use strict";
 
 class User {
-    constructor(username, admin, temporaneo, orientatoreId, id) {
+    constructor(username, admin, temporaneo, gruppo_id, id) {
         this.username = username;
         this.isAdmin = admin;
         this.temporaneo = temporaneo;
-        this.orientatoreId = orientatoreId;
+        this.gruppo_id = gruppo_id;
         this.id = id;
     }
 }

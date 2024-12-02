@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function downloadData(negation = false) {
     getGruppo().then((result) => {
-        gruppo = result.gruppi[0];
-        console.log(result.gruppi[0]);
+        gruppo = result;
+        console.log(result);
         getTappe(gruppo.id).then((result) => {
             tappe = result.tappe;
             aggiorna(negation);
@@ -26,7 +26,7 @@ function downloadData(negation = false) {
             if (err === 401)
                 location.href = "pages/login.html";
             else if (err === 404)
-                location.href = "collegaOrientatore.html";
+                location.href = "collegaGruppo.html";
             else
                 MostraPaginaErrore("Errore nel server", err);
         });
@@ -35,7 +35,7 @@ function downloadData(negation = false) {
         if (err === 401)
             location.href = "pages/login.html";
         else if (err === 404)
-            location.href = "pages/orientatore/collegaOrientatore.html";
+            location.href = "pages/orientatore/collegaGruppo.html";
         else
             MostraPaginaErrore("Errore nel server", err);
     });

@@ -4,7 +4,7 @@ let user;
 document.addEventListener("loginSucceded", controllaOrientatore);
 
 window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btnLink").addEventListener("click", collegaOrientatore);
+    document.getElementById("btnLink").addEventListener("click", collegaGruppo);
 });
 
 /**
@@ -26,8 +26,8 @@ function controllaOrientatore() {
 }
 
 
-function collegaOrientatore() {
-    linkOrientatore(document.getElementById("codiceOrientatore").value.toUpperCase())
+function collegaGruppo() {
+    linkGruppo(document.getElementById("codiceGruppo").value.toUpperCase())
         .then(res => {
             mostraAlert("successo", res, 3);
             location.href = "./pages/orientatore/index.html";

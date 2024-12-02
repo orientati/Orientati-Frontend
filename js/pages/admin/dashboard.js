@@ -59,21 +59,8 @@ function creaGruppo(group) {
         "</span>";
 
     const groupMembers = document.createElement("p");
-    groupMembers.id = group.id + "-orientatori";
-    let output = "";
-
-    if (group.nomi_orientatori.length >= 2) {
-        output = group.nomi_orientatori[0];
-        let j;
-        for (j = 1; j < group.nomi_orientatori.length; j++)
-            output += " - " + group.nomi_orientatori[j];
-    } else if (group.nomi_orientatori.length == 1)
-        output = group.nomi_orientatori[0];
-
-    groupMembers.textContent = output;
 
     groupDiv.appendChild(groupTitle);
-    groupDiv.appendChild(groupMembers);
 
     const onTimeSpan = document.createElement("span");
     const details = getInOrario(group);
@@ -198,13 +185,12 @@ function getInOrario(group) {
     ) {
         let minutesRitardo = (d.getHours() - data.getHours()) * 60 + d.getMinutes() - data.getMinutes();
 
-        if(minutesRitardo <= 3){
+        if (minutesRitardo <= 3) {
             return {
                 classe: "bit-late",
                 text: "LIEVE RITARDO",
             }
-        }
-        else(d.getHours() == data.getHours() && d.getMinutes() )
+        } else (d.getHours() == data.getHours() && d.getMinutes())
         return {
             classe: "late",
             text: "IN RITARDO",

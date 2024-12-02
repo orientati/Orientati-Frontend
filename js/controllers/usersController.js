@@ -3,20 +3,20 @@
 let utenti = [];
 
 /**
- * Collega l'utente con l'orientatore specificato dal codice
- * @param {string} codiceOrientatore Codice dato dall'amministratore per il collegamento
+ * Collega l'utente con il gruppo specificato dal codice
+ * @param {string} codiceGruppo Codice dato dall'amministratore per il collegamento
  * @returns Errore del server o risposta OK
  */
-function linkOrientatore(codiceOrientatore) {
+function linkGruppo(codiceGruppo) {
     return new Promise((res, rej) => {
         const access_token = localStorage.getItem("access_token");
         const headers = {
             Authorization: `Bearer ${access_token}`,
         };
 
-        vallauriRequest(`${serverUrl}utenti/orientatore?orientatore_codice=` + codiceOrientatore, "POST", headers)
+        vallauriRequest(`${serverUrl}utenti/gruppo?gruppo_codice=` + codiceGruppo, "POST", headers)
             .then((response) => {
-                res("Utente collegato come Orientatore!");
+                res("Utente collegato al gruppo!");
             })
             .catch((err) => {
                 if (err == 422)
@@ -78,7 +78,7 @@ function getMe() {
                         user.username,
                         user.admin,
                         user.temporaneo,
-                        user.orientatore_id
+                        user.gruppo_id
                     )
                 );
             })
@@ -109,7 +109,7 @@ function getUsers() {
                             user.username,
                             user.admin,
                             user.temporaneo,
-                            user.orientatore_id,
+                            user.gruppo_id,
                             user.id
                         )
                     );
@@ -143,7 +143,7 @@ function getUserById(id) {
                             response.username,
                             response.admin,
                             response.temporaneo,
-                            response.orientatore_id,
+                            response.gruppo_id,
                             response.id
                         )
                     );
@@ -163,7 +163,7 @@ function getUserById(id) {
  * @param {string} password
  * @param {boolean} isAdmin
  * @param {boolean} isTemporary
- * @param {*} idOrientatore Null se inesistente
+ * @param {*} gruppo_id Null se inesistente
  * @returns Una classe USER con i dati aggiornati.
  */
 function patchUser(
@@ -172,7 +172,7 @@ function patchUser(
     password,
     isAdmin,
     isTemporary,
-    idOrientatore
+    gruppo_id
 ) {
     return new Promise((res, rej) => {
         if (
@@ -191,7 +191,7 @@ function patchUser(
                 password: password,
                 admin: isAdmin,
                 temporaneo: isTemporary,
-                orientatore_id: idOrientatore,
+                gruppo_id: gruppo_id,
             };
 
             vallauriRequest(`${serverUrl}admin/utenti/${id}`, "PUT", headers, body)
@@ -201,7 +201,7 @@ function patchUser(
                             response.username,
                             response.admin,
                             response.temporaneo,
-                            response.orientatore_id,
+                            response.gruppo_id,
                             response.id
                         )
                     );
@@ -220,10 +220,10 @@ function patchUser(
  * @param {string} password
  * @param {boolean} isAdmin
  * @param {boolean} isTemporary
- * @param {*} idOrientatore Null se inesistente
+ * @param {*} gruppo_id Null se inesistente
  * @returns Un messaggio di avvenuta modifica dei dati sul server
  */
-function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
+function addUser(username, password, isAdmin, isTemporary, gruppo_id) {
     return new Promise((res, rej) => {
         if (
             username.trim() &&
@@ -240,7 +240,7 @@ function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
                 password: password,
                 admin: isAdmin,
                 temporaneo: isTemporary,
-                orientatore_id: idOrientatore,
+                gruppo_id: gruppo_id,
             };
 
             vallauriRequest(`${serverUrl}admin/utenti`, "POST", headers, body)
@@ -250,7 +250,7 @@ function addUser(username, password, isAdmin, isTemporary, idOrientatore) {
                             response.username,
                             response.admin,
                             response.temporaneo,
-                            response.orientatore_id,
+                            response.gruppo_id,
                             response.id
                         )
                     );
