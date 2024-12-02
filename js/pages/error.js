@@ -16,6 +16,8 @@ function mostraErrore() {
     let messaggio = "Pagina inesistente",
         codice = 404;
 
+    console.log(errorMsg);
+
     if (errorMsg) {
         errorMsg = JSON.parse(errorMsg);
         messaggio = errorMsg.msg;
