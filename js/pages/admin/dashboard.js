@@ -74,12 +74,37 @@ function creaGruppo(group) {
     button.addEventListener("click", function () {
         const modal = document.getElementById("modalGruppo");
         const inputOrario = document.getElementById("inputOrario");
+        const comboBoxTappa = document.getElementById("comboBoxTappa");
         const closeModalButton = document.getElementById("closeModalButtonGruppo");
         const applyButton = document.getElementById("applyButtonGruppo");
+        const inputPresenza = document.getElementById("inputPresenza");
 
         //Chiamata per sapere i gruppi passare il gruppo gia selezionato
 
         inputOrario.value = group.orario_partenza;
+        getTappeGruppo(group.id)
+            .then((tappe) => {
+                comboBoxTappa.innerHTML = "";
+                let option = document.createElement("option");
+                option.value = "0";
+                option.textContent ="Fermo";
+                comboBoxTappa.appendChild(option);
+                tappe.tappe.forEach((tappa) => {
+                    let option = document.createElement("option");
+                    option.value = tappa.id;
+                    option.textContent = tappa.aula_nome;
+                    comboBoxTappa.appendChild(option);
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            })
+            .finally(() => {
+                comboBoxTappa.selectedIndex = group.numero_tappa;
+                inputPresenza.checked = group.arrivato;
+            });
+
         modal.style.display = "block";
 
         closeModalButton.addEventListener("click", function () {
@@ -96,6 +121,19 @@ function creaGruppo(group) {
             const orario = document.getElementById("inputOrario").value;
             const gruppoId = group.id;
 
+            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/tappa/${gruppoId}?numero_tappa=${comboBoxTappa.selectedIndex}&arrivato=${inputPresenza.checked}`, "PUT",
+                {
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                })
+                .then(() => {
+                    modal.style.display = "none";
+                    updatePage();
+                })
+                .catch((err) => {
+                    console.error(err);
+                    mostraAlert("errore", err);
+                });
+
             vallauriRequest(`${serverUrl}admin/dashboard/gruppi/orario_partenza/${gruppoId}?orario_partenza=${orario}`, "PUT",
                 {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`
@@ -108,6 +146,7 @@ function creaGruppo(group) {
                     console.error(err);
                     mostraAlert("errore", err);
                 });
+
 
             modal.style.display = "none";
         });

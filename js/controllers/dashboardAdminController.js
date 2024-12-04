@@ -74,3 +74,26 @@ function getAule(){
             });
     });
 }
+
+function getTappeGruppo(idGruppo) {
+    return new Promise((res, rej) => {
+        const access_token = localStorage.getItem("access_token");
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+        };
+
+        vallauriRequest(
+            `${serverUrl}admin/dashboard/gruppi/tappe/${idGruppo}`,
+            "GET",
+            headers,
+            {}
+        )
+            .then((response) => {
+                res(response);
+            })
+            .catch((err) => {
+                console.error(err);
+                rej("Errore nel cambiamento dell'aula dell'gruppo");
+            });
+    });
+}
