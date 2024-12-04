@@ -116,7 +116,7 @@ function creaGruppo(group) {
                 modal.style.display = "none";
             }
         });
-
+        //IL DOCKTOR
         applyButton.addEventListener("click", function () {
             const orario = document.getElementById("inputOrario").value;
             const gruppoId = group.id;
