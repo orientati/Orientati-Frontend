@@ -2,6 +2,7 @@
 
 let utenti = [];
 
+
 /**
  * Collega l'utente con il gruppo specificato dal codice
  * @param {string} codiceGruppo Codice dato dall'amministratore per il collegamento

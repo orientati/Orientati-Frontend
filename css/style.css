@@ -119,3 +119,7 @@ body {
     animation: exitAlert 0.5s forwards;
 }
 
+.hide{
+  display: none !important;
+}
+
