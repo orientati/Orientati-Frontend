@@ -8,6 +8,12 @@ window.addEventListener("DOMContentLoaded", function () {
     groupsWrapper = this.document.getElementById("groupsWrapper");
     tableOrientati = this.document.getElementById("tableOrientati");
     auleWrapper = this.document.getElementById("auleContainer");
+
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function () {
+        searchTable("tableOrientati", this.value);
+    });
+
     getGruppi()
         .then(loadGraphic)
         .catch((err) => {
@@ -87,7 +93,7 @@ function creaGruppo(group) {
                 comboBoxTappa.innerHTML = "";
                 let option = document.createElement("option");
                 option.value = "0";
-                option.textContent ="Fermo";
+                option.textContent = "Fermo";
                 comboBoxTappa.appendChild(option);
                 tappe.tappe.forEach((tappa) => {
                     let option = document.createElement("option");
@@ -249,13 +255,14 @@ function updatePage() {
             console.error(err);
             mostraAlert("errore", err);
         });
-
-    getOrientati()
-        .then(loadTable)
-        .catch((err) => {
-            console.error(err);
-            mostraAlert("errore", err);
-        });
+    if (document.getElementById("searchInput").value === "") {
+        getOrientati()
+            .then(loadTable)
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            });
+    }
 
     getAule()
         .then(loadAule)
@@ -520,4 +527,22 @@ function loadAule(aule) {
     aule.forEach((aula) => {
         creaAula(aula);
     });
+}
+
+function searchTable(tableId, searchValue) {
+    let table, tr, td, i, txtValue;
+    table = document.getElementById(tableId);
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(searchValue.toUpperCase()) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
 }
