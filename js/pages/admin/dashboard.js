@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
 
     getGruppi()
-        .then(loadGraphic)
+        .then(loadGruppi)
         .catch((err) => {
             console.error(err);
             mostraAlert("errore", err);
@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", function () {
     reloadPagina = setInterval(updatePage, pollingTime);
 });
 
-function loadGraphic(groups) {
+function loadGruppi(groups) {
     groupsWrapper.innerHTML = "";
     for (let i = 0; i < groups.length; i++) {
         if (groups[i] !== undefined) creaGruppo(groups[i]);
@@ -158,10 +158,16 @@ function creaGruppo(group) {
         });
     });
 
+    let codice = document.createElement("p");
+    if (group.codice !== null) {
+        codice.textContent = "Codice: " + group.codice;
+    }
+
     const divWrapper = document.createElement("div");
     divWrapper.id = "divWrapper";
     divWrapper.appendChild(onTimeSpan);
-    divWrapper.appendChild(button)
+    divWrapper.appendChild(button);
+    divWrapper.appendChild(codice);
     topDiv.appendChild(groupDiv);
     topDiv.appendChild(divWrapper);
 
@@ -250,7 +256,7 @@ function getInOrario(group) {
 
 function updatePage() {
     getGruppi()
-        .then(loadGraphic)
+        .then(loadGruppi)
         .catch((err) => {
             console.error(err);
             mostraAlert("errore", err);
