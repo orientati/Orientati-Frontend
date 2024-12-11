@@ -14,65 +14,7 @@ window.addEventListener("DOMContentLoaded", function () {
         searchTable("tableOrientati", this.value);
     });
 
-    const btnAggiungiOrientato = document.getElementById("btnAggiungiOrientato");
-    btnAggiungiOrientato.addEventListener("click", function () {
-        const modal = document.getElementById("modaleAggiungiOrientato");
-        const comboBox = document.getElementById("gruppoOrientato");
-        const closeModalButton = document.getElementById("closeModalButtonOrientato");
-        const applyButton = document.getElementById("applicaOrientato");
-
-        getGruppi()
-            .then((gruppi) => {
-                comboBox.innerHTML = "";
-                gruppi.forEach((gruppo) => {
-                    if (!gruppo.percorsoFinito) {
-                        let option = document.createElement("option");
-                        option.value = gruppo.id;
-                        option.textContent = gruppo.nome;
-                        comboBox.appendChild(option);
-                    }
-                });
-            })
-            .catch((err) => {
-                console.error(err);
-                mostraAlert("errore", err);
-            });
-
-        modal.style.display = "block";
-
-        closeModalButton.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-
-        applyButton.addEventListener("click", function () {
-            const selectedOption = document.getElementById("comboBox").value;
-            /*
-                        vallauriRequest(
-                            `${serverUrl}admin/dashboard/orientati/gruppo/${orientatoId}?gruppo_id=${selectedOption}`,
-                            "PUT",
-                            {
-                                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-                            }
-                        )
-                            .then(() => {
-                                modal.style.display = "none";
-                                updatePage();
-                            })
-                            .catch((err) => {
-                                console.error(err);
-                                mostraAlert("errore", err);
-                            });
-            */
-            modal.style.display = "none";
-        });
-    });
-
+    modaleOrientati();
 
     getGruppi()
         .then(loadGruppi)
@@ -612,4 +554,75 @@ function searchTable(tableId, searchValue) {
             }
         }
     }
+}
+
+function modaleOrientati() {
+
+    const btnAggiungiOrientato = document.getElementById("btnAggiungiOrientato");
+    const modal = document.getElementById("modaleAggiungiOrientato");
+    const comboBox = document.getElementById("gruppoOrientato");
+    const closeModalButton = document.getElementById("closeModalButtonOrientato");
+    const applyButton = document.getElementById("applicaOrientato");
+
+    closeModalButton.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    btnAggiungiOrientato.addEventListener("click", function () {
+
+        getGruppi()
+            .then((gruppi) => {
+                comboBox.innerHTML = "";
+                gruppi.forEach((gruppo) => {
+                    if (!gruppo.percorsoFinito) {
+                        let option = document.createElement("option");
+                        option.value = gruppo.id;
+                        option.textContent = gruppo.nome;
+                        comboBox.appendChild(option);
+                    }
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            });
+
+        modal.style.display = "block";
+
+    });
+
+    applyButton.addEventListener("click", function () {
+        console.log("applica");
+        const selectedOption = document.getElementById("gruppoOrientato").value;
+        vallauriRequest(`${serverUrl}admin/dashboard/orientati/`, "POST",
+            {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            },
+            {
+                nome: document.getElementById("nomeOrientato").value,
+                cognome: document.getElementById("cognomeOrientato").value,
+                gruppo_id: selectedOption,
+                scuolaDiProvenienza_id: 1 //TODO: implementare la select della scuola
+            })
+            .then(() => {
+                modal.style.display = "none";
+                document.getElementById("nomeOrientato").value = "";
+                document.getElementById("cognomeOrientato").value = "";
+                updatePage();
+            })
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            });
+
+
+        modal.style.display = "none";
+    });
+
 }
