@@ -289,14 +289,10 @@ main {
     justify-content: end;
     gap: 10px;
 
-    margin-left: 10px;
-    margin-right: 3%;
     padding: 20px 20px 10px 0;
 
     border-radius: 15px 15px 0 0;
     background-color: #84a8dc;
-
-    width: calc(100% - 10px);
 }
 
 .btnTable {
@@ -370,11 +366,8 @@ main {
 .tableWrapper {
     overflow-y: auto;
     overflow-x: hidden;
-    width: calc(100% - 10px);
-    margin-right: 3%;
     background-color: #fffeff;
     height: 100%;
-    margin-left: 10px;
     border-radius: 0px 0px 18px 18px;
 }
 
@@ -384,7 +377,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: "Overpass";
     font-size: 0.8em;
     font-weight: bold;
 }
@@ -539,4 +531,27 @@ p {
     display: flex;
     gap: 10px;
     flex-direction: column;
+}
+
+.search-bar {
+    margin-bottom: 12px;
+    display: flex;
+    background-color: white;
+    padding: 12px 16px;
+    border-radius: 24px;
+    gap: 12px;
+}
+
+#searchInput {
+    width: 100%;
+    border: none;
+    font-size: 16px;
+}
+
+#searchInput::placeholder {
+    color: black;
+}
+
+#searchInput:focus {
+    outline: none;
 }
