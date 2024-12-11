@@ -29,3 +29,20 @@
 
 #chart-ritardo{
 }
+
+main {
+    display: flex;
+    height: 100vh;
+}
+
+#navbarWrapper {
+    flex-shrink: 0;
+    width: 60px;
+}
+
+#content {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    overflow-y: auto;
+}
