@@ -534,16 +534,16 @@ p {
 }
 
 .search-bar {
-    margin-bottom: 12px;
     display: flex;
     background-color: white;
     padding: 12px 16px;
     border-radius: 24px;
     gap: 12px;
+    width: 100%;
+
 }
 
 #searchInput {
-    width: 100%;
     border: none;
     font-size: 16px;
 }
@@ -554,4 +554,10 @@ p {
 
 #searchInput:focus {
     outline: none;
+}
+
+.search-nav {
+    display: flex;
+    margin-bottom: 12px;
+    gap: 8px;
 }
