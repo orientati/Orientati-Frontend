@@ -49,33 +49,47 @@ function caricaDatiOrientati() {
 }
 
 function getGroupsData(dataRaw) {
-  console.log(dataRaw);
-  if (dataRaw != null) {
-    data = {};
+    console.log(dataRaw);
+    if (dataRaw != null) {
+        const labels = []; // Etichette (es. nomi dei gruppi)
+        const datasetData = []; // Valori (es. ritardi in minuti)
 
-    for (let i = 0; i < dataRaw.length; i++) {
-      let ritardoInMin = getMinutes(
-        dataRaw[i].orario_partenza,
-        dataRaw[i].orario_partenza_effettivo
-      );
-      if (ritardoInMin != null) data[dataRaw[i].nome] = ritardoInMin;
+        for (let i = 0; i < dataRaw.length; i++) {
+            let ritardoInMin = getMinutes(
+                dataRaw[i].orario_partenza,
+                dataRaw[i].orario_partenza_effettivo
+            );
+            if (ritardoInMin != null) {
+                labels.push(dataRaw[i].nome); // Aggiungi il nome del gruppo
+                datasetData.push(ritardoInMin); // Aggiungi il valore di ritardo
+            }
+        }
+
+        const chart = new Chart(graph, {
+            type: "bar",
+            data: {
+                labels: labels, // Asse X
+                datasets: [
+                    {
+                        label: "Ritardo gruppi (in minuti)", // Nome del dataset
+                        data: datasetData, // Asse Y
+                        backgroundColor: "rgba(75, 192, 192, 0.2)", // Colore riempimento barre
+                        borderColor: "rgba(75, 192, 192, 1)", // Colore bordo barre
+                        borderWidth: 1, // Spessore bordo
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true, // Il grafico parte da 0
+                    },
+                },
+            },
+        });
+    } else {
+        data = null;
     }
-
-    const chart = new Chart(graph, {
-      type: "bar",
-      data: {
-        data,
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-  } else data = null;
-
 }
 
 function getMinutes(fine, fineEff) {
