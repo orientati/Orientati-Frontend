@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
 
     modaleOrientati();
+    modaleFile();
 
     getGruppi()
         .then(loadGruppi)
@@ -625,4 +626,46 @@ function modaleOrientati() {
         modal.style.display = "none";
     });
 
+}
+
+function modaleFile() {
+    const btnAggiungiFile = document.getElementById("FilesNavbar");
+    const modal = document.getElementById("modaleUploadCSV");
+    const input = document.getElementById("csvFileInput");
+    const applyButton = document.getElementById("uploadCSVButton");
+    const closeModalButton = document.getElementById("closeModalButtonUploadCSV");
+
+    closeModalButton.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    btnAggiungiFile.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    applyButton.addEventListener("click", function () {
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+
+        vallauriRequest(`${serverUrl}admin/orientati/upload`, "POST",
+            {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            },
+            formData)
+            .then(() => {
+                modal.style.display = "none";
+                updatePage();
+            })
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            });
+    });
 }
