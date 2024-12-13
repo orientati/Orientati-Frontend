@@ -166,12 +166,29 @@ function creaGruppo(group) {
     if (group.codice !== null) {
         codice.textContent = "Codice: " + group.codice;
     }
+    let buttonRigeneraCodice = document.createElement("button");
+    buttonRigeneraCodice.classList.add("btnModifica");
+    buttonRigeneraCodice.textContent = "Rigenera Codice";
+    buttonRigeneraCodice.addEventListener("click", function () {
+        vallauriRequest(`${serverUrl}admin/gruppi/rigeneraCodice/${group.id}`, "PUT",
+            {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            })
+            .then(() => {
+                updatePage();
+            })
+            .catch((err) => {
+                console.error(err);
+                mostraAlert("errore", err);
+            });
+    });
 
     const divWrapper = document.createElement("div");
     divWrapper.id = "divWrapper";
     divWrapper.appendChild(onTimeSpan);
     divWrapper.appendChild(button);
     divWrapper.appendChild(codice);
+    divWrapper.appendChild(buttonRigeneraCodice);
     topDiv.appendChild(groupDiv);
     topDiv.appendChild(divWrapper);
 
