@@ -71,6 +71,7 @@ main {
     padding: 6px;
     border-radius: 8px;
     color: white;
+    height: fit-content;
 }
 
 .late {
