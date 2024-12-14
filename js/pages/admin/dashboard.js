@@ -9,6 +9,12 @@ window.addEventListener("DOMContentLoaded", function () {
     tableOrientati = this.document.getElementById("tableOrientati");
     auleWrapper = this.document.getElementById("auleContainer");
 
+    const clearSearch = document.getElementById("clearSearch");
+    clearSearch.addEventListener("click", function () {
+        document.getElementById("searchInput").value = "";
+        searchTable("tableOrientati", "");
+    });
+
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", function () {
         searchTable("tableOrientati", this.value);
