@@ -565,9 +565,8 @@ p {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    width: min-content !important;
-    min-width: 30em;
-    height: 10em;
+    width: 400px;
+    height: 150px;
 }
 
 #divWrapper {
