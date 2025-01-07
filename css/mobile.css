@@ -1,87 +1,10 @@
-@media (orientation: portrait) {
-    html, body {
-        font-size: 30px;
-    }
-
-    svg {
-        width: 500px;
-        height: 500px;
-    }
-
-    .btn-tappe {
-        padding: 12px;
-        border-radius: 18px;
-        color: white;
-        background-color: #506aff;
-        border: solid #020181;
-        font-size: 50px;
-        margin-top: 20px;
-      }
-
-      .nav-bar {
-        background-color: #c4cfe9;
-        height: fit-content;
-        display: flex;
-        align-items: start;
-        justify-content: space-evenly;
-        padding: 18px 0 0 0;
-        margin-top: -200px;
-      }
-
-      .nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 200px;
-        width: 200px;
-        font-size: 50px;
-      }
-
-      .nav-icon-selected {
-        display: flex;
-        background-color: #506aff;
-        color: white;
-        width: 150px;
-        height: 80px;
-        justify-content: center;
-        align-items: center;
-      } 
-
-      .nav-icon-selected svg {
-        width: 50px;
-        height: 50px;
-      }
-
-      .timer-h1 {
-        text-align: center;
-        padding: 4px;
-        background-color: #506aff;
-        border: solid #020181;
-        border-radius: 8px;
-        color: white;
-        width: fit-content;
-    }
-    
-    .timer-h1-red {
-        text-align: center;
-        padding: 4px;
-        background-color: #ef3b3b;
-        border: solid #ff0000;
-        border-radius: 8px;
-        color: white;
-        width: fit-content;
-      }
-    
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   height: 100%;
   width: 100%;
 }
@@ -102,25 +25,24 @@ body {
 }
 
 .top {
-  background-color: #c4cfe9;
+  background-color: #C4CFE9;
   border-radius: 18px;
   padding: 24px;
 }
 
 .bottom {
-  background-color: #c4cfe9;
+  background-color: #C4CFE9;
   border-radius: 18px;
   padding: 24px;
 }
 
 .nav-bar {
-  background-color: #c4cfe9;
-  height: fit-content;
+  background-color: #C4CFE9;
+  height: 92px;
   display: flex;
   align-items: start;
   justify-content: space-evenly;
-  padding: 18px 0 0 0;
-  margin-top: -200px;
+  padding: 12px 0 0 0;
 }
 
 .nav-item {
@@ -128,13 +50,13 @@ body {
   flex-direction: column;
   align-items: center;
 }
-    
+
 .nav-icon-selected {
   display: flex;
   padding: 4px 16px 4px 16px;
-  background-color: #506aff;
+  background-color: #506AFF;
   color: white;
-  border-radius:100px;
+  border-radius: 16px;
 }
 
 .timer {
@@ -164,19 +86,19 @@ body {
 .timer-h1 {
   text-align: center;
   padding: 4px;
-  background-color: #506aff;
+  background-color: #506AFF;
   border: solid #020181;
-  width: fit-content;
+  width: 86px;
   border-radius: 8px;
   color: white;
 }
 
-.timer-h1-red {
+.timer-h1-red{
   text-align: center;
   padding: 4px;
   background-color: #ef3b3b;
   border: solid #ff0000;
-  width: fit-content;
+  width: 86px;
   border-radius: 8px;
   color: white;
 }
@@ -185,7 +107,7 @@ body {
   padding: 12px;
   border-radius: 18px;
   color: white;
-  background-color: #506aff;
+  background-color: #506AFF;
   border: solid #020181;
 }
 
@@ -194,6 +116,6 @@ body {
 }
 
 svg {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
