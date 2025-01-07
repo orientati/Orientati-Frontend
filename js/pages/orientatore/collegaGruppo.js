@@ -35,3 +35,7 @@ function collegaGruppo() {
         mostraAlert("errore", err);
     })
 }
+
+function feedback() {
+    location.href="https://forms.gle/GYVu66aoP1y7AF45A";
+}
