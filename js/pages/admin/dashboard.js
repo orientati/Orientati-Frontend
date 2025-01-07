@@ -66,13 +66,18 @@ function creaGruppo(group) {
     topDiv.className = "top";
 
     const groupDiv = document.createElement("div");
-    const groupTitle = document.createElement("h1");
+    const groupTitle = document.createElement("span");
     groupTitle.id = group.id + "-nome";
     groupTitle.innerHTML =
-        group.nome +
+        "<h1>" + group.nome + "</h1>" +
         "<span style='font-size: 18px; margin-left: 14px'>" +
         group.orario_partenza +
         "</span>";
+
+    if (group.arrivato === true) {
+        groupTitle.innerHTML =
+            "<h3>In viaggio verso</h3> " + groupTitle.innerHTML;
+    }
 
     const groupMembers = document.createElement("p");
 
