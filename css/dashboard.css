@@ -66,6 +66,10 @@ main {
     justify-content: space-between;
 }
 
+.inViaggio {
+    font-size: 18px;
+}
+
 .on-time {
     background-color: green;
     padding: 6px;
@@ -120,10 +124,9 @@ main {
     gap: 35px;
 
     height: 100%;
-    width: 60px;
+    width: fit-content;
     background-color: #84a8dc;
 
-    position: sticky;
 }
 
 #navbarBurger {
@@ -160,7 +163,8 @@ main {
     justify-content: center;
 
     height: 30px;
-    width: 100%;
+    width: fit-content;
+    padding: 10px 14px 10px 14px;
 
     background-color: #4e6dfc;
     border-radius: 15px;
@@ -539,24 +543,20 @@ p {
     width: 100%;
     height: auto;
     background: #c4cfe9;
-
     padding: 0 36px 36px 36px;
 }
 
 #auleContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    background-color: #fffeff;
-    padding: 22px;
-    border-radius: 16px;
-
     width: 100%;
-    height: min-content;
-    max-height: 50vh;
-
-    overflow-y: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    background-color: #fffeff;
+    padding: 20px;
+    border-radius: 16px;
+    gap: 22px;
 }
 
 .templateAula {
@@ -566,8 +566,8 @@ p {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    width: 400px;
-    height: 150px;
+    width: 416px;
+    height: 146px;
 }
 
 #divWrapper {

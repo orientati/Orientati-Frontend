@@ -20,6 +20,15 @@ window.addEventListener("DOMContentLoaded", function () {
         searchTable("tableOrientati", this.value);
     });
 
+
+    const modal = document.getElementById("modalGruppo");
+
+    const closeModalButton = document.getElementById("closeModalButtonGruppo");
+    closeModalButton.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+
     modaleOrientati();
     modaleFile();
 
@@ -69,17 +78,7 @@ function creaGruppo(group) {
     const groupTitle = document.createElement("span");
     groupTitle.id = group.id + "-nome";
     groupTitle.innerHTML =
-        "<h1>" + group.nome + "</h1>" +
-        "<span style='font-size: 18px; margin-left: 14px'>" +
-        group.orario_partenza +
-        "</span>";
-
-    if (group.arrivato === true) {
-        groupTitle.innerHTML =
-            "<h3>In viaggio verso</h3> " + groupTitle.innerHTML;
-    }
-
-    const groupMembers = document.createElement("p");
+        "<h1>" + group.nome + " <p>" + group.orario_partenza + "</p>" + "</h1>";
 
     groupDiv.appendChild(groupTitle);
 
@@ -96,7 +95,6 @@ function creaGruppo(group) {
         const modal = document.getElementById("modalGruppo");
         const inputOrario = document.getElementById("inputOrario");
         const comboBoxTappa = document.getElementById("comboBoxTappa");
-        const closeModalButton = document.getElementById("closeModalButtonGruppo");
         const applyButton = document.getElementById("applyButtonGruppo");
         const inputPresenza = document.getElementById("inputPresenza");
 
@@ -128,17 +126,18 @@ function creaGruppo(group) {
 
         modal.style.display = "block";
 
-        closeModalButton.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
         window.addEventListener("click", function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
             }
         });
+
         //IL DOCKTOR
-        applyButton.addEventListener("click", function () {
+
+        //rimuovo tutti gli events
+        const newApplyButton = applyButton.cloneNode(true);
+
+        newApplyButton.addEventListener("click", function () {
             const orario = document.getElementById("inputOrario").value;
             const gruppoId = group.id;
 
@@ -171,6 +170,8 @@ function creaGruppo(group) {
 
             modal.style.display = "none";
         });
+        applyButton.parentNode.replaceChild(newApplyButton, applyButton);
+
     });
 
     let codice = document.createElement("p");
@@ -205,15 +206,31 @@ function creaGruppo(group) {
 
     // Crea la sezione centrale
     const centralDiv = document.createElement("div");
+
+    const divViaggio = document.createElement("div");
+
     const labInfo = document.createElement("p");
     labInfo.id = group.id + "-materia";
     labInfo.textContent = group.aula_materia + " - " + group.aula_posizione;
-    const subjectTitle = document.createElement("h1");
+    divViaggio.appendChild(labInfo);
 
+    const subjectTitle = document.createElement("h1");
     subjectTitle.id = group.id + "-aula";
     subjectTitle.textContent = group.aula_nome;
-    centralDiv.appendChild(labInfo);
-    centralDiv.appendChild(subjectTitle);
+
+    const span = document.createElement("span");
+    span.classList.add("inViaggio");
+    span.textContent = "In viaggio verso:";
+
+    if (group.arrivato === false && group.numero_tappa !== 0) {
+        divViaggio.appendChild(span);
+        divViaggio.appendChild(subjectTitle);
+    } else {
+        divViaggio.appendChild(subjectTitle);
+
+    }
+
+    centralDiv.appendChild(divViaggio);
 
     const infoPresenze = document.createElement("p");
     infoPresenze.textContent =
