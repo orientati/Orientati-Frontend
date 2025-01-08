@@ -178,10 +178,17 @@ function creaGruppo(group) {
     if (group.codice !== null) {
         codice.textContent = "Codice: " + group.codice;
     }
+    else
+    {
+        codice.style.display = "none";
+    }
     let buttonRigeneraCodice = document.createElement("button");
     buttonRigeneraCodice.classList.add("btnModifica");
     buttonRigeneraCodice.textContent = "Rigenera Codice";
     buttonRigeneraCodice.addEventListener("click", function () {
+
+        buttonRigeneraCodice.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Caricamento...`;
+
         vallauriRequest(`${serverUrl}admin/gruppi/rigeneraCodice/${group.id}`, "PUT",
             {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`
@@ -212,7 +219,6 @@ function creaGruppo(group) {
     const labInfo = document.createElement("p");
     labInfo.id = group.id + "-materia";
     labInfo.textContent = group.aula_materia + " - " + group.aula_posizione;
-    divViaggio.appendChild(labInfo);
 
     const subjectTitle = document.createElement("h1");
     subjectTitle.id = group.id + "-aula";
@@ -224,12 +230,12 @@ function creaGruppo(group) {
 
     if (group.arrivato === false && group.numero_tappa !== 0) {
         divViaggio.appendChild(span);
-        divViaggio.appendChild(subjectTitle);
-    } else {
-        divViaggio.appendChild(subjectTitle);
-
     }
 
+    if (group.numero_tappa !== 0) {
+        divViaggio.appendChild(labInfo);
+        divViaggio.appendChild(subjectTitle);
+    }
     centralDiv.appendChild(divViaggio);
 
     const infoPresenze = document.createElement("p");
@@ -238,7 +244,7 @@ function creaGruppo(group) {
     centralDiv.appendChild(infoPresenze);
 
     const orarioPartenzaFine = document.createElement("p");
-    if (group.numero_tappa !== 0) {
+    if (!(group.numero_tappa === 0 && group.arrivato === false)) {
         orarioPartenzaFine.textContent =
             "Partenza: " + group.orario_partenza_effettivo;
         centralDiv.appendChild(orarioPartenzaFine);
@@ -247,6 +253,8 @@ function creaGruppo(group) {
     if (group.numero_tappa === 0 && group.arrivato === true) {
         orarioPartenzaFine.textContent += " Fine: " + group.orario_fine_effettivo;
     }
+
+    centralDiv.appendChild(orarioPartenzaFine);
 
     // Aggiungi tutto al contenitore principale
     contentDiv.appendChild(topDiv);
@@ -290,7 +298,7 @@ function getInOrario(group) {
                 classe: "bit-late",
                 text: "LIEVE RITARDO",
             }
-        } else (d.getHours() == data.getHours() && d.getMinutes())
+        } else if (d.getHours() === data.getHours() && d.getMinutes())
         return {
             classe: "late",
             text: "IN RITARDO",
