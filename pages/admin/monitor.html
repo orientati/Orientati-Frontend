@@ -29,12 +29,26 @@
 
     <!-- Styles -->
     <link href="css/style.css" rel="stylesheet"/>
-    <link href="css/dashboard.css" rel="stylesheet"/>
+    <link href="css/monitor.css" rel="stylesheet"/>
 </head>
 <body>
 <main>
-    <div id="gruppoSuccessivo">
+    <div class="layout">
+        <div class="left">
+            <div id="group-info">
 
+            </div>
+        </div>
+        <div class="right">
+            <div class="current-time">
+                <p>Orario attuale</p>
+                <h1 id="time"></h1>
+            </div>
+            <div class="lab-status">
+                <p id="lab"></p>
+                <h1 id="availability"></h1>
+            </div>
+        </div>
     </div>
 </main>
 </body>

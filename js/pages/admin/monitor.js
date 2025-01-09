@@ -7,7 +7,15 @@ let reloadPagina;
 let gruppo, aula;
 
 window.addEventListener("DOMContentLoaded", function () {
-    divGruppo = this.document.getElementById("gruppoSuccessivo");
+    const time = this.document.getElementById("time");
+    time.textContent = new Date().toLocaleTimeString();
+
+    setInterval(() => {
+        time.textContent = new Date().toLocaleTimeString();
+    }, 1000);
+
+
+    divGruppo = this.document.getElementById("group-info");
 
     getGruppi()
         .then((gruppi) => {
@@ -28,8 +36,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
     reloadPagina = setInterval(updatePage, pollingTime);
-})
-;
+});
 
 function loadGruppi(groups) {
     //prendi o il gruppo con numero tappa = 1 o il gruppo con numero tappa = 0
@@ -40,40 +47,54 @@ function loadGruppi(groups) {
     if (gruppoInCorso !== undefined) {
         gruppo = gruppoInCorso;
     }
-
 }
 
 function creaGruppo(group, aula) {
     divGruppo.innerHTML = "";
-    let titolo = document.createElement("h2");
-    titolo.textContent = group.nome;
-    let orarioPartenza = document.createElement("p");
-    orarioPartenza.textContent = "Orario di partenza: " + group.orario_partenza;
 
-    let orarioFineTappa = document.createElement("p");
+    const nomeGruppo = document.createElement("h1");
+    nomeGruppo.innerHTML = "Gruppo <span>" + group.nome + "</span>";
 
-    if(group.numero_tappa !== 0){
-        orarioPartenza.textContent += " Orario di partenza effettivo: " + group.orario_partenza_effettivo
+    const orariTeorici = document.createElement("p");
+    orariTeorici.textContent = group.orario_partenza;
 
-        let orarioFine = new Date();
-        orarioFine.setHours(parseInt(group.orario_partenza.split(":")[0]));
-        orarioFine.setMinutes(parseInt(group.orario_partenza.split(":")[1]));
-        orarioFine.setMinutes(orarioFine.getMinutes() + group.minuti_partenza);
-        orarioFineTappa.textContent = "Orario di fine tappa: " + orarioFine.getHours() + ":" + orarioFine.getMinutes();
+    const divTop = document.createElement("div");
+    divTop.appendChild(nomeGruppo);
+    divTop.appendChild(orariTeorici);
+
+    const orariReali = document.createElement("h2");
+    if (group.numero_tappa !== 0) {
+        let orarioFineTeorico = new Date();
+        orarioFineTeorico.setHours(parseInt(group.orario_partenza.split(":")[0]));
+        orarioFineTeorico.setMinutes(parseInt(group.orario_partenza.split(":")[1]));
+        orarioFineTeorico.setMinutes(orarioFineTeorico.getMinutes() + group.minuti_partenza);
+        orariTeorici.textContent += " - " + orarioFineTeorico.getHours() + ":" + orarioFineTeorico.getMinutes();
+
+        let orarioFineReale = new Date();
+        orarioFineReale.setHours(parseInt(group.orario_partenza_effettivo.split(":")[0]));
+        orarioFineReale.setMinutes(parseInt(group.orario_partenza_effettivo.split(":")[1]));
+        orarioFineReale.setMinutes(orarioFineReale.getMinutes() + 10);
+
+        orariReali.textContent = group.orario_partenza_effettivo + " - " + orarioFineReale.getHours() + ":" + orarioFineReale.getMinutes();
     }
 
-    divGruppo.appendChild(titolo);
-    divGruppo.appendChild(orarioPartenza);
-    divGruppo.appendChild(orarioFineTappa);
+    const divBottom = document.createElement("div");
 
-    let aulaDiv = document.createElement("div");
-    aulaDiv.classList.add("aula");
-    aulaDiv.textContent = aula.nome;
-    let aulaStatus = document.createElement("p");
-    aulaStatus.textContent = aula.occupata ? "Occupata" : "Libera";
-    divGruppo.appendChild(aulaDiv);
-    divGruppo.appendChild(aulaStatus);
+    const text = document.createElement("p");
+    text.textContent = "Orari reali:";
+    divBottom.appendChild(text);
+    divBottom.appendChild(orariReali);
 
+    divGruppo.appendChild(divTop);
+    divGruppo.appendChild(divBottom);
+
+    const lab = document.getElementById("lab");
+    let laboratorio = aula.nome.charAt(0).toUpperCase() + aula.nome.slice(1).toLowerCase();
+    lab.textContent = "Lab. " + laboratorio;
+
+    const availability = document.getElementById("availability");
+    availability.textContent = aula.occupata ? "OCCUPATO" : "LIBERO";
+    availability.classList.add(aula.occupata ? "occupato" : "libero");
 }
 
 function loadAule(aule) {
