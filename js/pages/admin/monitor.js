@@ -48,15 +48,19 @@ function creaGruppo(group, aula) {
     let titolo = document.createElement("h2");
     titolo.textContent = group.nome;
     let orarioPartenza = document.createElement("p");
-    orarioPartenza.textContent = "Orario di partenza: " + group.orario_partenza + " Orario di partenza effettivo: " + group.orario_partenza_effettivo;
+    orarioPartenza.textContent = "Orario di partenza: " + group.orario_partenza;
+
     let orarioFineTappa = document.createElement("p");
 
-    let orarioFine = new Date();
-    orarioFine.setHours(parseInt(group.orario_partenza.split(":")[0]));
-    orarioFine.setMinutes(parseInt(group.orario_partenza.split(":")[1]));
-    orarioFine.setMinutes(orarioFine.getMinutes() + group.minuti_partenza);
+    if(group.numero_tappa !== 0){
+        orarioPartenza.textContent += " Orario di partenza effettivo: " + group.orario_partenza_effettivo
 
-    orarioFineTappa.textContent = "Orario di fine tappa: " + orarioFine.getHours() + ":" + orarioFine.getMinutes();
+        let orarioFine = new Date();
+        orarioFine.setHours(parseInt(group.orario_partenza.split(":")[0]));
+        orarioFine.setMinutes(parseInt(group.orario_partenza.split(":")[1]));
+        orarioFine.setMinutes(orarioFine.getMinutes() + group.minuti_partenza);
+        orarioFineTappa.textContent = "Orario di fine tappa: " + orarioFine.getHours() + ":" + orarioFine.getMinutes();
+    }
 
     divGruppo.appendChild(titolo);
     divGruppo.appendChild(orarioPartenza);
