@@ -144,6 +144,8 @@ function creaGruppo(group, aula) {
     const availability = document.getElementById("availability");
     availability.textContent = aula.occupata ? "OCCUPATO" : "LIBERO";
     availability.classList.add(aula.occupata ? "occupato" : "libero");
+    availability.classList.remove(!aula.occupata ? "occupato" : "libero");
+
 }
 
 
