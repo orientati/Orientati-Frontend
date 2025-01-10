@@ -78,7 +78,7 @@ function creaGruppo(group) {
     const groupTitle = document.createElement("span");
     groupTitle.id = group.id + "-nome";
     groupTitle.innerHTML =
-        "<h1>" + group.nome + " <p>" + group.orario_partenza + "</p>" + "</h1>";
+        "<h1><span class='highlight'>" +  group.nome + "</span><p>" + group.orario_partenza + "</p>" + "</h1>";
 
     groupDiv.appendChild(groupTitle);
 

@@ -176,7 +176,7 @@ main {
 }
 
 .navbarItemBtn {
-    background-color: #6481ff;
+    background-color: #4e6dfc;
 }
 
 .navbarItemText {
@@ -445,7 +445,7 @@ p {
     padding: 6px;
     border-radius: 24px;
     color: white;
-    background-color: #506aff;
+    background-color: #4e6dfc;
     border: none;
     display: flow;
 }
@@ -502,7 +502,7 @@ p {
     border: none;
     border-radius: 8px;
     padding: 8px;
-    background-color: #506aff;
+    background-color: #4e6dfc;
     color: white;
     width: 30%;
 }
@@ -604,4 +604,11 @@ p {
     display: flex;
     margin-bottom: 12px;
     gap: 8px;
+}
+
+.highlight {
+    background-color: #4e6dfc;
+    color: white;
+    padding: 0 18px;
+    border-radius: 12px;
 }
