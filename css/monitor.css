@@ -113,4 +113,41 @@ p {
 
 #group-info p{
     font-size: 86px;
+    margin-bottom: 0;
+}
+
+.outer-div-slider {
+    border: black 6px solid;
+    border-radius: 32px;
+    overflow: hidden;
+    width: 100%;
+    height: 10%;
+}
+
+/* Rimuove lo stile nativo */
+.slider {
+    -webkit-appearance: none; /* Per Safari/Chrome */
+    appearance: none; /* Per altri browser */
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 32px; /* Aggiungi il bordo arrotondato */
+    overflow: hidden;
+}
+
+/* Stile per lo sfondo */
+.slider::-webkit-progress-bar {
+    background-color: #f0f0f0; /* Colore dello sfondo */
+    border-radius: 32px;
+}
+
+/* Stile per il valore (parte colorata) */
+.slider::-webkit-progress-value {
+    background-color: red; /* Colore della barra di avanzamento */
+    border-radius: 32px; /* Aggiungi il bordo arrotondato */
+}
+
+.slider::-moz-progress-bar {
+    background-color: red; /* Colore della barra per Firefox */
+    border-radius: 32px;
 }
