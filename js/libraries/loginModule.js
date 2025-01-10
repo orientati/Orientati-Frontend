@@ -1,6 +1,4 @@
 "use strict";
-const htmlpage =
-    window.location.href.split("/")[window.location.href.split("/").length - 1];
 
 /**
  * trova l'hostname, utile per mantenere la funzionalità durante il developing in locale.
