@@ -151,3 +151,13 @@ p {
     background-color: red; /* Colore della barra per Firefox */
     border-radius: 32px;
 }
+
+.infoGruppo {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.hide {
+    display: none;
+}
