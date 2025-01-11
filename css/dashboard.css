@@ -568,7 +568,6 @@ p {
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
     width: 416px;
     height: 146px;
 }
