@@ -1,0 +1,75 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dashboard</title>
+    <base href="../../"/>
+
+    <script>
+        document.addEventListener("loginSucceded", () => {
+            checkAdmin();
+        });
+    </script>
+
+    <!-- Modelli -->
+    <script src="js/model/Route.js"></script>
+    <script src="js/Model/Orientato.js"></script>
+
+    <!-- Librerie -->
+    <script src="js/libraries/urlModule.js"></script>
+    <script src="js/libraries/requestModule.js"></script>
+    <script src="js/libraries/loginModule.js"></script>
+    <script src="js/libraries/errorModule.js"></script>
+
+    <!-- Scripts-->
+    <script src="js/controllers/orientatiController.js"></script>
+    <script src="js/controllers/dashboardAdminController.js"></script>
+    <script src="js/pages/admin/monitor.js"></script>
+
+    <!-- Styles -->
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/monitor.css" rel="stylesheet"/>
+</head>
+<body>
+<main>
+    <div class="layout">
+        <div class="left">
+            <div id="group-info">
+                <div>
+                    <div class="infoGruppo">
+                        <div>
+                            <h1>Gruppo <span id="nomeGruppo"></span></h1>
+                            <p id="orariTeorici"></p>
+                        </div>
+                        <div>
+                            <h1 id="presenza"></h1>
+                        </div>
+                    </div>
+                    <div class="outer-div-slider">
+                        <progress id="progressTeorico" class="slider" max="100"></progress>
+                    </div>
+                </div>
+                <div>
+                    <p id="text"></p>
+                    <h2 id="orariReali"></h2>
+                    <div class="outer-div-slider">
+                        <progress id="progressReale" class="slider" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="current-time">
+                <p>Orario attuale</p>
+                <h1 id="time"></h1>
+            </div>
+            <div class="lab-status">
+                <p id="lab"></p>
+                <h1 id="availability"></h1>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

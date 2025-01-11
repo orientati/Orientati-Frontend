@@ -1,0 +1,341 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  background-color: #c4d0ea;
+  overflow: hidden;
+}
+
+/* navbar */
+#navbarWrapper {
+  user-select: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+
+  height: 100%;
+  width: 60px;
+  background-color: #84a8dc;
+}
+
+#navbarBurger {
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbarList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* Navbar links style */
+.navbarItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+
+  margin: 0 5px 0 5px;
+  height: 50px;
+}
+
+.navbarItemBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+  width: 100%;
+
+  background-color: #4e6dfc;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+.navbarItem:hover {
+  cursor: pointer;
+
+  .navbarItemBtn {
+    background-color: #6481ff;
+  }
+}
+
+.navbarItemText {
+  text-align: center;
+  color: white;
+  font-size: small;
+  font-weight: bold;
+
+  overflow: hidden;
+  text-wrap: wrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Context Navbar styles*/
+.contextNavbarWrapper {
+  user-select: none;
+  max-width: 20%;
+  height: 100%;
+  padding-top: 75px;
+}
+
+.btnWhite {
+  border-radius: 15px;
+  background-color: #fffeff;
+  transition: background-color 0.3s;
+}
+
+.btnWhite:hover,
+.contextNavbarItem:hover {
+  background-color: rgb(232, 234, 255);
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .contextNavbarWrapper {
+    width: 60px;
+  }
+
+  .droppableText {
+    display: none;
+  }
+
+  .contextNavbarItem {
+    justify-content: center;
+    padding: 2px 0 2px 0;
+  }
+}
+
+@media (min-width: 701px) {
+  .contextNavbarWrapper {
+    width: 20%;
+  }
+
+  .contextNavbarItem {
+    justify-content: start;
+    padding: 2px 0 2px 15px;
+  }
+}
+
+/* Files navbar */
+#loadFilesBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  max-width: min-content;
+
+  margin-left: 7px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+#loadFilesBtn > .droppableText,
+.btnWhite > .droppableText {
+  text-wrap: nowrap;
+}
+
+#loadFilesBtn > svg {
+  flex-shrink: 0;
+}
+
+.contextNavbarList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  width: 100%;
+  height: 100%;
+}
+
+.contextNavbarItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  height: 25px;
+
+  color: white;
+
+  margin-left: 7px;
+  margin-right: 7px;
+  border-radius: 15px;
+  transition: background-color color 0.3s;
+
+  overflow: hidden;
+  text-wrap: wrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.contextNavbarItem > svg {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(27%)
+    hue-rotate(253deg) brightness(108%) contrast(108%);
+  min-width: min-content;
+  transition: filter 0.3s;
+}
+
+.contextNavbarItemSelected {
+  background-color: white;
+  color: black !important;
+}
+
+.contextNavbarItemSelected > svg {
+  filter: none !important;
+}
+
+/* Pagina di contesto stile */
+.contextPageWrapper {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.searchBox {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  width: 500px;
+  max-width: 50%;
+
+  border-radius: 20px;
+
+  margin: 10px 0 0 10px;
+  padding: 10px;
+
+  background-color: #84a8dc;
+}
+
+.searchBoxInput {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  border: 0;
+}
+
+.searchBoxInput::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+.searchBoxInput:focus {
+  outline: none !important;
+  border: 0;
+}
+
+.pageWrapper {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tableButtonsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 10px;
+
+  margin-left: 10px;
+  margin-right: 3%;
+  padding: 20px 20px 10px 0;
+
+  border-radius: 15px 15px 0 0;
+  background-color: #84a8dc;
+
+  width: calc(100% - 30px - 3%);
+}
+
+.btnTable {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  max-width: min-content;
+
+  padding: 15px;
+  -webkit-box-shadow: 10px 10px 17px -15px rgba(0, 0, 0, 0.75);
+}
+
+.btnTable > svg {
+  flex-shrink: 0;
+}
+
+.defaultTable {
+  border-collapse: collapse;
+  overflow-y: hidden;
+
+  table-layout: auto;
+  width: 100%;
+}
+
+.defaultTable tr {
+  background-color: white;
+  width: 100%;
+}
+
+.defaultTable tr:first-child {
+  color: white;
+}
+
+.defaultTable th {
+  position: sticky;
+  top: 0;
+  background-color: #84a8dc;
+  padding-bottom: 10px;
+  text-align: start;
+  box-shadow: inset 0 -2px 0 #000000;
+}
+
+.defaultTable tr td:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: #84a8dc;
+  height: 10px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: #d6dbdf;
+}
+
+.tableWrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: calc(100% - 10px - 3%);
+  margin-bottom: 20px;
+  margin-right: 3%;
+  background-color: #fffeff;
+  height: 100%;
+  margin-left: 10px;
+}

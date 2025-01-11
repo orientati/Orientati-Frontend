@@ -128,13 +128,10 @@ a {
         margin: auto;
         width: 90%;
         max-width: 55vw;
-        padding: 3dvh 0;
+        padding: 3vh 0;
     }
 
     #formLogin input {
-        width: 100
-
-    %;
-            
+        width:100%;
     }
 }

@@ -1,6 +1,7 @@
 "use strict";
 let scuoleDiProvenienza = [];
 
+
 /**
  * Ritorna tutte le scuole di provenienza registrate sul server. Richiede l'admin
  * @returns Una LISTA di classe SCUOLADIPROVENIENZA con i dettagli

@@ -58,7 +58,7 @@ main {
     padding: 16px 20px;
     border-radius: 16px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
 
 .top {
@@ -66,11 +66,17 @@ main {
     justify-content: space-between;
 }
 
+.inViaggio {
+    font-size: 18px;
+}
+
 .on-time {
     background-color: green;
     padding: 6px;
     border-radius: 8px;
     color: white;
+    height: fit-content;
+    text-align: center;
 }
 
 .late {
@@ -79,7 +85,7 @@ main {
     border-radius: 8px;
     color: white;
     height: fit-content;
-
+    text-align: center;
 }
 
 .not-started {
@@ -88,6 +94,7 @@ main {
     border-radius: 8px;
     color: white;
     height: fit-content;
+    text-align: center;
 }
 
 .bit-late{
@@ -96,6 +103,7 @@ main {
     border-radius: 8px;
     color: black;
     height: fit-content;
+    text-align: center;
 }
 
 .next-lab {
@@ -119,10 +127,9 @@ main {
     gap: 35px;
 
     height: 100%;
-    width: 60px;
+    width: fit-content;
     background-color: #84a8dc;
 
-    position: sticky;
 }
 
 #navbarBurger {
@@ -159,7 +166,8 @@ main {
     justify-content: center;
 
     height: 30px;
-    width: 100%;
+    width: fit-content;
+    padding: 10px 14px 10px 14px;
 
     background-color: #4e6dfc;
     border-radius: 15px;
@@ -171,7 +179,7 @@ main {
 }
 
 .navbarItemBtn {
-    background-color: #6481ff;
+    background-color: #4e6dfc;
 }
 
 .navbarItemText {
@@ -289,14 +297,10 @@ main {
     justify-content: end;
     gap: 10px;
 
-    margin-left: 10px;
-    margin-right: 3%;
     padding: 20px 20px 10px 0;
 
     border-radius: 15px 15px 0 0;
     background-color: #84a8dc;
-
-    width: calc(100% - 10px);
 }
 
 .btnTable {
@@ -370,11 +374,8 @@ main {
 .tableWrapper {
     overflow-y: auto;
     overflow-x: hidden;
-    width: calc(100% - 10px);
-    margin-right: 3%;
     background-color: #fffeff;
     height: 100%;
-    margin-left: 10px;
     border-radius: 0px 0px 18px 18px;
 }
 
@@ -384,7 +385,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: "Overpass";
     font-size: 0.8em;
     font-weight: bold;
 }
@@ -448,7 +448,7 @@ p {
     padding: 6px;
     border-radius: 24px;
     color: white;
-    background-color: #506aff;
+    background-color: #4e6dfc;
     border: none;
     display: flow;
 }
@@ -468,30 +468,73 @@ p {
 
 /* Contenuto della modale */
 .modal-content {
-    background-color: #fff;
+    background-color: white;
     margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 300px;
-    text-align: center;
+    padding: 32px;
+    border-radius: 18px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
 }
 
-/* Pulsante di chiusura (X) */
-.close-btn {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    right: 10px;
-    top: 10px;
+.modal-content input {
+    border: solid #84a8dc;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 6px;
 }
 
-/* Effetto hover sulla X */
-.close-btn:hover,
-.close-btn:focus {
+.modal-content select {
+    border: solid #84a8dc;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 12px;
+}
+
+.modal-content button:first-child {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: gray;
+    color: white;
+    width: 30%;
+}
+
+.modal-content button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #4e6dfc;
+    color: white;
+    width: 30%;
+}
+
+.modal-content div {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.modal-content input::placeholder {
     color: black;
-    text-decoration: none;
-    cursor: pointer;
+}
+
+.modal-content input:focus {
+    outline: none;
+}
+
+.modal-content select:focus {
+    outline: none;
+}
+
+#modalGruppoDiv {
+    display: flex;
+}
+
+#modalGruppoDiv div{
+    display: flex;
+    align-content: center;
 }
 
 #overviewPage {
@@ -503,24 +546,20 @@ p {
     width: 100%;
     height: auto;
     background: #c4cfe9;
-
     padding: 0 36px 36px 36px;
 }
 
 #auleContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    background-color: #fffeff;
-    padding: 22px;
-    border-radius: 16px;
-
     width: 100%;
-    height: min-content;
-    max-height: 50vh;
-
-    overflow-y: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    background-color: #fffeff;
+    padding: 20px;
+    border-radius: 16px;
+    gap: 10px;
 }
 
 .templateAula {
@@ -529,14 +568,55 @@ p {
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    width: min-content !important;
-    min-width: 30em;
-    height: 10em;
+    width: 416px;
+    height: 146px;
 }
 
 #divWrapper {
     display: flex;
     gap: 10px;
     flex-direction: column;
+}
+
+.search-bar {
+    display: flex;
+    background-color: white;
+    padding: 12px 16px;
+    border-radius: 24px;
+    gap: 12px;
+    width: 100%;
+
+}
+
+#searchInput {
+    border: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+#searchInput::placeholder {
+    color: black;
+}
+
+#searchInput:focus {
+    outline: none;
+}
+
+.search-nav {
+    display: flex;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.highlight {
+    background-color: #4e6dfc;
+    color: white;
+    padding: 0 18px;
+    border-radius: 12px;
+}
+
+.alignInColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
