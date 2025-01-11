@@ -162,3 +162,79 @@ svg {
 .selected {
     background-color: #8290aa;
 }
+
+
+/* Stile della modale */
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Sfondo trasparente */
+    padding-top: 60px;
+}
+
+/* Contenuto della modale */
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 32px;
+    border-radius: 18px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    width: fit-content;
+}
+
+.modal-content input {
+    border: solid #84a8dc;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+
+.modal-content select {
+    border: solid #84a8dc;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 12px;
+}
+
+.modal-content button:first-child {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: gray;
+    color: white;
+    width: 30%;
+}
+
+.modal-content button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #4e6dfc;
+    color: white;
+    width: 30%;
+}
+
+.modal-content div {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.modal-content input::placeholder {
+    color: black;
+}
+
+.modal-content input:focus {
+    outline: none;
+}
+
+.modal-content select:focus {
+    outline: none;
+}

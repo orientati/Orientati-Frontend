@@ -6,6 +6,16 @@ let arrivato = false;
 let Gruppo = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    if (localStorage.getItem("modaleUpdate") === null) {
+        document.getElementById("modalUpdate").classList.remove("hide");
+        document.getElementById("closeModalUpdate").addEventListener("click", function () {
+            document.getElementById("modalUpdate").classList.add("hide");
+            localStorage.setItem("modaleUpdate", "true");
+        });
+    }
+
+
     aggiornaDataOra();
     setInterval(aggiornaDataOra, 1000);
 
