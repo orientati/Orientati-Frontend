@@ -4,16 +4,20 @@ let tappe = [];
 let numeroTappa = 0;
 let arrivato = false;
 let Gruppo = 0;
+let versione = "1.0.0"; //TODO: da ricavare
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    if (localStorage.getItem("modaleUpdate") === null) {
+    function mostraModale(){
+    if (localStorage.getItem("modaleUpdate") !== versione) {
         document.getElementById("modalUpdate").classList.remove("hide");
         document.getElementById("closeModalUpdate").addEventListener("click", function () {
             document.getElementById("modalUpdate").classList.add("hide");
-            localStorage.setItem("modaleUpdate", "true");
+            localStorage.setItem("modaleUpdate", versione);
         });
-    }
+    }}
+
+    setTimeout(mostraModale, 500);
 
 
     aggiornaDataOra();
