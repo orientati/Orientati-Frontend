@@ -178,7 +178,7 @@ function caricaGruppo(gruppo) {
         mostraProssimaTappa(gruppo);
     }
 
-    document.getElementById("accompagantori").textContent = "Partecipanti " + gruppo.orientati_presenti + "/" + gruppo.orientati_totali;
+    document.getElementById("accompagantori").textContent = "Partecipanti " + gruppo.orientati_presenti + "/" + (gruppo.totale_orientati - gruppo.orientati_assenti);
 }
 
 function tappaSuccessiva() {
