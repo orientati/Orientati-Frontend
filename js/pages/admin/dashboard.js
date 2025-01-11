@@ -54,8 +54,7 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 
     reloadPagina = setInterval(updatePage, pollingTime);
-})
-;
+});
 
 function loadGruppi(groups) {
     groupsWrapper.innerHTML = "";
@@ -70,17 +69,19 @@ function creaGruppo(group) {
     contentDiv.className = "content";
     contentDiv.id = group.id;
 
-    // Crea la sezione "top"
-    const topDiv = document.createElement("div");
-    topDiv.className = "top";
+    const divLeft = document.createElement("div");
+    divLeft.className = "alignInColumn";
+    contentDiv.appendChild(divLeft);
 
-    const groupDiv = document.createElement("div");
+    const divRight = document.createElement("div");
+    divRight.className = "alignInColumn";
+    contentDiv.appendChild(divRight);
+
     const groupTitle = document.createElement("span");
     groupTitle.id = group.id + "-nome";
-    groupTitle.innerHTML =
-        "<h1><span class='highlight'>" +  group.nome + "</span><p>" + group.orario_partenza + "</p>" + "</h1>";
+    groupTitle.innerHTML = "<h1><span class='highlight'>" + group.nome + "</span><p>" + group.orario_partenza + "</p>" + "</h1>";
 
-    groupDiv.appendChild(groupTitle);
+    divLeft.appendChild(groupTitle);
 
     const onTimeSpan = document.createElement("span");
     const details = getInOrario(group);
@@ -141,10 +142,9 @@ function creaGruppo(group) {
             const orario = document.getElementById("inputOrario").value;
             const gruppoId = group.id;
 
-            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/tappa/${gruppoId}?numero_tappa=${comboBoxTappa.selectedIndex}&arrivato=${inputPresenza.checked}`, "PUT",
-                {
-                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
-                })
+            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/tappa/${gruppoId}?numero_tappa=${comboBoxTappa.selectedIndex}&arrivato=${inputPresenza.checked}`, "PUT", {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            })
                 .then(() => {
                     modal.style.display = "none";
                     updatePage();
@@ -154,10 +154,9 @@ function creaGruppo(group) {
                     mostraAlert("errore", err);
                 });
 
-            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/orario_partenza/${gruppoId}?orario_partenza=${orario}`, "PUT",
-                {
-                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
-                })
+            vallauriRequest(`${serverUrl}admin/dashboard/gruppi/orario_partenza/${gruppoId}?orario_partenza=${orario}`, "PUT", {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            })
                 .then(() => {
                     modal.style.display = "none";
                     updatePage();
@@ -177,9 +176,7 @@ function creaGruppo(group) {
     let codice = document.createElement("p");
     if (group.codice !== null) {
         codice.textContent = "Codice: " + group.codice;
-    }
-    else
-    {
+    } else {
         codice.style.display = "none";
     }
     let buttonRigeneraCodice = document.createElement("button");
@@ -189,10 +186,9 @@ function creaGruppo(group) {
 
         buttonRigeneraCodice.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Caricamento...`;
 
-        vallauriRequest(`${serverUrl}admin/gruppi/rigeneraCodice/${group.id}`, "PUT",
-            {
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`
-            })
+        vallauriRequest(`${serverUrl}admin/gruppi/rigeneraCodice/${group.id}`, "PUT", {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        })
             .then(() => {
                 updatePage();
             })
@@ -202,19 +198,11 @@ function creaGruppo(group) {
             });
     });
 
-    const divWrapper = document.createElement("div");
-    divWrapper.id = "divWrapper";
-    divWrapper.appendChild(onTimeSpan);
-    divWrapper.appendChild(button);
-    divWrapper.appendChild(codice);
-    divWrapper.appendChild(buttonRigeneraCodice);
-    topDiv.appendChild(groupDiv);
-    topDiv.appendChild(divWrapper);
+
+
 
     // Crea la sezione centrale
-    const centralDiv = document.createElement("div");
 
-    const divViaggio = document.createElement("div");
 
     const labInfo = document.createElement("p");
     labInfo.id = group.id + "-materia";
@@ -229,36 +217,39 @@ function creaGruppo(group) {
     span.textContent = "In viaggio verso:";
 
     if (group.arrivato === false && group.numero_tappa !== 0) {
-        divViaggio.appendChild(span);
+        divLeft.appendChild(span);
     }
 
     if (group.numero_tappa !== 0) {
-        divViaggio.appendChild(labInfo);
-        divViaggio.appendChild(subjectTitle);
+        divLeft.appendChild(labInfo);
+        divLeft.appendChild(subjectTitle);
     }
-    centralDiv.appendChild(divViaggio);
 
     const infoPresenze = document.createElement("p");
-    infoPresenze.textContent =
-        "Partecipanti: " + group.orientati_presenti + "/" + group.totale_orientati;
-    centralDiv.appendChild(infoPresenze);
+    infoPresenze.textContent = "Partecipanti: " + group.orientati_presenti + "/" + (group.totale_orientati - group.orientati_assenti);
+    if (group.orientati_assenti !== 0) {
+        infoPresenze.textContent += " (" + group.totale_orientati + ")";
+    }
 
     const orarioPartenzaFine = document.createElement("p");
     if (!(group.numero_tappa === 0 && group.arrivato === false)) {
-        orarioPartenzaFine.textContent =
-            "Partenza: " + group.orario_partenza_effettivo;
-        centralDiv.appendChild(orarioPartenzaFine);
+        orarioPartenzaFine.textContent = "Partenza: " + group.orario_partenza_effettivo;
+        divLeft.appendChild(orarioPartenzaFine);
     }
 
     if (group.numero_tappa === 0 && group.arrivato === true) {
         orarioPartenzaFine.textContent += " Fine: " + group.orario_fine_effettivo;
     }
 
-    centralDiv.appendChild(orarioPartenzaFine);
+    divLeft.appendChild(orarioPartenzaFine);
+
+    divRight.appendChild(onTimeSpan);
+    divRight.appendChild(infoPresenze);
+    divRight.appendChild(button);
+    divRight.appendChild(codice);
+    divRight.appendChild(buttonRigeneraCodice);
 
     // Aggiungi tutto al contenitore principale
-    contentDiv.appendChild(topDiv);
-    contentDiv.appendChild(centralDiv);
 
     // Aggiungi il contenitore principale al body o a un altro elemento della pagina
     groupsWrapper.appendChild(contentDiv);
@@ -267,14 +258,12 @@ function creaGruppo(group) {
 function getInOrario(group) {
     if (group.numero_tappa === 0 && group.arrivato === false) {
         return {
-            classe: "not-started",
-            text: "NON PARTITO",
+            classe: "not-started", text: "NON PARTITO",
         };
     }
     if (group.numero_tappa === 0 && group.arrivato === true) {
         return {
-            classe: "not-started",
-            text: "USCITO",
+            classe: "not-started", text: "USCITO",
         };
     }
 
@@ -287,27 +276,20 @@ function getInOrario(group) {
     var d = new Date();
     d.setSeconds(0);
     data.setSeconds(0);
-    if (
-        d.getHours() > data.getHours() ||
-        (d.getHours() === data.getHours() && d.getMinutes() > data.getMinutes())
-    ) {
+    if (d.getHours() > data.getHours() || (d.getHours() === data.getHours() && d.getMinutes() > data.getMinutes())) {
         let minutesRitardo = (d.getHours() - data.getHours()) * 60 + d.getMinutes() - data.getMinutes();
 
         if (minutesRitardo <= 3) {
             return {
-                classe: "bit-late",
-                text: "LIEVE RITARDO",
+                classe: "bit-late", text: "LIEVE RITARDO",
             }
-        } else if (d.getHours() === data.getHours() && d.getMinutes())
-        return {
-            classe: "late",
-            text: "IN RITARDO",
+        } else if (d.getHours() === data.getHours() && d.getMinutes()) return {
+            classe: "late", text: "IN RITARDO",
         };
     }
     // }
     return {
-        classe: "on-time",
-        text: "IN ORARIO",
+        classe: "on-time", text: "IN ORARIO",
     };
 }
 
@@ -458,13 +440,9 @@ function loadTable(orientati) {
                 const selectedOption = document.getElementById("comboBox").value;
                 const orientatoId = datiOrientato.id;
 
-                vallauriRequest(
-                    `${serverUrl}admin/dashboard/orientati/gruppo/${orientatoId}?gruppo_id=${selectedOption}`,
-                    "PUT",
-                    {
-                        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-                    }
-                )
+                vallauriRequest(`${serverUrl}admin/dashboard/orientati/gruppo/${orientatoId}?gruppo_id=${selectedOption}`, "PUT", {
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                })
                     .then(() => {
                         modal.style.display = "none";
                         updatePage();
@@ -526,11 +504,7 @@ function creaAula(aula) {
         const groupDiv = document.createElement("div");
         const groupTitle = document.createElement("h1");
         groupTitle.id = aula.id + "-nome";
-        groupTitle.innerHTML =
-            aula.nome +
-            "<span style='font-size: 18px; margin-left: 14px'>" +
-            aula.posizione +
-            "</span>";
+        groupTitle.innerHTML = aula.nome + "<span style='font-size: 18px; margin-left: 14px'>" + aula.posizione + "</span>";
         /*
             const groupMembers = document.createElement("p");
             groupMembers.id = aula.id + "-dettagli";
@@ -567,11 +541,7 @@ function creaAula(aula) {
             oraUscita.setHours(aula.gruppo_orario_partenza.split(":")[0]);
             oraUscita.setMinutes(aula.gruppo_orario_partenza.split(":")[1]);
             oraUscita.setMinutes(oraUscita.getMinutes() + aula.minuti_partenza);
-            infoPresenze.textContent =
-                "Occupata da Gruppo " +
-                aula.gruppo_nome +
-                " fino alle  " +
-                oraUscita.getHours() + ":" + oraUscita.getMinutes();
+            infoPresenze.textContent = "Occupata da Gruppo " + aula.gruppo_nome + " fino alle  " + oraUscita.getHours() + ":" + oraUscita.getMinutes();
             centralDiv.appendChild(infoPresenze);
         }
 
@@ -654,16 +624,14 @@ function modaleOrientati() {
     applyButton.addEventListener("click", function () {
         console.log("applica");
         const selectedOption = document.getElementById("gruppoOrientato").value;
-        vallauriRequest(`${serverUrl}admin/dashboard/orientati/`, "POST",
-            {
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`
-            },
-            {
-                nome: document.getElementById("nomeOrientato").value,
-                cognome: document.getElementById("cognomeOrientato").value,
-                gruppo_id: selectedOption,
-                scuolaDiProvenienza_id: 1 //TODO: implementare la select della scuola
-            })
+        vallauriRequest(`${serverUrl}admin/dashboard/orientati/`, "POST", {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        }, {
+            nome: document.getElementById("nomeOrientato").value,
+            cognome: document.getElementById("cognomeOrientato").value,
+            gruppo_id: selectedOption,
+            scuolaDiProvenienza_id: 1 //TODO: implementare la select della scuola
+        })
             .then(() => {
                 modal.style.display = "none";
                 document.getElementById("nomeOrientato").value = "";
@@ -707,11 +675,9 @@ function modaleFile() {
         const formData = new FormData();
         formData.append("file", file);
 
-        vallauriRequest(`${serverUrl}admin/orientati/upload`, "POST",
-            {
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`
-            },
-            formData)
+        vallauriRequest(`${serverUrl}admin/orientati/upload`, "POST", {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        }, formData)
             .then(() => {
                 modal.style.display = "none";
                 updatePage();

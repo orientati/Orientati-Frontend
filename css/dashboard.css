@@ -58,7 +58,7 @@ main {
     padding: 16px 20px;
     border-radius: 16px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
 
 .top {
@@ -76,6 +76,7 @@ main {
     border-radius: 8px;
     color: white;
     height: fit-content;
+    text-align: center;
 }
 
 .late {
@@ -84,7 +85,7 @@ main {
     border-radius: 8px;
     color: white;
     height: fit-content;
-
+    text-align: center;
 }
 
 .not-started {
@@ -93,6 +94,7 @@ main {
     border-radius: 8px;
     color: white;
     height: fit-content;
+    text-align: center;
 }
 
 .bit-late{
@@ -101,6 +103,7 @@ main {
     border-radius: 8px;
     color: black;
     height: fit-content;
+    text-align: center;
 }
 
 .next-lab {
@@ -611,4 +614,10 @@ p {
     color: white;
     padding: 0 18px;
     border-radius: 12px;
+}
+
+.alignInColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
