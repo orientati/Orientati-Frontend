@@ -4,7 +4,7 @@ const ep = "api/v1/"
 let serverUrl;
 
 if(location.origin == "file://") {
-    serverUrl = `http://localhost:${pl}/${ep}`;
+    serverUrl = `https://localhost:${pl}/${ep}`;
 }else{
-    serverUrl = `http://${location.hostname}:${ps}/${ep}`;
+    serverUrl = `https://${location.hostname}:${ps}/${ep}`;
 }
