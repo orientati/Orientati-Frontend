@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  user-select: none;
+  padding: 18px;
+}
+
+.section {
+  background-color: lightgray;
+  border: 1px solid #aaa;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: move; /* Cambia il cursore per il drag */
+}
+
+.resizer {
+  width: 5px;
+  background-color: #333;
+  cursor: ew-resize;
+}

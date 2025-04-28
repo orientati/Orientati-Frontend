@@ -1,0 +1,10 @@
+<div class="container" cdkDropList (cdkDropListDropped)="onDrop($event)">
+  @for (section of sections; track $index) {
+    <div class="section" [style.width.%]="section.width" cdkDrag>
+      {{ section.content }}
+    </div>
+    @if ($index < sections.length - 1) {
+      <div class="resizer" (mousedown)="startResize($event, $index)"></div>
+    }
+  }
+</div>
