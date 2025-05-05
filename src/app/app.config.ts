@@ -12,3 +12,20 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([tokenInterceptor])),
   ]
 };
+
+
+import { InjectionToken } from '@angular/core';
+
+export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL', {
+  factory: () => {
+    const ps = "8000";
+    const pl = "8000";
+    const ep = "api/v1/";
+
+    if (location.origin === 'file://') {
+      return `https://localhost:${pl}/${ep}`;
+    } else {
+      return `https://${location.hostname}:${ps}/${ep}`;
+    }
+  }
+});

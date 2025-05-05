@@ -1,14 +1,13 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {map, catchError} from 'rxjs/operators';
+import {API_BASE_URL} from "../../tokens/api-base-url.token";
 
 @Injectable({providedIn: 'root'})
 export class TokenService {
-  private readonly API_URL = ''; //TODO
-
-  constructor(private http: HttpClient) {
-  }
+  private http = inject(HttpClient);
+  private readonly API_URL = inject(API_BASE_URL);
 
   getAccessToken(): string | null {
     return localStorage.getItem('accessToken');
@@ -27,7 +26,7 @@ export class TokenService {
     const refreshToken = this.getRefreshToken();
     if (!refreshToken) return throwError(() => new Error('No refresh token'));
 
-    return this.http.post<any>(`${this.API_URL}/refresh-token`, {
+    return this.http.post<any>(`${this.API_URL}/token/refresh`, {
       refreshToken: refreshToken
     }).pipe(
       map(response => {
