@@ -1,5 +1,19 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <input type="text" formControlName="username">
-  <input type="password" placeholder="PASSWORD" formControlName="password">
-  <button type="submit" class="form-button" (keydown.enter)="on_enter()">JOIN</button>
-</form>
+<div class="container">
+
+    <div class="prova">
+        <div class="left">
+            <h1>gaga</h1>
+        </div>
+        <div class="right">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <app-form-input [control]="getControl('username')" label="Username" type="text" [formSubmitted]="formSubmitted"></app-form-input>
+                <app-form-input [control]="getControl('password')" label="Password" type="password" [formSubmitted]="formSubmitted"></app-form-input>
+                <button type="submit" class="form-button" (keydown.enter)="on_enter()">JOIN</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+

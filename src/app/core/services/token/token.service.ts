@@ -10,16 +10,16 @@ export class TokenService {
   private readonly API_URL = inject(API_BASE_URL);
 
   getAccessToken(): string | null {
-    return localStorage.getItem('accessToken');
+    return sessionStorage.getItem('access_token');
   }
 
   getRefreshToken(): string | null {
-    return localStorage.getItem('refreshToken');
+    return localStorage.getItem('refresh_token');
   }
 
   saveTokens(access: string, refresh: string): void {
-    localStorage.setItem('accessToken', access);
-    localStorage.setItem('refreshToken', refresh);
+    sessionStorage.setItem('access_token', access);
+    localStorage.setItem('refresh_token', refresh);
   }
 
   refreshToken(): Observable<string> {
@@ -41,7 +41,7 @@ export class TokenService {
 
   logout(): void {
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('refresh_token');
     location.href = ''; //TODO
   }
 }

@@ -15,7 +15,7 @@ export class AuthGenitoriService {
 
     try {
       //TODO
-      const response = this.apiService.post('/genitore', requestBody);
+      const response: any = this.apiService.post('/genitore', requestBody);
       sessionStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('tokenType', response.token_type);
       return (!response.nome || !response.cognome || !response.comune);

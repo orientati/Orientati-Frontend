@@ -1,63 +1,71 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../../../core/services/api/api.service';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../../../core/services/api/api.service';
+import {firstValueFrom, Observable, tap} from "rxjs";
+import {TokenService} from '../../../core/services/token/token.service';
+
+type LoginResponse = {
+    access_token: string;
+    refresh_token: string;
+    token_type: string;
+};
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthAdminService {
 
-  constructor(private apiService: ApiService) {
-  }
-
-  async login(username: string, password: string): Promise<boolean> {
-    const requestBody = JSON.stringify({
-      username,
-      password
-    });
-
-    try {
-      const response = this.apiService.post('', requestBody); //TODO
-      sessionStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('refreshToken', response.refreshToken);
-      return !!response;
-    } catch (error) {
-      console.error('Errore durante la richiesta:', error);
-      throw error;
+    constructor(private apiService: ApiService, private tokenService: TokenService) {
     }
-  }
 
-  isAuthenticated(): boolean {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
-
-    return !!(accessToken && refreshToken);
-  }
-
-/*
-  async logout(): Promise<boolean> {
-    try {
-      const response = await this.apiService.sendRequest('/auth/logout', 'POST');
-      sessionStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      return !!response;
-    } catch (error) {
-      console.error('Errore durante la richiesta:', error);
-      throw error;
+    login(requestBody: FormData): Observable<any> {
+        try {
+            return this.apiService.post<LoginResponse>('login', requestBody).pipe(
+                tap(response => {
+                    this.tokenService.saveTokens(response.access_token, response.refresh_token);
+                })
+            );
+        } catch (error) {
+            console.error('Error during the request:', error);
+            throw error;
+        }
     }
-  }
 
-  async forgotPassword(email: string): Promise<boolean> {
-    const requestBody = JSON.stringify({
-      email
-    });
 
-    try {
-      const response = await this.apiService.sendRequest('/auth/forgot-password', 'POST', requestBody);
-      return !!response;
-    } catch (error) {
-      console.error('Errore durante la richiesta:', error);
-      throw error;
+
+
+
+    isAuthenticated(): boolean {
+        this.tokenService.getAccessToken();
+        this.tokenService.getRefreshToken();
+
+        return true;
     }
-  }
- */
+
+    /*
+      async logout(): Promise<boolean> {
+        try {
+          const response = await this.apiService.sendRequest('/auth/logout', 'POST');
+          sessionStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          return !!response;
+        } catch (error) {
+          console.error('Errore durante la richiesta:', error);
+          throw error;
+        }
+      }
+
+      async forgotPassword(email: string): Promise<boolean> {
+        const requestBody = JSON.stringify({
+          email
+        });
+
+        try {
+          const response = await this.apiService.sendRequest('/auth/forgot-password', 'POST', requestBody);
+          return !!response;
+        } catch (error) {
+          console.error('Errore durante la richiesta:', error);
+          throw error;
+        }
+      }
+     */
 }
