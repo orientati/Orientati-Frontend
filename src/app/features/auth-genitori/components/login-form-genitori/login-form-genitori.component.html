@@ -1,0 +1,25 @@
+@if (Registrazione) {
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <input type="email" formControlName="email">
+    <button type="submit" class="form-button">JOIN</button>
+
+
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" formControlName="nome">
+
+    <label for="cognome">Cognome:</label>
+    <input type="text" name="cognome" formControlName="cognome">
+
+    <label for="comune">Comune di Residenza:</label>
+    <select id="comune" name="comune" formControlName="comune">
+      <option value="">Seleziona un comune</option>
+    </select>
+
+  </form>
+}
+@else {
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <input type="email" formControlName="email">
+    <button type="submit" class="form-button" (keydown.enter)="on_enter()">JOIN</button>
+  </form>
+}
