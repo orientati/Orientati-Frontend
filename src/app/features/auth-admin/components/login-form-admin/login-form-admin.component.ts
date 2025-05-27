@@ -3,13 +3,15 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthAdminService} from '../../services/auth-admin.service';
 import {FormInputComponent} from "../../../../form-input/form-input.component";
+import { FormButtonComponent } from '../../../../form-button/form-button.component';
 
 @Component({
     selector: 'app-login-form-admin',
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        FormInputComponent
+        FormInputComponent,
+        FormButtonComponent
     ],
     templateUrl: './login-form-admin.component.html',
     styleUrl: './login-form-admin.component.css'

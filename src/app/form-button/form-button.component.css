@@ -1,0 +1,21 @@
+button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    padding: 14px;
+    gap: 6px;
+    border-radius: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20
+}
+

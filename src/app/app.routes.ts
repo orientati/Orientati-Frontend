@@ -4,10 +4,8 @@ import {
   LoginFormGenitoriComponent
 } from './features/auth-genitori/components/login-form-genitori/login-form-genitori.component';
 
-import {DashboardComponent} from './dashboard/dashboard.component';
 
 export const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent},
   {path: 'genitori', component: LoginFormGenitoriComponent},
   {path: 'login', component: LoginFormAdminComponent},
 ];

@@ -46,7 +46,7 @@ input:valid+label {
   position: absolute;
   left: 9px;
   top: 17px;
-  background-color: #0e0e0e;
+  background-color: black;
   color: #e3e3e3;
   font-size: 18px;
   padding: 0 10px;
@@ -68,6 +68,7 @@ input:valid+label {
   display: flex;
   gap: 8px;
   align-items: center;
+  min-height: 24px;
 }
 
 span {
