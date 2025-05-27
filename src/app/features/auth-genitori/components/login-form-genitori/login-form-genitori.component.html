@@ -1,4 +1,5 @@
 @if (Registrazione) {
+  <!--
   <form [formGroup]="registerForm" (ngSubmit)="register()">
     <input type="email" formControlName="email">
     <button type="submit" class="form-button">JOIN</button>
@@ -16,6 +17,7 @@
     </select>
 
   </form>
+-->
 }
 @else {
   <form [formGroup]="loginForm" (ngSubmit)="login()">

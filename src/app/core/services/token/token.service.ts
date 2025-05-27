@@ -17,9 +17,9 @@ export class TokenService {
     return localStorage.getItem('refresh_token');
   }
 
-  saveTokens(access: string, refresh: string): void {
-    sessionStorage.setItem('access_token', access);
-    localStorage.setItem('refresh_token', refresh);
+  saveTokens(access_token: string = "", refresh_token: string = ""): void {
+    sessionStorage.setItem('access_token', access_token);
+    localStorage.setItem('refresh_token', refresh_token);
   }
 
   refreshToken(): Observable<string> {

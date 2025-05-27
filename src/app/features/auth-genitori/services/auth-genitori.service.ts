@@ -1,30 +1,61 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../../core/services/api/api.service';
+import {Observable, tap} from 'rxjs';
+import {TokenService} from '../../../core/services/token/token.service';
+
+type LoginResponse = {
+  nome: string;
+  cognome: string;
+  comune: string;
+  id: number;
+  access_token: string;
+  token_type: string;
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGenitoriService {
-  constructor(private apiService: ApiService) {
+
+  constructor(private apiService: ApiService, private tokenService: TokenService) {
   }
 
-  async login(username: string, password: string): Promise<boolean> {
-    const requestBody = JSON.stringify({
-      username,
-    });
+  login(email: string): Observable<any> {
+    const requestBody = {
+      email
+    };
 
     try {
-      //TODO
-      const response: any = this.apiService.post('/genitore', requestBody);
-      sessionStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('tokenType', response.token_type);
-      return (!response.nome || !response.cognome || !response.comune);
+      return this.apiService.post<LoginResponse>('public/genitore', requestBody).pipe(
+        tap(response => {
+          this.tokenService.saveTokens(response.access_token);
+        })
+      );
     } catch (error) {
-      console.error('Errore durante la richiesta:', error);
+      console.error('Error during the request:', error);
       throw error;
     }
   }
 
+
+
+
+  /*
+    async login(username: string, password: string): Promise<boolean> {
+
+
+      try {
+        //TODO
+        const response: any = this.apiService.post('/genitore', requestBody);
+        sessionStorage.setItem('accessToken', response.accessToken);
+        localStorage.setItem('tokenType', response.token_type);
+        return (!response.nome || !response.cognome || !response.comune);
+      } catch (error) {
+        console.error('Errore durante la richiesta:', error);
+        throw error;
+      }
+    }
+  */
   async register(nome: string, cognome: string, comune: string, email: string): Promise<boolean> {
     const requestBody = JSON.stringify({
       email,
@@ -42,24 +73,6 @@ export class AuthGenitoriService {
       throw error;
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   /*
