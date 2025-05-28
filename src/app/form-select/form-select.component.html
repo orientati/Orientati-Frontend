@@ -1,0 +1,18 @@
+<div class="select-container">
+    <!-- <input [type]="type" [formControl]="control" [class.error]="control.invalid && formSubmitted" required> -->
+    <label>Comune</label>
+    <select >
+        @for (option of options; track option) {
+        <option [value]="option">{{ option }}</option>
+        }
+    </select>
+    <div class="error-message">
+        <span class="material-symbols-outlined">
+            <!-- [style.visibility]="control.invalid && formSubmitted ? 'visible' : 'hidden'" -->
+            error
+        </span>
+        <p> <!-- [style.visibility]="control.invalid && formSubmitted ? 'visible' : 'hidden'" -->
+            Enter an email or phone number
+        </p>
+    </div>
+</div>
