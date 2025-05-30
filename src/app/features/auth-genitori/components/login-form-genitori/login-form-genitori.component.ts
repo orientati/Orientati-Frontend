@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthGenitoriService} from '../../services/auth-genitori.service';
 import {ApiService} from '../../../../core/services/api/api.service';
-import {FormInputComponent} from "../../../../form-input/form-input.component";
+import {FormInputComponent} from "../../../../shared/components/forms/form-input/form-input.component";
 
 @Component({
   selector: 'app-login-form-genitori',

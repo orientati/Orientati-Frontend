@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthAdminService} from '../../services/auth-admin.service';
-import {FormInputComponent} from "../../../../form-input/form-input.component";
-import { FormButtonComponent } from '../../../../form-button/form-button.component';
+import {FormInputComponent} from "../../../../shared/components/forms/form-input/form-input.component";
+import { FormButtonComponent } from '../../../../shared/components/forms/form-button/form-button.component';
 
 @Component({
     selector: 'app-login-form-admin',
@@ -52,6 +52,7 @@ export class LoginFormAdminComponent {
             next: () => {
                 //this.router.navigate(['/home']);
                 console.log("Login successful");
+                this.router.navigate(['/dashboard']);
             },
             //error: err => this.errorMessage = 'Credenziali errate'
         });

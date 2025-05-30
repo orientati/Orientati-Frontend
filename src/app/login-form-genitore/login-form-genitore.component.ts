@@ -3,10 +3,10 @@ import { AuthGenitoriService } from '../features/auth-genitori/services/auth-gen
 import { ApiService } from '../core/services/api/api.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormInputComponent } from '../form-input/form-input.component';
-import { FormButtonComponent } from '../form-button/form-button.component';
+import { FormInputComponent } from '../shared/components/forms/form-input/form-input.component';
+import { FormButtonComponent } from '../shared/components/forms/form-button/form-button.component';
 
-import { FormSelectComponent } from '../form-select/form-select.component';
+import { FormSelectComponent } from '../shared/components/forms/form-select/form-select.component';
 
 @Component({
   selector: 'app-login-form-genitore',
