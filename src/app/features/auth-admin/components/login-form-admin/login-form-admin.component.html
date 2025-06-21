@@ -4,7 +4,7 @@
             <div class="logo"></div>
             <div class="auth-card-title">
                 <h2>Accedi</h2>
-                <p>per continuare su #Orientati</p>
+                <p>per continuare su <span class="accent-color">#Orientati</span></p>
             </div>
         </div>
         <div class="auth-card-right">
@@ -18,5 +18,8 @@
                 <app-form-button type="submit" (keydown.enter)="on_enter()"></app-form-button>
             </form>
         </div>
+    </div>
+    <div class="auth-orientati">
+    <app-button [label]="'Accedi come utente temporaneo'" [icon]="'login'"></app-button>
     </div>
 </main>

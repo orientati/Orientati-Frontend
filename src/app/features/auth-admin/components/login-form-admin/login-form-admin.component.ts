@@ -4,6 +4,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {AuthAdminService} from '../../services/auth-admin.service';
 import {FormInputComponent} from '../../../../shared/components/forms/form-input/form-input.component';
 import {FormButtonComponent} from '../../../../shared/components/forms/form-button/form-button.component';
+import {ButtonComponent} from "../../../../shared/button/button.component";
 
 @Component({
     selector: 'app-login-form-admin',
@@ -11,7 +12,8 @@ import {FormButtonComponent} from '../../../../shared/components/forms/form-butt
         FormsModule,
         ReactiveFormsModule,
         FormInputComponent,
-        FormButtonComponent
+        FormButtonComponent,
+        ButtonComponent
     ],
     templateUrl: './login-form-admin.component.html',
     styleUrl: './login-form-admin.component.css'

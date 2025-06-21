@@ -6,9 +6,9 @@
 }
 
 .input-container input {
-  color: #e3e3e3;
+  color: black;
   background-color: transparent;
-  border: 1px solid #e3e3e3;
+  border: 2px solid black;
   border-radius: 4px;
   font-size: 18px;
   padding: 16px 18px;
@@ -19,15 +19,15 @@
 }
 
 .input-container input:valid {
-  border: 2px solid #e3e3e3;
+  border: 2px solid black;
 }
 
 .input-container input:focus {
-  border: 2px solid #e3e3e3;
+  border: 2px solid black;
 }
 
 .input-container input.error {
-  border: 2px solid #f2b8b5;
+  border: 2px solid #d84538;
 }
 
 .input-container input:focus+label,
@@ -37,7 +37,7 @@ input:valid+label {
 }
 
 .input-container label.error-label {
-  color: #f2b8b5;
+  color: #d84538;
   font-size: 14px;
   top: -9px;
 }
@@ -46,8 +46,8 @@ input:valid+label {
   position: absolute;
   left: 9px;
   top: 17px;
-  background-color: black;
-  color: #e3e3e3;
+  background-color: white;
+  color: black;
   font-size: 18px;
   padding: 0 10px;
   pointer-events: none;
@@ -63,7 +63,7 @@ input:valid+label {
 }
 
 .error-message {
-  color: #f2b8b5;
+  color: #d84538;
   font-size: 12px;
   display: flex;
   gap: 8px;
