@@ -35,8 +35,12 @@ export class DashboardPageComponent implements OnInit {
 
   send(): void {
     this.wsService.send({
-      Authorization: 'Bearer ' + this.tokenService.getAccessToken(),
-      dashboard: 'true'
+      type: 'auth',
+      data: {
+        Authorization: 'Bearer ' + this.tokenService.getAccessToken(),
+        dashboard: 'true',
+        percorso_id: '1'
+      }
     });
   }
 

@@ -5,6 +5,7 @@ import {DashboardPageComponent} from './features/dashboard/pages/dashboard-page/
 import {IscrizioneOrientatoPageComponent} from './iscrizione-orientato-page/iscrizione-orientato-page.component';
 
 export const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'genitore', component: LoginFormGenitoreComponent},
   {path: 'login', component: LoginFormAdminComponent},
   {path: 'dashboard', component: DashboardPageComponent},

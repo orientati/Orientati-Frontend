@@ -9,6 +9,12 @@
   gap: 18px;
 }
 
+.aule-overview::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .aula-item {
   background-color: #f0f0f0;
   padding: 16px 20px;

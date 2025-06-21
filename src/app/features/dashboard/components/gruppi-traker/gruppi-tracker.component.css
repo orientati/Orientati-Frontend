@@ -9,6 +9,12 @@
   gap: 18px;
 }
 
+.gruppi-traker::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .highlight {
   background-color: #4e6dfc;
   color: white;
