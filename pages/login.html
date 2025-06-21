@@ -23,38 +23,58 @@
     <link href="css/style.css" rel="stylesheet"/>
     <link href="css/login.css" rel="stylesheet"/>
 
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
     <title>Pagina Login</title>
 </head>
 <body>
 <main>
-    <p class="title">Login</p>
-    <p class="subtitle">Applicativo per la gestione dei turni</p>
-
-    <!-- Modulo di login -->
-    <form id="formLogin">
-        <label for="txtUsername">Inserisci il tuo nome utente/email</label>
-        <input
-                class="input"
-                id="txtUsername"
-                placeholder="Inserisci il tuo nome utente/email"
-                required
-                type="text"
-        />
-
-        <label for="txtPassword">Inserisci la tua password</label>
-        <input
-                class="input"
-                id="txtPassword"
-                placeholder="Inserisci la tua password"
-                required
-                type="password"
-        />
-
-        <button class="btn-vallauri" type="submit">Login</button>
-    </form>
-
-    <a id="ALoginUtenteTemporaneo">Entra come utente temporaneo</a>
-
+    <div class="auth-card">
+        <div class="auth-card-left">
+            <div class="logo"></div>
+            <div class="auth-card-title">
+                <h2>Accedi</h2>
+                <p>per continuare su <span class="accent-color">#Orientati</span></p>
+            </div>
+        </div>
+        <div class="auth-card-right">
+            <form id="formLogin">
+                <div class="auth-card-form">
+                    <div class="input-container">
+                        <input type="text" id="txtUsername" required/>
+                        <label for="txtUsername">Username</label>
+                        <div class="error-message hidden">
+                            <span class="material-symbols-outlined">error</span>
+                            <p>Enter an email or phone number</p>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <input type="password" id="txtPassword" required/>
+                        <label for="txtPassword">Username</label>
+                        <div class="error-message hidden">
+                            <span class="material-symbols-outlined">error</span>
+                            <p>Enter an email or phone number</p>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">
+                    <span class="material-symbols-outlined">
+                        arrow_forward
+                    </span>
+                    Avanti
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="auth-temporaneo">
+        <button id="ALoginUtenteTemporaneo">
+        <span class="material-symbols-outlined">
+        login
+        </span>
+            Accedi come utente temporaneo
+        </button>
+    </div>
 </main>
 </body>
 </html>
