@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {WebSocketService} from '../../../../WebSoket/web-socket.service';
+import {WebSocketService} from '../../../../core/WebSoket/web-socket.service';
 import {TokenService} from '../../../../core/services/token/token.service';
 import {NavRailComponent} from '../../../../shared/components/navigation/nav-rail/nav-rail.component';
 import {AuleOverviewComponent} from '../../components/aule-overview/aule-overview.component';

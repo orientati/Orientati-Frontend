@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Input, Output, EventEmitter } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {Component} from '@angular/core';
+import {Input, Output, EventEmitter} from '@angular/core';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-form-select',
@@ -9,12 +9,19 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './form-select.component.css'
 })
 export class FormSelectComponent {
-  @Input() options: string[] = [];
-  @Input() selected: string | null = null;
+  @Input() options: any[] = [];
+  @Input() control!: FormControl;
+  @Input() label!: string;
+  @Input() formSubmitted: boolean = false;
+
+
   @Output() selectionChanged = new EventEmitter<string>();
 
-  
+  isOpen = false;
+
+
   onChange(value: string) {
     this.selectionChanged.emit(value);
   }
 }
+

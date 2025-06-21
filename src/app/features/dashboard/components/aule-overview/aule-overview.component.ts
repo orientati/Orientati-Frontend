@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Aula} from '../../services/types.service';
-import {WebSocketService} from '../../../../WebSoket/web-socket.service';
+import {WebSocketService} from '../../../../core/WebSoket/web-socket.service';
 
 @Component({
   selector: 'app-aule-overview',

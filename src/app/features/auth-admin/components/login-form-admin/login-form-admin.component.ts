@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthAdminService} from '../../services/auth-admin.service';
-import {FormInputComponent} from "../../../../shared/components/forms/form-input/form-input.component";
-import { FormButtonComponent } from '../../../../shared/components/forms/form-button/form-button.component';
+import {FormInputComponent} from '../../../../shared/components/forms/form-input/form-input.component';
+import {FormButtonComponent} from '../../../../shared/components/forms/form-button/form-button.component';
 
 @Component({
     selector: 'app-login-form-admin',
@@ -50,52 +50,17 @@ export class LoginFormAdminComponent {
 
         this.authService.login(formData).subscribe({
             next: () => {
-                //this.router.navigate(['/home']);
+              this.router.navigate(['/dashboard']);
                 console.log("Login successful");
-                this.router.navigate(['/dashboard']);
             },
             //error: err => this.errorMessage = 'Credenziali errate'
         });
     }
 
-    on_enter(): void {
-        this.login();
+
+    on_enter() {
+      this.login();
     }
-
-    /*
-      async forgot_password(): Promise<void> {
-        const emailControl: any = this.loginForm.get('email');
-        if (emailControl && emailControl.invalid) {
-          emailControl.markAsTouched();
-          setTimeout(() => {
-            this.loginForm.markAsUntouched();
-          }, 5000);
-          return;
-        }
-
-        this.ForgotPasswordResult = await this.authService.forgotPassword(
-          this.loginForm.value.email!,
-        );
-
-        if (this.ForgotPasswordResult) {
-          const forgotPassword = document.getElementById('forgotPassword') as HTMLParagraphElement;
-          forgotPassword.innerText = 'Email sent! Check your inbox :)';
-
-          if (this.loginForm.get('password')) {
-            this.loginForm.get('password')!.reset();
-          }
-
-          this.LoginResult = true;
-
-          setTimeout(() => {
-            forgotPassword.innerText = 'Forgot your password?';
-          }, 10000);
-        }
-      }
-
-      toggle_password_visibility(): void {
-        this.TogglePassword = !this.TogglePassword;
-      }
-
-     */
 }
+
+
