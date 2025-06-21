@@ -38,68 +38,23 @@ export class AuthGenitoriService {
   }
 
 
-
-
-  /*
-    async login(username: string, password: string): Promise<boolean> {
-
-
-      try {
-        //TODO
-        const response: any = this.apiService.post('/genitore', requestBody);
-        sessionStorage.setItem('accessToken', response.accessToken);
-        localStorage.setItem('tokenType', response.token_type);
-        return (!response.nome || !response.cognome || !response.comune);
-      } catch (error) {
-        console.error('Errore durante la richiesta:', error);
-        throw error;
-      }
-    }
-  */
-  async register(nome: string, cognome: string, comune: string, email: string): Promise<boolean> {
-    const requestBody = JSON.stringify({
+  signup(email: string, nome: string, cognome: string, comune: string): Observable<any> {
+    const requestBody = {
       email,
       nome,
       cognome,
       comune
-    });
+    };
 
     try {
-      //TODO
-      const response = this.apiService.put('/genitore', requestBody);
-      return !!response
+      return this.apiService.put<LoginResponse>('public/genitore', requestBody).pipe(
+        tap(response => {
+          //this.tokenService.saveTokens(response.access_token, response.refresh_token);
+        })
+      );
     } catch (error) {
-      console.error('Errore durante la richiesta:', error);
+      console.error('Error during the request:', error);
       throw error;
     }
   }
-
-
-  /*
-    async logout(): Promise<boolean> {
-      try {
-        const response = await this.apiService.sendRequest('/auth/logout', 'POST');
-        sessionStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        return !!response;
-      } catch (error) {
-        console.error('Errore durante la richiesta:', error);
-        throw error;
-      }
-    }
-
-    async forgotPassword(email: string): Promise<boolean> {
-      const requestBody = JSON.stringify({
-        email
-      });
-
-      try {
-        const response = await this.apiService.sendRequest('/auth/forgot-password', 'POST', requestBody);
-        return !!response;
-      } catch (error) {
-        console.error('Errore durante la richiesta:', error);
-        throw error;
-      }
-    }
-   */
 }

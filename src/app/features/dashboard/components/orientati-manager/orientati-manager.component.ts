@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchBarComponent} from '../../../../search-bar/search-bar.component';
-import {WebSocketService} from '../../../../WebSoket/web-socket.service';
+import {WebSocketService} from '../../../../core/WebSoket/web-socket.service';
 import {Orientato} from '../../services/types.service';
 import {ButtonComponent} from '../../../../shared/button/button.component';
 
