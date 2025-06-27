@@ -1,0 +1,16 @@
+name: ✨ Richiesta Funzionalità (Frontend)
+description: Suggerisci un miglioramento dell'interfaccia utente o una nuova pagina
+labels: [enhancement]
+body:
+  - type: textarea
+    attributes:
+      label: Descrizione
+      description: Spiega l'obiettivo o il beneficio della feature
+      placeholder: Es. Aggiungere una dashboard per visualizzare i dati utente...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Mockup o esempio visivo (se disponibile)
+      description: Link o allega un esempio dell'interfaccia
