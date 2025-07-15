@@ -1,0 +1,34 @@
+name: 🐛 Bug Report (Frontend)
+description: Riporta un problema visivo o di comportamento nell'interfaccia utente
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Descrizione del problema
+      description: Spiega cosa non funziona nel frontend
+      placeholder: Es. Il pulsante "Accedi" non fa nulla quando cliccato...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Come riprodurre il bug
+      description: Elenca i passaggi per riprodurlo
+      placeholder: |
+        1. Vai su '...'
+        2. Clicca su '...'
+        3. Osserva l'errore
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Browser / Sistema operativo
+      placeholder: Es. Chrome 125 / macOS
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Screenshot / Log
+      description: Se possibile, allega uno screenshot o errori JS nella console
